@@ -1,0 +1,10 @@
+<%= @warehouse.name%>
+<%= @warehouse.code%>
+<%= @warehouse.description%>
+<%= @warehouse.address%>
+<%= @warehouse.city%>/<%= @warehouse.state%>
+CEP: <%= @warehouse.postal_code%>
+Área Total: <%= @warehouse.total_area%> m2
+Área Útil: <%= @warehouse.useful_area%> m2
+
+<%=link_to 'Voltar', root_path%>
