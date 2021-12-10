@@ -1,6 +1,10 @@
 <h1>Novo galpão</h1>
-
-<%= form_with(model: Warehouse.new) do |f|%>
+<ul>
+<% @warehouse.errors.full_messages.each do |msg| %>
+ <li><%=msg%></li>
+<%end%>
+</ul>
+<%= form_with(model: @warehouse) do |f|%>
 <div>
   <%= f.label :name, 'Nome'%>
   <%=f.text_field :name%>

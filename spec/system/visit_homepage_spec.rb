@@ -9,10 +9,10 @@ describe "Visitor abre a tela inicial" do
   end
 
   it "e vê os galpões cadastrados" do
-    Warehouse.new(name: "Guarulhos", code: "GRU").save
-    Warehouse.new(name: "Porto Alegre", code: "POA").save
-    Warehouse.new(name: "São Luís", code: "SLZ").save
-    Warehouse.new(name: "Vitória", code: "VIX").save
+    Warehouse.new(name: "Guarulhos", code: "GRU", address: "Rua x").save
+    Warehouse.new(name: "Porto Alegre", code: "POA", address: "Rua y").save
+    Warehouse.new(name: "São Luís", code: "SLZ", address: "Rua z").save
+    Warehouse.new(name: "Vitória", code: "VIX", address: "Rua a").save
 
     visit root_path
     expect(page).to have_content("Galpões cadastrados")

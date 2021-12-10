@@ -46,4 +46,22 @@ describe 'Visitante cadastra um galpão' do
     expect(page).to have_content('Galpão cadastrado com sucesso!')
 
   end
+
+  it 'e todos os campos são obrigatórios' do
+
+    visit root_path
+
+    click_on 'Cadastrar novo galpão'
+    fill_in 'Nome', with: ''
+    fill_in 'Código', with: ''
+    fill_in 'Endereço', with: ''
+    click_on 'Gravar'
+
+    expect(page).not_to have_content('Galpão cadastrado com sucesso!')
+    expect(page).to have_content('Não foi possível gravar o galpão')
+    expect(page).to have_content("Name can't be blank")
+    expect(page).to have_content("Code can't be blank")
+    expect(page).to have_content("Address can't be blank")
+
+  end
 end
