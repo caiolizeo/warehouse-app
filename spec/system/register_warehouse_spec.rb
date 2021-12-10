@@ -59,9 +59,9 @@ describe 'Visitante cadastra um galpão' do
 
     expect(page).not_to have_content('Galpão cadastrado com sucesso!')
     expect(page).to have_content('Não foi possível gravar o galpão')
-    expect(page).to have_content("Name can't be blank")
-    expect(page).to have_content("Code can't be blank")
-    expect(page).to have_content("Address can't be blank")
+    expect(page).to have_content('Nome não pode ficar em branco')
+    expect(page).to have_content('Código não pode ficar em branco')
+    expect(page).to have_content('Endereço não pode ficar em branco')
 
   end
 end
