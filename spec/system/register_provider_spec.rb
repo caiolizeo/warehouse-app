@@ -2,7 +2,9 @@ require 'rails_helper'
 
 describe 'Visitante cadastra um fornecedor' do
   it 'e vê um formulário' do
+
     visit root_path
+    click_on 'Ver todos os fornecedores'
     click_on 'Cadastrar novo fornecedor'
 
     expect(page).to have_content 'Novo fornecedor'
@@ -12,10 +14,12 @@ describe 'Visitante cadastra um fornecedor' do
     expect(page).to have_field 'Endereço'
     expect(page).to have_field 'Email'
     expect(page).to have_field 'Telefone'
+    expect(page).to have_button 'Gravar'
   end
 
   it 'com sucesso' do
     visit root_path
+    click_on 'Ver todos os fornecedores'
     click_on 'Cadastrar novo fornecedor'
 
     fill_in 'Nome fantasia', with: 'J Presentes'
@@ -37,6 +41,8 @@ describe 'Visitante cadastra um fornecedor' do
 
   it 'e os campos são obrigatórios' do
     visit root_path
+
+    click_on 'Ver todos os fornecedores'
     click_on 'Cadastrar novo fornecedor'
 
     fill_in 'Nome fantasia', with: ''
@@ -49,7 +55,7 @@ describe 'Visitante cadastra um fornecedor' do
     expect(page).to have_content('Não foi possível cadastrar o fornecedor')
     expect(page).to have_content('Nome fantasia não pode ficar em branco')
     expect(page).to have_content('Razão social não pode ficar em branco')
-    expect(page).to have_content('CNPJ não pode ficar em branco')
+    expect(page).to have_content('Cnpj não pode ficar em branco')
     expect(page).to have_content('Email não pode ficar em branco')
   end
 
@@ -58,6 +64,8 @@ describe 'Visitante cadastra um fornecedor' do
                     cnpj: '30258600000115', email: 'contato@jpresentes.com')
 
     visit root_path
+
+    click_on 'Ver todos os fornecedores'
     click_on 'Cadastrar novo fornecedor'
 
     fill_in 'Nome fantasia', with: 'K Presentes'
@@ -73,6 +81,8 @@ describe 'Visitante cadastra um fornecedor' do
 
   it 'o cnpj deve possuir 13 digitos' do
     visit root_path
+
+    click_on 'Ver todos os fornecedores'
     click_on 'Cadastrar novo fornecedor'
 
     fill_in 'Nome fantasia', with: 'K Presentes'

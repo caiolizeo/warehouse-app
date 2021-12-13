@@ -1,0 +1,21 @@
+<%= link_to "Cadastrar novo fornecedor", new_provider_path %>
+
+<h3>Lista de fornecedores</h3>
+
+<% if !@none %>
+  <p>Fornecedores cadastrados: <%= @provider_count %></p>
+  
+  <% @providers.each do |provider| %>
+ 
+    <%= link_to provider.trading_name, provider_path(provider.id) %>
+    
+  <% end %>
+  
+<% else %>
+
+  <p>Nenhum fornecedor cadastrado</p>
+
+<% end %>
+
+
+<%= link_to 'Voltar', root_path%>

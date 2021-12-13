@@ -1,13 +1,13 @@
 
 
 <dl>
-<dt><%= @warehouse.name%></dt>
-<dd><%= @warehouse.code%></dd>
-<dd><%= @warehouse.description%></dd>
-<dd><%= @warehouse.address%> - <%= @warehouse.city%>/<%= @warehouse.state%></dd>
-<dd>CEP: <%= @warehouse.postal_code%></dd>
-<dd>Área Total: <%= @warehouse.total_area%> m2</dd>
-<dd>Área Útil: <%= @warehouse.useful_area%> m2</dd>
+  <dt><%= @warehouse.name %></dt>
+  <dd><%= @warehouse.code %></dd>
+  <dd><%= @warehouse.description %></dd>
+  <dd><%= @warehouse.address %> - <%= @warehouse.city %>/<%= @warehouse.state %></dd>
+  <dd>CEP: <%= @warehouse.postal_code %></dd>
+  <dd>Área Total: <%= @warehouse.total_area %> m2</dd>
+  <dd>Área Útil: <%= @warehouse.useful_area %> m2</dd>
 </dl>
 
-<%=link_to 'Voltar', root_path%>
+<%= link_to "Voltar", root_path %>

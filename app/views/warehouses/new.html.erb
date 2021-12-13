@@ -1,45 +1,47 @@
 <h1>Novo galpão</h1>
+
 <ul>
-<% @warehouse.errors.full_messages.each do |msg| %>
- <li><%=msg%></li>
-<%end%>
+  <% @warehouse.errors.full_messages.each do |msg| %>
+    <li><%=msg%></li>
+  <%end%>
 </ul>
+
 <%= form_with(model: @warehouse) do |f|%>
-<div>
-  <%= f.label :name, 'Nome'%>
-  <%=f.text_field :name%>
-</div>
-<div>
-  <%= f.label :code, 'Código'%>
-  <%=f.text_field :code%>
-</div>
-<div>
-  <%= f.label :description, 'Descrição'%>
-  <%=f.text_area :description%>
-</div>
-<div>
-  <%= f.label :address, 'Endereço'%>
-  <%=f.text_field :address%>
-</div>
-<div>
-  <%= f.label :city, 'Cidade'%>
-  <%=f.text_field :city%>
-</div>
-<div>
-  <%= f.label :state, 'Estado'%>
-  <%=f.text_field :state%>
-</div>
-<div>
-  <%= f.label :postal_code, 'CEP'%>
-  <%=f.text_field :postal_code%>
-</div>
-<div>
-  <%= f.label :total_area, 'Área total'%>
-  <%=f.number_field :total_area%>
-</div>
-<div>
-  <%= f.label :useful_area, 'Área útil'%>
-  <%=f.number_field :useful_area%>
-</div>
-<%=f.submit 'Gravar'%>
+  <div>
+    <%= f.label :name, 'Nome'%>
+    <%=f.text_field :name%>
+  </div>
+  <div>
+    <%= f.label :code, 'Código'%>
+    <%=f.text_field :code%>
+  </div>
+  <div>
+    <%= f.label :description, 'Descrição'%>
+    <%=f.text_area :description%>
+  </div>
+  <div>
+    <%= f.label :address, 'Endereço'%>
+    <%=f.text_field :address%>
+  </div>
+  <div>
+    <%= f.label :city, 'Cidade'%>
+    <%=f.text_field :city%>
+  </div>
+  <div>
+    <%= f.label :state, 'Estado'%>
+    <%=f.text_field :state%>
+  </div>
+  <div>
+    <%= f.label :postal_code, 'CEP'%>
+    <%=f.text_field :postal_code%>
+  </div>
+  <div>
+    <%= f.label :total_area, 'Área total'%>
+    <%=f.number_field :total_area%>
+  </div>
+  <div>
+    <%= f.label :useful_area, 'Área útil'%>
+    <%=f.number_field :useful_area%>
+  </div>
+  <%=f.submit 'Gravar'%>
 <% end %>
