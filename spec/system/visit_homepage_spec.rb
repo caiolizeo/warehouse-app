@@ -9,10 +9,18 @@ describe "Visitante abre a tela inicial" do
   end
 
   it "e vê os galpões cadastrados" do
-    Warehouse.new(name: "Guarulhos", code: "GRU", address: "Rua x").save
-    Warehouse.new(name: "Porto Alegre", code: "POA", address: "Rua y").save
-    Warehouse.new(name: "São Luís", code: "SLZ", address: "Rua z").save
-    Warehouse.new(name: "Vitória", code: "VIX", address: "Rua a").save
+    Warehouse.new(name: "Guarulhos", code: "GRU", description: 'Galpão em Guarulhos',
+                  address: "Rua x", city: "Guarulhos", state: "SP", postal_code: "04200-000",
+                  total_area: 5000, useful_area: 3000).save
+    Warehouse.new(name: "Porto Alegre", code: "POA", description: 'Galpão em POA',
+                  address: "Rua y", city: "Porto Alegre", state: "RS", postal_code: "03500-000",
+                  total_area: 2000, useful_area: 1000).save
+    Warehouse.new(name: "São Luís", code: "SLZ", description: 'Galpão em São Luís',
+                  address: "Rua z", city: "São Luís", state: "MA", postal_code: "01700-000",
+                  total_area: 2500, useful_area: 2000).save
+    Warehouse.new(name: "Vitória", code: "VIX", description: 'Galpão em Vitória', 
+                  address: "Rua a", city: "Vitória", state: "ES", postal_code: "02500-000",
+                  total_area: 2700, useful_area: 2300).save
 
     visit root_path
     expect(page).to have_content("Galpões cadastrados")
