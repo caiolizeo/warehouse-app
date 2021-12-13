@@ -6,7 +6,6 @@ class ProvidersController < ApplicationController
   def index
     @provider_count = Provider.count
     @providers = Provider.all
-    @none = Provider.none?
   end
 
   def new

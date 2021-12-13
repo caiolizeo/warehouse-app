@@ -2,19 +2,14 @@
 
 <h3>Lista de fornecedores</h3>
 
-<% if !@none %>
+<% if @providers.none? %>
+  <p>Nenhum fornecedor cadastrado</p>
+<% else %>
   <p>Fornecedores cadastrados: <%= @provider_count %></p>
   
   <% @providers.each do |provider| %>
- 
     <li><%= link_to provider.trading_name, provider_path(provider.id) %></li>
-    
   <% end %>
-  
-<% else %>
-
-  <p>Nenhum fornecedor cadastrado</p>
-
 <% end %>
 
 
