@@ -35,14 +35,14 @@ describe 'Visitante cadastra um galpão' do
     fill_in 'Área útil', with: '3000'
     click_on 'Gravar'
 
-    expect(page).to have_content("Juiz de Fora")
-    expect(page).to have_content("JDF")
-    expect(page).to have_content("Um galpão")
-    expect(page).to have_content("Av Rio Branco")
-    expect(page).to have_content("Juiz de Fora/MG")
-    expect(page).to have_content("CEP: 36000-000")
-    expect(page).to have_content("Área Total: 5000 m2")
-    expect(page).to have_content("Área Útil: 3000 m2")
+    expect(page).to have_content('Juiz de Fora')
+    expect(page).to have_content('JDF')
+    expect(page).to have_content('Um galpão')
+    expect(page).to have_content('Av Rio Branco')
+    expect(page).to have_content('Juiz de Fora/MG')
+    expect(page).to have_content('CEP: 36000-000')
+    expect(page).to have_content('Área Total: 5000 m2')
+    expect(page).to have_content('Área Útil: 3000 m2')
     expect(page).to have_content('Galpão cadastrado com sucesso!')
 
   end
