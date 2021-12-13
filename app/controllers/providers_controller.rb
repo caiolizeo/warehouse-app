@@ -3,7 +3,7 @@ class ProvidersController < ApplicationController
     @provider = Provider.find(params[:id])
   end
 
-  def all_providers
+  def index
     @provider_count = Provider.count
     @providers = Provider.all
     @none = Provider.none?

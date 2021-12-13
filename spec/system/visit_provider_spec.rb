@@ -28,6 +28,6 @@ describe 'O visitante vê um fornecedor' do
     click_on 'A Presentes'
     click_on 'Voltar'
 
-    expect(current_path).to eq all_providers_path
+    expect(current_path).to eq providers_path
   end
 end
