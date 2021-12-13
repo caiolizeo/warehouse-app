@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "Visitor abre a tela inicial" do
+describe "Visitante abre a tela inicial" do
   it "e vê a mensagem de boas vindas" do
     visit root_path
 

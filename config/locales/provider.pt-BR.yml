@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      provider: "Fornecedor"
+    attributes:
+      provider: 
+        trading_name: "Nome fantasia"
+        company_name: "Razão social"
+        address: "Endereço"
+        phone: "Telefone"

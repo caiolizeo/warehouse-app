@@ -68,7 +68,7 @@ describe 'Visitante cadastra um fornecedor' do
 
     expect(page).not_to have_content('Fornecedor cadastrado com sucesso!')
     expect(page).to have_content('Não foi possível cadastrar o fornecedor')
-    expect(page).to have_content('CNPJ deve ser único')
+    expect(page).to have_content('Cnpj já está em uso')
   end
 
   it 'o cnpj deve possuir 13 digitos' do
@@ -83,6 +83,6 @@ describe 'Visitante cadastra um fornecedor' do
 
     expect(page).not_to have_content('Fornecedor cadastrado com sucesso!')
     expect(page).to have_content('Não foi possível cadastrar o fornecedor')
-    expect(page).to have_content('CNPJ deve possuir 13 digitos')
+    expect(page).to have_content('Cnpj é muito curto (mínimo: 13 caracteres)')
   end
 end

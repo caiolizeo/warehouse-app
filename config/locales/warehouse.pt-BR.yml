@@ -1,9 +1,15 @@
 pt-BR:
   activerecord:
     models:
-      warehouse: Galpão
+      warehouse: "Galpão"
     attributes:
       warehouse:
         name: "Nome"
         code: "Código"
+        description: "Descrição"
         address: "Endereço"
+        city: "Cidade"
+        state: "Estado"
+        postal_code: "CEP"
+        total_area: "Área total"
+        useful_area: "Área útil"
