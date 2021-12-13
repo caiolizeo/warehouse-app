@@ -29,7 +29,7 @@ describe 'O visitante acessa a página com todos os fornecedores' do
     expect(page).to have_content('Nenhum fornecedor cadastrado')
   end
 
-  it 'E consegue voltar para a tela inicial' do
+  it 'E consegue voltar para a página inicial' do
     Provider.create(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
       cnpj: '30258600000115', address: 'Av Paulista 500', 
       email: 'contato@jpresentes.com', phone: '99999-9999')

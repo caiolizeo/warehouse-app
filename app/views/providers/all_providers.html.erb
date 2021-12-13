@@ -7,7 +7,7 @@
   
   <% @providers.each do |provider| %>
  
-    <%= link_to provider.trading_name, provider_path(provider.id) %>
+    <li><%= link_to provider.trading_name, provider_path(provider.id) %></li>
     
   <% end %>
   

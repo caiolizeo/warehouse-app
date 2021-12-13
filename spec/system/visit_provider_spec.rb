@@ -18,7 +18,7 @@ describe 'O visitante vê um fornecedor' do
     expect(page).to have_content('Telefone: 99999-9999')
   end
 
-  it 'e consegue voltar para a tela inicial' do
+  it 'e consegue voltar para a página de fornecedores' do
     Provider.create(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
                     cnpj: '30258600000115', address: 'Av Paulista 500',
                     email: 'contato@apresentes.com', phone: '99999-9999')
@@ -28,6 +28,6 @@ describe 'O visitante vê um fornecedor' do
     click_on 'A Presentes'
     click_on 'Voltar'
 
-    expect(current_path).to eq root_path
+    expect(current_path).to eq all_providers_path
   end
 end

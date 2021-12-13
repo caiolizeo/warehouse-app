@@ -3,5 +3,5 @@ Rails.application.routes.draw do
 
   resources :warehouses, only:[:show, :new, :create]
   resources :providers, only:[:show, :new, :create] 
-  get '/all',to: 'providers#all_providers', as: 'all_providers'
+  get '/provider/all/',to: 'providers#all_providers', as: 'all_providers'
 end
