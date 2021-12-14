@@ -1,0 +1,37 @@
+
+
+<%= form_with(model: ProductModel.new) do |f|%>
+  <div>
+    <%= f.label :name, 'Nome'%>
+    <%= f.text_field :name%>
+  </div>
+
+  <div>
+    <%= f.label :weight, 'Peso'%>
+    <%= f.text_field :weight%>
+  </div>
+
+  <div>
+    <%= f.label :height, 'Altura'%>
+    <%= f.text_field :height%>
+  </div>
+
+  <div>
+    <%= f.label :width, 'Largura'%>
+    <%= f.text_field :width%>
+  </div>
+
+  <div>
+    <%= f.label :length, 'Profundidade'%>
+    <%= f.text_field :length%>
+  </div>
+
+  <div>
+    <%= f.label :sku, 'Código SKU'%>
+    <%= f.text_field :sku%>
+  </div>
+
+  <%= f.label :provider_id, 'Fornecedor'%>
+  <%= f.collection_select(:provider_id, Provider.all, :id, :trading_name) %>
+  <%= f.submit 'Gravar'%>
+<%end%>
