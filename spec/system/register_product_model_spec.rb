@@ -24,9 +24,9 @@ describe 'Usuário cadastra um modelo de produto' do
     click_on 'Gravar'
 
     expect(page).to have_content('Modelo de produto registrado com sucesso!')
-    expect(page).to have_content('Caneca Star Wars')
-    expect(page).to have_content('300 gramas')
-    expect(page).to have_content('Dimensões 12 x 8 x 14')
+    expect(page).to have_content('Nome: Caneca Star Wars')
+    expect(page).to have_content('Peso: 300 gramas')
+    expect(page).to have_content('Dimensões: 12 x 8 x 14')
     expect(page).to have_content('SKU: CN987654A')
     expect(page).to have_content('Fornecedor: A Presentes')
     
