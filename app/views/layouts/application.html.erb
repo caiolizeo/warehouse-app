@@ -11,18 +11,18 @@
   </head>
 
   <body>
-  <%=flash[:alert]%>
-  <%=flash[:notice]%>
-  <header>
-  <nav>
-  <%= link_to 'Início', root_path%>
-  <%= link_to 'Cadastrar novo galpão', new_warehouse_path%>
-  <%= link_to 'Ver todos os fornecedores', providers_path%>
-  <%= link_to 'Cadastrar modelo de produto', new_product_model_path%>
-  </nav>
-  </header>
-  <main>
-    <%= yield %>
+    <%=flash[:alert]%>
+    <%=flash[:notice]%>
+    <header>
+      <nav>
+        <%= link_to 'Início', root_path%>
+        <%= link_to 'Cadastrar novo galpão', new_warehouse_path%>
+        <%= link_to 'Ver todos os fornecedores', providers_path%>
+        <%= link_to 'Cadastrar modelo de produto', new_product_model_path%>
+      </nav>
+    </header>
+    <main>
+      <%= yield %>
     </main>
   </body>
 </html>

@@ -8,7 +8,7 @@
   <p>Fornecedores cadastrados: <%= @provider_count %></p>
   
   <% @providers.each do |provider| %>
-    <li><%= link_to provider.trading_name, provider_path(provider.id) %></li>
+    <li><%= link_to provider.trading_name, provider %></li>
   <% end %>
 <% end %>
 

@@ -6,7 +6,7 @@
 <h3>Galpões cadastrados</h3>
 
 <%@warehouses.each do |w|%>
-  <%= link_to w.name, warehouse_path(w.id)%>
+  <%= link_to w.name, w%>
   <%=w.code%>
 <%end%>
 

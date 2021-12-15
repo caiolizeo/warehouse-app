@@ -7,4 +7,20 @@
   <li>Telefone: <%= @provider.phone%></li>
 </ul>
 
+<p>Produtos deste fornecedor:</p>
+
+<table>
+  <tr>
+    <th>Produto</th>
+    <th>SKU</th>
+  </tr>
+  <% @provider.product_models.each do |p|%>
+    <tr>
+      <td><%=p.name%></td>
+      <td><%=p.sku%></td>
+    </tr>
+  <%end%>
+
+</table>
+
 <%= link_to 'Voltar', providers_path%>
