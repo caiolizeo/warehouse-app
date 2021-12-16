@@ -12,11 +12,16 @@
 <table>
   <tr>
     <th>Produto</th>
+    <th>Peso</th>
+    <th>Dimensões</th>
     <th>SKU</th>
+
   </tr>
   <% @provider.product_models.each do |p|%>
     <tr>
       <td><%=p.name%></td>
+      <td><%=p.weight%>g</td>
+      <td><%=p.dimensions%></td>
       <td><%=p.sku%></td>
     </tr>
   <%end%>

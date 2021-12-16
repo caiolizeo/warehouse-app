@@ -3,13 +3,13 @@ require 'rails_helper'
 describe 'Usuário cadastra um modelo de produto' do
 
   it 'com sucesso' do
-    Provider.create(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
-                    cnpj: '30258600000115', address: 'Av Paulista 500', 
-                    email: 'contato@jpresentes.com', phone: '99999-9999')
+    Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
+                     cnpj: '21.749.641/0001-13', address: 'Av Paulista 500', 
+                     email: 'contato@jpresentes.com', phone: '99999-9999')
 
-    Provider.create(trading_name: 'C Modas', company_name: 'C Confecções LTDA',
-                    cnpj: '16719454000157', address: 'Av Europa 250', 
-                    email: 'contato@cconfec.com', phone: '99999-9000')
+    Provider.create!(trading_name: 'C Modas', company_name: 'C Confecções LTDA',
+                     cnpj: '08.385.207/0001-33', address: 'Av Europa 250', 
+                     email: 'contato@cconfec.com', phone: '99999-9000')
 
     visit root_path
     click_on 'Cadastrar modelo de produto'
@@ -34,13 +34,13 @@ describe 'Usuário cadastra um modelo de produto' do
   end
 
   it 'e deixa campos em branco' do
-    Provider.create(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
-                    cnpj: '30258600000115', address: 'Av Paulista 500', 
+    Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
+                     cnpj: '21.749.641/0001-13', address: 'Av Paulista 500', 
                     email: 'contato@jpresentes.com', phone: '99999-9999')
 
-    Provider.create(trading_name: 'C Modas', company_name: 'C Confecções LTDA',
-                    cnpj: '16719454000157', address: 'Av Europa 250', 
-                    email: 'contato@cconfec.com', phone: '99999-9000')
+    Provider.create!(trading_name: 'C Modas', company_name: 'C Confecções LTDA',
+                     cnpj: '08.385.207/0001-33', address: 'Av Europa 250', 
+                     email: 'contato@cconfec.com', phone: '99999-9000')
     
     visit root_path
     click_on 'Cadastrar modelo de produto'
@@ -66,13 +66,13 @@ describe 'Usuário cadastra um modelo de produto' do
   end
 
   it 'e deixa as dimensões e o peso menores que 1' do
-    Provider.create(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
-                    cnpj: '30258600000115', address: 'Av Paulista 500', 
-                    email: 'contato@jpresentes.com', phone: '99999-9999')
+    Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
+                     cnpj: '21.749.641/0001-13', address: 'Av Paulista 500', 
+                     email: 'contato@jpresentes.com', phone: '99999-9999')
 
-    Provider.create(trading_name: 'C Modas', company_name: 'C Confecções LTDA',
-                    cnpj: '16719454000157', address: 'Av Europa 250', 
-                    email: 'contato@cconfec.com', phone: '99999-9000')
+    Provider.create!(trading_name: 'C Modas', company_name: 'C Confecções LTDA',
+                     cnpj: '08.385.207/0001-33', address: 'Av Europa 250', 
+                     email: 'contato@cconfec.com', phone: '99999-9000')
 
     visit root_path
     click_on 'Cadastrar modelo de produto'
@@ -96,11 +96,11 @@ describe 'Usuário cadastra um modelo de produto' do
 
   it 'e o código SKU ja foi cadastrado' do
     p1 = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
-                         cnpj: '30258600000115', address: 'Av Paulista 500', 
+                         cnpj: '21.749.641/0001-13', address: 'Av Paulista 500', 
                          email: 'contato@jpresentes.com', phone: '99999-9999')
 
     p2 = Provider.create!(trading_name: 'C Modas', company_name: 'C Confecções LTDA',
-                         cnpj: '16719454000157', address: 'Av Europa 250', 
+                         cnpj: '08.385.207/0001-33', address: 'Av Europa 250', 
                          email: 'contato@cconfec.com', phone: '99999-9000')
     
     ProductModel.create!(name: 'Caneca Star Wars', weight: '300',

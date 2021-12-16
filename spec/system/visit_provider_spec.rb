@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe 'O visitante vê um fornecedor' do
   it 'e vê todos os dados cadastrados' do
-    s = Provider.create(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
-                    cnpj: '30258600000115', address: 'Av Paulista 500',
+    s = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
+                    cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
                     email: 'contato@apresentes.com', phone: '99999-9999')
 
     visit root_path
@@ -20,7 +20,7 @@ describe 'O visitante vê um fornecedor' do
 
   it 'e vê os produtos do fornecedor' do
     p = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
-                        cnpj: '30258600000115', address: 'Av Paulista 500',
+                        cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
                         email: 'contato@apresentes.com', phone: '99999-9999')
     
     ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
@@ -33,16 +33,22 @@ describe 'O visitante vê um fornecedor' do
     click_on p.trading_name #é possível utilizar uma variável
 
     expect(page).to have_css('li', text: 'Nome fantasia: A Presentes')
-    expect(page).to have_content('Produtos deste fornecedor:')
-    expect(page).to have_content('Caneca Marvel')
-    expect(page).to have_content('CM3569SD105W3666SD10')
+    expect(page).to have_css('p',  text:'Produtos deste fornecedor:')
+    expect(page).to have_css('td', text: 'Caneca Marvel')
+    expect(page).to have_css('td', text: '300g')
+    expect(page).to have_css('td', text: '14 x 10 x 8')
+    expect(page).to have_css('td', text: 'CM3569SD105W3666SD10')
+    expect(page).to have_css('td', text: 'Boneco Homem Aranha')
+    expect(page).to have_css('td', text: '250g')
+    expect(page).to have_css('td', text: '50 x 30 x 15')
+    expect(page).to have_css('td', text: 'BO236S5D10XC3567SX08')
 
 
   end
 
   it 'e consegue voltar para a página de fornecedores' do
     Provider.create(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
-                    cnpj: '30258600000115', address: 'Av Paulista 500',
+                    cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
                     email: 'contato@apresentes.com', phone: '99999-9999')
 
     visit root_path

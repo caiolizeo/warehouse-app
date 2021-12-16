@@ -24,7 +24,7 @@ describe 'Visitante cadastra um fornecedor' do
 
     fill_in 'Nome fantasia', with: 'J Presentes'
     fill_in 'Razão social', with: 'J importações LTDA ME'
-    fill_in 'CNPJ', with: '30258600000115'
+    fill_in 'CNPJ', with: '21.749.641/0001-13'
     fill_in 'Endereço', with: 'Av Paulista 500'
     fill_in 'Email', with: 'contato@jpresentes.com'
     fill_in 'Telefone', with: '11 99999-9999'
@@ -32,7 +32,7 @@ describe 'Visitante cadastra um fornecedor' do
 
     expect(page).to have_content('Nome fantasia: J Presentes')
     expect(page).to have_content('Razão social: J importações LTDA ME')
-    expect(page).to have_content('CNPJ: 30258600000115')
+    expect(page).to have_content('CNPJ: 21.749.641/0001-13')
     expect(page).to have_content('Endereço: Av Paulista 500')
     expect(page).to have_content('Email: contato@jpresentes.com')
     expect(page).to have_content('Telefone: 11 99999-9999')
@@ -61,7 +61,7 @@ describe 'Visitante cadastra um fornecedor' do
 
   it 'e o cnpj deve ser único' do
     Provider.create(trading_name: 'J Presentes', company_name: 'J importações LTDA ME',
-                    cnpj: '30258600000115', email: 'contato@jpresentes.com')
+                    cnpj: '21.749.641/0001-13', email: 'contato@jpresentes.com')
 
     visit root_path
 
@@ -70,7 +70,7 @@ describe 'Visitante cadastra um fornecedor' do
 
     fill_in 'Nome fantasia', with: 'K Presentes'
     fill_in 'Razão social', with: 'K importações LTDA ME'
-    fill_in 'CNPJ', with: '30258600000115'
+    fill_in 'CNPJ', with: '21.749.641/0001-13'
     fill_in 'Email', with: 'contato@kpresentes.com'
     click_on 'Gravar'
 
@@ -79,7 +79,7 @@ describe 'Visitante cadastra um fornecedor' do
     expect(page).to have_content('Cnpj já está em uso')
   end
 
-  it 'o cnpj deve possuir 13 digitos' do
+  it 'e o cnpj deve possuir formato correto' do
     visit root_path
 
     click_on 'Ver todos os fornecedores'
@@ -87,12 +87,12 @@ describe 'Visitante cadastra um fornecedor' do
 
     fill_in 'Nome fantasia', with: 'K Presentes'
     fill_in 'Razão social', with: 'K importações LTDA ME'
-    fill_in 'CNPJ', with: '302586000001'
+    fill_in 'CNPJ', with: '21749641000113'
     fill_in 'Email', with: 'contato@kpresentes.com'
     click_on 'Gravar'
 
     expect(page).not_to have_content('Fornecedor cadastrado com sucesso!')
     expect(page).to have_content('Não foi possível cadastrar o fornecedor')
-    expect(page).to have_content('Cnpj é muito curto (mínimo: 13 caracteres)')
+    expect(page).to have_content('Cnpj possui formato inválido')
   end
 end
