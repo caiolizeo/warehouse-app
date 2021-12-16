@@ -1,9 +1,25 @@
 require 'rails_helper'
 
-describe 'Visitante cadastra um galpão' do
+describe 'Usuário cadastra um galpão' do
+
+  it 'e um visitante não vê o menu' do
+
+    visit root_path
+
+    expect(page).not_to have_link ('Cadastrar novo galpão')
+  end
+
+  it 'e um visitante não acessa diretamente o formulário' do
+    
+    visit new_warehouse_path
+    
+    expect(current_path).to eq new_user_session_path
+  end
+
   it 'e vê formulário' do
-
-
+    user = User.create!(email: 'email@teste.com', password: '123456789')
+    login_as(user, :scope => :user)
+    
     visit root_path
     click_on 'Cadastrar novo galpão'
 
@@ -21,9 +37,12 @@ describe 'Visitante cadastra um galpão' do
   end
 
   it 'com sucesso' do
+    user = User.create!(email: 'email@teste.com', password: '123456789')
 
+    login_as(user, :scope => :user)
     visit root_path
     click_on 'Cadastrar novo galpão'
+
     fill_in 'Nome', with: 'Juiz de Fora'
     fill_in 'Código', with: 'JDF'
     fill_in 'Descrição', with: 'Um galpão'
@@ -48,7 +67,9 @@ describe 'Visitante cadastra um galpão' do
   end
 
   it 'e todos os campos são obrigatórios' do
+    user = User.create!(email: 'email@teste.com', password: '123456789')
 
+    login_as(user, :scope => :user)
     visit root_path
     click_on 'Cadastrar novo galpão'
     fill_in 'Nome', with: ''
@@ -76,10 +97,12 @@ describe 'Visitante cadastra um galpão' do
   end
 
   it 'e o nome e código já estão em uso' do
+    user = User.create!(email: 'email@teste.com', password: '123456789')
     Warehouse.create(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
                      address: 'Av Fernandes Lima', city: 'Maceió',
                      state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
     
+    user = login_as(user, :scope => :user)
     visit root_path
     click_on 'Cadastrar novo galpão'
 
@@ -100,7 +123,8 @@ describe 'Visitante cadastra um galpão' do
   end
 
   it 'e o CEP possui formato inválido' do
-    
+    user = User.create!(email: 'email@teste.com', password: '123456789')
+    login_as(user, :scope => :user)
     visit root_path
     click_on 'Cadastrar novo galpão'
     fill_in 'Nome', with: 'Juiz de Fora'
