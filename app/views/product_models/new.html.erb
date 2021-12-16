@@ -1,5 +1,11 @@
 
 
+<ul>
+  <% @product_model.errors.full_messages.each do |msg| %>
+    <li><%=msg%></li>
+  <%end%>
+</ul>
+
 <%= form_with(model: ProductModel.new) do |f|%>
   <div>
     <%= f.label :name, 'Nome'%>

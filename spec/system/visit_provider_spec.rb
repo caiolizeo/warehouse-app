@@ -24,9 +24,9 @@ describe 'O visitante vê um fornecedor' do
                         email: 'contato@apresentes.com', phone: '99999-9999')
     
     ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
-                         weight: 300, sku: 'CA589952', provider: p)
+                         weight: 300, sku: 'CM3569SD105W3666SD10', provider: p)
     ProductModel.create!(name: 'Boneco Homem Aranha', height: '50', width: '30', length: '15',
-                         weight: 250, sku: 'BOH55959', provider: p)
+                         weight: 250, sku: 'BO236S5D10XC3567SX08', provider: p)
     
     visit root_path
     click_on 'Ver todos os fornecedores'
@@ -35,7 +35,7 @@ describe 'O visitante vê um fornecedor' do
     expect(page).to have_css('li', text: 'Nome fantasia: A Presentes')
     expect(page).to have_content('Produtos deste fornecedor:')
     expect(page).to have_content('Caneca Marvel')
-    expect(page).to have_content('CA589952')
+    expect(page).to have_content('CM3569SD105W3666SD10')
 
 
   end
