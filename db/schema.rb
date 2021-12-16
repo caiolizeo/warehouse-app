@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_15_201102) do
+ActiveRecord::Schema.define(version: 2021_12_16_205326) do
+
+  create_table "product_bundle_items", force: :cascade do |t|
+    t.integer "product_model_id", null: false
+    t.integer "product_bundle_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_bundle_id"], name: "index_product_bundle_items_on_product_bundle_id"
+    t.index ["product_model_id"], name: "index_product_bundle_items_on_product_model_id"
+  end
+
+  create_table "product_bundles", force: :cascade do |t|
+    t.string "name"
+    t.string "sku"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "product_models", force: :cascade do |t|
     t.string "name"
@@ -62,5 +78,7 @@ ActiveRecord::Schema.define(version: 2021_12_15_201102) do
     t.integer "useful_area"
   end
 
+  add_foreign_key "product_bundle_items", "product_bundles"
+  add_foreign_key "product_bundle_items", "product_models"
   add_foreign_key "product_models", "providers"
 end

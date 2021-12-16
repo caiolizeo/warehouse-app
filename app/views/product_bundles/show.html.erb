@@ -1,0 +1,6 @@
+<%=@product_bundle.name%>
+<%=@product_bundle.sku%>
+
+<% @product_bundle.product_models.each do |p| %>
+  <%= p.name %>
+<% end %>
