@@ -32,11 +32,6 @@
     <%= f.text_field :length%>
   </div>
 
-  <div>
-    <%= f.label :sku, 'Código SKU'%>
-    <%= f.text_field :sku%>
-  </div>
-
   <%= f.label :provider_id, 'Fornecedor'%>
   <%= f.collection_select(:provider_id, Provider.all, :id, :trading_name) %>
   <%= f.submit 'Gravar'%>

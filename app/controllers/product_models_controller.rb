@@ -9,7 +9,7 @@ class ProductModelsController < ApplicationController
   end
 
   def create
-    product_model_params = params.require(:product_model).permit(:name, :sku, :weight,
+    product_model_params = params.require(:product_model).permit(:name, :weight,
                                                                  :length, :height, :width,
                                                                  :provider_id)
     @product_model = ProductModel.new(product_model_params)
