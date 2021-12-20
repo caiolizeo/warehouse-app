@@ -1,5 +1,9 @@
 class ProductBundlesController < ApplicationController
 
+  def index
+    
+  end
+
   def show
     id = params[:id]
     @product_bundle = ProductBundle.find(id)
