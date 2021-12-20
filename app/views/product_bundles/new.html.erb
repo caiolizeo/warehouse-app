@@ -1,19 +1,30 @@
-<h1>Novo kit de produtos</h1>
 
-<%=form_with(model: @product_bundle) do |f|%>
-  <div>
-    <%= f.label :name, 'Nome'%>
-    <%= f.text_field :name%>
-  </div>
+<% if ProductModel.all.empty? %>
+<p>Não é possível criar um novo kit pois não existem produtos cadastrados</p>
+<% else %>
 
-  <div>
-    <%= f.label :sku, 'Código SKU'%>
-    <%= f.text_field :sku%>
-  </div>
-  <div>
-    <%= f.collection_check_boxes :product_model_ids, ProductModel.all, :id, :name %>
-  </div>
-  <div>
-    <%=f.submit 'Gravar'%>
-  </div>
+  <h1>Novo kit de produtos</h1>
+  <ul>
+  <% @product_bundle.errors.full_messages.each do |error| %>
+    <li><%= error%></li>
+  <% end %>
+  </ul>
+
+  <%=form_with(model: @product_bundle) do |f|%>
+    <div>
+      <%= f.label :name, 'Nome'%>
+      <%= f.text_field :name%>
+    </div>
+
+    <div>
+      <%= f.label :sku, 'Código SKU'%>
+      <%= f.text_field :sku%>
+    </div>
+    <div>
+      <%= f.collection_check_boxes :product_model_ids, ProductModel.all, :id, :name %>
+    </div>
+    <div>
+      <%=f.submit 'Gravar'%>
+    </div>
+  <% end %>
 <% end %>

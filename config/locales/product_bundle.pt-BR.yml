@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      product_bundle: "Kit"
+    attributes:
+      product_bundle: 
+        name: "Nome"
+        sku: "SKU"
+        weight: "Peso"
+        product_models: "Produtos"

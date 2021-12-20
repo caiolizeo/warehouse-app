@@ -14,6 +14,9 @@ class ProductBundlesController < ApplicationController
     @product_bundle = ProductBundle.new(bundle_params)
     if @product_bundle.save
       redirect_to @product_bundle
+    else
+      flash.now[:alert] = 'Não foi possível gravar o kit'
+      render 'new'
     end
   end
 end

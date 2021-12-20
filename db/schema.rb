@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_16_205326) do
+ActiveRecord::Schema.define(version: 2021_12_20_125635) do
 
   create_table "product_bundle_items", force: :cascade do |t|
     t.integer "product_model_id", null: false
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2021_12_16_205326) do
     t.string "sku"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "weight"
   end
 
   create_table "product_models", force: :cascade do |t|
