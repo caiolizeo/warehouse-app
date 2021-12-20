@@ -19,7 +19,7 @@ describe 'Um usuário vê todos os bundles cadastrados' do
                           product_model_ids: ['1', '3'])
 
     visit root_path
-    click_on 'Visualizar todos os kits'
+    click_on 'Ver todos os kits'
 
     expect(page).to have_css('td', text: 'Kit Nerd')
     expect(page).to have_css('td', text: 'KD5E9D5E8R7S5D6T9H5Y4')

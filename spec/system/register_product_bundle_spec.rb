@@ -12,6 +12,7 @@ describe 'Usuário registra um kit' do
     expect(page).not_to have_css('label', text: 'Camiseta Homem de ferro')
     expect(page).not_to have_css('label', text: 'Boneco Homem Aranha')
     expect(page).not_to have_button('Gravar')
+
   end
 
   it 'com sucesso' do
@@ -35,12 +36,21 @@ describe 'Usuário registra um kit' do
     check 'Camiseta Homem de ferro'
     click_on 'Gravar'
                
-    expect(page).to have_content('Kit Presente Nerd')
+    expect(page).to have_css('h2', text: 'Kit Presente Nerd')
     expect(page).to have_content('KXVJ81D8S24X95X1GH4E8')
-    expect(page).to have_content('Caneca Marvel')
-    expect(page).to have_content('Camiseta Homem de ferro')
+
+    expect(page).to have_css('td', text: 'Caneca Marvel')
+    expect(page).to have_css('td', text: '300g')
+    expect(page).to have_css('td', text: '14 x 10 x 8')
+    expect(page).to have_css('td', text: 'A Presentes')
+
+    expect(page).to have_css('td', text: 'Camiseta Homem de ferro')
+    expect(page).to have_css('td', text: '100g')
+    expect(page).to have_css('td', text: '75 x 40 x 1')
+    expect(page).to have_css('td', text: 'A Presentes')
+
     expect(page).to have_content('Peso total: 400g')
-    expect(page).not_to have_content('Boneco Homem Aranha')
+    expect(page).not_to have_css('td', text: 'Boneco Homem Aranha')
     
   end
 

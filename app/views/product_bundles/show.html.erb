@@ -1,8 +1,29 @@
-<%=@product_bundle.name%>
-<%=@product_bundle.sku%>
 
-<% @product_bundle.product_models.each do |p| %>
-  <%= p.name %>
-<% end %>
+<h2><%=@product_bundle.name%></h2>
 
-Peso total: <%= @product_bundle.weight%>g
+<p>Lista de produtos</p>
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>Peso</th>
+    <th>Dimensões</th>
+    <th>Código SKU do produto</th>
+    <th>Fornecedor</th>
+  </tr>
+  
+  <% @product_bundle.product_models.each do |p| %>
+    <tr>
+      <td><%= p.name %></td>
+      <td><%= p.weight%>g</td>
+      <td><%= p.dimensions%></td>
+      <td><%= p.sku%></td>
+      <td><%= p.provider.trading_name%></td>
+    </tr>
+  <% end %>
+</table>
+
+<p>Código SKU do Kit: <%=@product_bundle.sku%></p>
+
+
+
+<p>Peso total: <%= @product_bundle.weight%>g</p>

@@ -1,0 +1,14 @@
+<table>
+  <tr>
+    <th>Nome</th>
+    <th>SKU</th>
+    <th>Quant. de produtos</th>
+  </tr>
+  <% @product_bundle.each do |bundle| %>
+    <tr>
+      <td><%= link_to bundle.name, bundle%></td>
+      <td><%= link_to bundle.sku, bundle %></td>
+      <td><%= link_to bundle.product_models.length, bundle %></td>
+    </tr>
+  <% end %>
+</table>

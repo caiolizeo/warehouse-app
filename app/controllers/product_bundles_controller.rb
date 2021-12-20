@@ -1,7 +1,7 @@
 class ProductBundlesController < ApplicationController
 
   def index
-    
+    @product_bundle = ProductBundle.all
   end
 
   def show
