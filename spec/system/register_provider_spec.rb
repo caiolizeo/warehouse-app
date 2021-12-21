@@ -60,7 +60,7 @@ describe 'Visitante cadastra um fornecedor' do
   end
 
   it 'e o cnpj deve ser único' do
-    Provider.create(trading_name: 'J Presentes', company_name: 'J importações LTDA ME',
+    Provider.create!(trading_name: 'J Presentes', company_name: 'J importações LTDA ME',
                     cnpj: '21.749.641/0001-13', email: 'contato@jpresentes.com')
 
     visit root_path

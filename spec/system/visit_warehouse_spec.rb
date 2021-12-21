@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Visitante vê um galpão' do
   it 'e vê todos os dados cadastrados' do
     # Arrange -> Preparar db
-    Warehouse.create(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
+    Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
                      address: 'Av Fernandes Lima', city: 'Maceió',
                      state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
 
@@ -25,7 +25,7 @@ describe 'Visitante vê um galpão' do
 
   it 'e consegue voltar para a tela inicial' do
     # Arrange -> Preparar db
-    Warehouse.create(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
+    Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
                      address: 'Av Fernandes Lima', city: 'Maceió',
                      state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
 
