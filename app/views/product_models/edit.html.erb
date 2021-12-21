@@ -1,4 +1,4 @@
-<h3>Cadastrar Produto</h3>
+<h3>Editar Produto</h3>
 
 <ul>
   <% @product_model.errors.full_messages.each do |msg| %>
@@ -6,7 +6,7 @@
   <%end%>
 </ul>
 
-<%= form_with(model: ProductModel.new) do |f|%>
+<%= form_with(model: @product_model) do |f|%>
   <div>
     <%= f.label :name, 'Nome'%>
     <%= f.text_field :name%>
@@ -34,5 +34,5 @@
 
   <%= f.label :provider_id, 'Fornecedor'%>
   <%= f.collection_select(:provider_id, Provider.all, :id, :trading_name) %>
-  <%= f.submit 'Gravar'%>
+  <%= f.submit 'Editar'%>
 <%end%>

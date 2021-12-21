@@ -20,16 +20,19 @@ describe 'Usuário vê a página de produtos' do
       click_on 'Ver todos os produtos'
 
       expect(page).to have_content('Caneca Marvel')
+      expect(page).to have_content('300g')
       expect(page).to have_content('14 x 10 x 8')
       expect(page).to have_content(p1.sku)
       expect(page).to have_content('A Presentes')
 
       expect(page).to have_content('Boneco Homem Aranha')
+      expect(page).to have_content('250g')
       expect(page).to have_content('50 x 30 x 15')
       expect(page).to have_content(p2.sku)
       expect(page).to have_content('A Presentes')
 
       expect(page).to have_content('Camiseta Homem de ferro')
+      expect(page).to have_content('100g')
       expect(page).to have_content('70 x 40 x 1')
       expect(page).to have_content(p3.sku)
       expect(page).to have_content('A Presentes')

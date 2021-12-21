@@ -6,7 +6,9 @@ class ProductModel < ApplicationRecord
   has_many :product_bundles, through: :product_bundle_items
 
   before_validation do
-    self.sku = generate_sku
+    if self.sku == nil
+      self.sku = generate_sku
+    end
   end
 
   validates :name, :weight, :height, :length, :width, presence: true
