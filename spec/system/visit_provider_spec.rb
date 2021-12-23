@@ -46,6 +46,38 @@ describe 'O visitante vê um fornecedor' do
 
   end
 
+  it 'e não vê produtos de outros fornecedores' do
+    provider1 = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
+                                 cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
+                                 email: 'contato@apresentes.com', phone: '99999-9999')
+
+    provider2 = Provider.create!(trading_name: 'xyz metalúrgica', company_name: 'metalúrgica xyz LTDA',
+                                 cnpj: '72.074.830/0001-74', address: 'Av Pres. Wilson 521',
+                                 email: 'xyz_met@email.com', phone: '99999-9999')
+
+    provider3 = Provider.create!(trading_name: 'C Modas', company_name: 'C Confecções LTDA',
+                                 cnpj: '22.281.398/0001-14', address: 'Av Europa 250', 
+                                 email: 'contato@cconfec.com', phone: '99999-9000')
+
+    prod1 = ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
+                                 weight: 300, provider: provider1)
+    prod2 = ProductModel.create!(name: 'Boneco Homem Aranha', height: '50', width: '30', length: '15',
+                                  weight: 250, provider: provider1)
+    prod3 = ProductModel.create!(name: 'Parafuso philips', height: '8', width: '2', length: '2',
+                                 weight: 2, provider: provider2)                            
+    prod4 = ProductModel.create!(name: 'Camiseta Homem de ferro', height: '70', width: '40', length: '1',
+                                 weight: 100, provider: provider3)
+
+    visit root_path
+    click_on 'Ver todos os fornecedores'
+    click_on 'A Presentes'
+    
+    expect(page).to have_css('td', text: 'Caneca Marvel')
+    expect(page).to have_css('td', text: 'Boneco Homem Aranha')
+    expect(page).not_to have_content('Parafuso philips')
+    expect(page).not_to have_content('Camiseta Homem de ferro')
+  end
+
   it 'e consegue voltar para a página de fornecedores' do
     Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
                     cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
