@@ -31,4 +31,11 @@ describe 'Um usuário vê todos os bundles cadastrados' do
     expect(page).to have_css('td', text: '2')
   end
 
+  it 'mas não existem bundles cadastrados' do
+    
+    visit root_path
+    click_on 'Ver todos os kits'
+
+    expect(page).to have_content('Nenhum kit cadastrado')
+  end
 end
