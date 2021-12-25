@@ -1,6 +1,17 @@
 require 'rails_helper'
 
-describe 'Visitante cadastra um fornecedor' do
+describe 'Usuário cadastra um fornecedor' do
+  it 'e um visitante não vê o link de cadastro' do
+    visit root_path
+    expect(page).not_to have_content('Cadastrar novo fornecedor')
+  end
+
+  it  'e um visitante não acessa diretamente o formulário' do
+    visit new_provider_path
+    
+    expect(current_path).to eq new_user_session_path
+  end
+
   it 'e vê um formulário' do
 
     visit root_path

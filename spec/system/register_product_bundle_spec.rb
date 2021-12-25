@@ -5,9 +5,9 @@ describe 'Usuário registra um kit' do
   it 'mas não existem produtos cadastrados' do
 
     visit root_path
-    click_on 'Criar novo kit de produtos'
+    click_on 'Cadastrar novo kit de produtos'
 
-    expect(page).to have_content('Não é possível criar um novo kit pois não existem produtos cadastrados')
+    expect(page).to have_content('Não é possível cadastrar um novo kit pois não existem produtos cadastrados')
     expect(page).not_to have_css('label', text: 'Caneca Marvel')
     expect(page).not_to have_css('label', text: 'Camiseta Homem de ferro')
     expect(page).not_to have_css('label', text: 'Boneco Homem Aranha')
@@ -28,7 +28,7 @@ describe 'Usuário registra um kit' do
                          weight: 100, provider: p)
 
     visit root_path
-    click_on 'Criar novo kit de produtos'
+    click_on 'Cadastrar novo kit de produtos'
     fill_in 'Nome', with: 'Kit Presente Nerd'
     fill_in 'Código SKU', with: 'XVJ81D8S24X95X1GH4E8'
 
@@ -67,7 +67,7 @@ describe 'Usuário registra um kit' do
                          weight: 100, provider: p)
 
     visit root_path
-    click_on 'Criar novo kit de produtos'
+    click_on 'Cadastrar novo kit de produtos'
     fill_in 'Nome', with: 'Kit Presente Nerd'
     fill_in 'Código SKU', with: ''
     
@@ -94,7 +94,7 @@ describe 'Usuário registra um kit' do
                          weight: 100, provider: p)
 
     visit root_path
-    click_on 'Criar novo kit de produtos'
+    click_on 'Cadastrar novo kit de produtos'
     fill_in 'Nome', with: 'Kit Presente Nerd'
     fill_in 'Código SKU', with: 'A'
     

@@ -1,4 +1,6 @@
 class ProvidersController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+
   def show
     @provider = Provider.find(params[:id])
   end
