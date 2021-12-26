@@ -1,4 +1,5 @@
 class ProductModelsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
 
   def edit
     @product_model = ProductModel.find(params[:id])

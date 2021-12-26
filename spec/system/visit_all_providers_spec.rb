@@ -13,7 +13,6 @@ describe 'O visitante acessa a página com todos os fornecedores' do
     visit root_path
     click_on 'Ver todos os fornecedores'
 
-    expect(page).to have_link('Cadastrar novo fornecedor')
     expect(page).not_to have_content('Nenhum fornecedor cadastrado')
     expect(page).to have_content('Lista de fornecedores')
     expect(page).to have_content('Fornecedores cadastrados: 2')
@@ -25,7 +24,6 @@ describe 'O visitante acessa a página com todos os fornecedores' do
     visit root_path
     click_on 'Ver todos os fornecedores'
     
-    expect(page).to have_link('Cadastrar novo fornecedor')
     expect(page).to have_content('Nenhum fornecedor cadastrado')
   end
 

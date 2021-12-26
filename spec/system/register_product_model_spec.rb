@@ -1,6 +1,16 @@
 require 'rails_helper'
 
 describe 'Usuário cadastra um modelo de produto' do
+  it 'e um visitante não vê o link de cadastro' do
+    visit root_path
+    expect(page).not_to have_content('Cadastrar modelo de produto')
+  end
+
+  it  'e um visitante não acessa diretamente o formulário' do
+    visit new_product_model_path
+
+    expect(current_path).to eq new_user_session_path
+  end
 
   it 'com sucesso' do
     Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
@@ -10,6 +20,9 @@ describe 'Usuário cadastra um modelo de produto' do
     Provider.create!(trading_name: 'C Modas', company_name: 'C Confecções LTDA',
                      cnpj: '08.385.207/0001-33', address: 'Av Europa 250', 
                      email: 'contato@cconfec.com', phone: '99999-9000')
+    
+    user = User.create!(email: 'email@teste.com', password: '123456789')
+    login_as(user, :scope => :user)
 
     visit root_path
     click_on 'Cadastrar modelo de produto'
@@ -39,6 +52,9 @@ describe 'Usuário cadastra um modelo de produto' do
     Provider.create!(trading_name: 'C Modas', company_name: 'C Confecções LTDA',
                      cnpj: '08.385.207/0001-33', address: 'Av Europa 250', 
                      email: 'contato@cconfec.com', phone: '99999-9000')
+
+    user = User.create!(email: 'email@teste.com', password: '123456789')
+    login_as(user, :scope => :user)
     
     visit root_path
     click_on 'Cadastrar modelo de produto'
@@ -69,6 +85,8 @@ describe 'Usuário cadastra um modelo de produto' do
     Provider.create!(trading_name: 'C Modas', company_name: 'C Confecções LTDA',
                      cnpj: '08.385.207/0001-33', address: 'Av Europa 250', 
                      email: 'contato@cconfec.com', phone: '99999-9000')
+    user = User.create!(email: 'email@teste.com', password: '123456789')
+    login_as(user, :scope => :user)
 
     visit root_path
     click_on 'Cadastrar modelo de produto'

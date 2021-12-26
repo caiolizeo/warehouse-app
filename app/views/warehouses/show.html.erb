@@ -1,5 +1,3 @@
-
-
 <dl>
   <dt><%= @warehouse.name %></dt>
   <dd><%= @warehouse.code %></dd>
@@ -9,5 +7,7 @@
   <dd>Área Total: <%= @warehouse.total_area %> m2</dd>
   <dd>Área Útil: <%= @warehouse.useful_area %> m2</dd>
 </dl>
-<%= link_to 'Editar galpão', edit_warehouse_path%>
+<% if user_signed_in? %>
+  <%= link_to 'Editar galpão', edit_warehouse_path%>
+<% end %>
 <%= link_to 'Voltar', root_path %>

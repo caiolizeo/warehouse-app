@@ -19,8 +19,9 @@
         <td><%= p.dimensions %></td>
         <td><%= p.sku %></td>
         <td><%= p.provider.trading_name %></td>
-        <td><%= link_to 'Editar', edit_product_model_path(p.id)%></td>
-           
+        <% if user_signed_in?%>
+          <td><%= link_to 'Editar', edit_product_model_path(p.id)%></td>
+        <% end %>
       </tr>
     <% end %>
 

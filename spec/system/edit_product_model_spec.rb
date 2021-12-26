@@ -1,6 +1,41 @@
 require 'rails_helper'
 
 describe 'Usuário edita um produto' do
+  it 'e um visitante não consegue editar produto' do
+    prov1 = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
+                             cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
+                             email: 'contato@apresentes.com', phone: '99999-9999')
+    prov2 = Provider.create!(trading_name: 'C Modas', company_name: 'C Confecções LTDA',
+                             cnpj: '18.021.478/0001-63', address: 'Av Europa 250', 
+                             email: 'contato@cconfec.com', phone: '99999-9000')
+
+    p1 = ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
+                              weight: 300, provider: prov1)
+    p2 = ProductModel.create!(name: 'Boneco Homem Aranha', height: '50', width: '30', length: '15',
+                              weight: 250, provider: prov1)
+    p3 = ProductModel.create!(name: 'Camiseta Homem de ferro', height: '70', width: '40', length: '1',
+                              weight: 100, provider: prov2)
+
+    visit root_path
+    click_on 'Ver todos os produtos'
+
+    expect(page).not_to have_css("tr##{p1.id}", text: 'Editar')
+    expect(page).not_to have_css("tr##{p2.id}", text: 'Editar')
+    expect(page).not_to have_css("tr##{p3.id}", text: 'Editar')
+  end
+
+  it 'e um visitante não acessa diretamente o formulário do produto' do
+    prov1 = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
+                             cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
+                             email: 'contato@apresentes.com', phone: '99999-9999')
+    p1 = ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
+                              weight: 300, provider: prov1)
+
+    visit edit_product_model_path(p1.id)
+
+    expect(current_path).to eq new_user_session_path
+  end
+
   it 'com sucesso' do
     prov1 = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
                              cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
@@ -15,6 +50,9 @@ describe 'Usuário edita um produto' do
                               weight: 250, provider: prov1)
     p3 = ProductModel.create!(name: 'Camiseta Homem de ferro', height: '70', width: '40', length: '1',
                               weight: 100, provider: prov2)
+
+    user = User.create!(email: 'email@teste.com', password: '123456789')
+    login_as(user, :scope => :user)
 
     visit root_path
     click_on 'Ver todos os produtos'
@@ -53,6 +91,9 @@ describe 'Usuário edita um produto' do
     p3 = ProductModel.create!(name: 'Camiseta Homem de ferro', height: '70', width: '40', length: '1',
                               weight: 100, provider: prov2)
 
+    user = User.create!(email: 'email@teste.com', password: '123456789')
+    login_as(user, :scope => :user)
+
     visit root_path
     click_on 'Ver todos os produtos'
 
@@ -89,6 +130,9 @@ describe 'Usuário edita um produto' do
                               weight: 250, provider: prov1)
     p3 = ProductModel.create!(name: 'Camiseta Homem de ferro', height: '70', width: '40', length: '1',
                               weight: 100, provider: prov2)
+
+    user = User.create!(email: 'email@teste.com', password: '123456789')
+    login_as(user, :scope => :user)
 
     visit root_path
     click_on 'Ver todos os produtos'

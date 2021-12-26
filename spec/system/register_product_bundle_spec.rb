@@ -1,8 +1,20 @@
 require 'rails_helper'
 
 describe 'Usuário registra um kit' do
+  it 'e um visitante não vê o link de cadastro' do
+    visit root_path
+    expect(page).not_to have_content('Cadastrar modelo de produto')
+  end
+
+  it  'e um visitante não acessa diretamente o formulário' do
+    visit new_product_bundle_path
+
+    expect(current_path).to eq new_user_session_path
+  end
 
   it 'mas não existem produtos cadastrados' do
+    user = User.create!(email: 'email@teste.com', password: '123456789')
+    login_as(user, :scope => :user)
 
     visit root_path
     click_on 'Cadastrar novo kit de produtos'
@@ -26,6 +38,8 @@ describe 'Usuário registra um kit' do
                          weight: 250, provider: p)
     ProductModel.create!(name: 'Camiseta Homem de ferro', height: '75', width: '40', length: '1',
                          weight: 100, provider: p)
+    user = User.create!(email: 'email@teste.com', password: '123456789')
+    login_as(user, :scope => :user)
 
     visit root_path
     click_on 'Cadastrar novo kit de produtos'
@@ -65,6 +79,8 @@ describe 'Usuário registra um kit' do
                          weight: 250, provider: p)
     ProductModel.create!(name: 'Camiseta Homem de ferro', height: '75', width: '40', length: '1',
                          weight: 100, provider: p)
+    user = User.create!(email: 'email@teste.com', password: '123456789')
+    login_as(user, :scope => :user)
 
     visit root_path
     click_on 'Cadastrar novo kit de produtos'
@@ -92,6 +108,8 @@ describe 'Usuário registra um kit' do
                          weight: 250, provider: p)
     ProductModel.create!(name: 'Camiseta Homem de ferro', height: '75', width: '40', length: '1',
                          weight: 100, provider: p)
+    user = User.create!(email: 'email@teste.com', password: '123456789')
+    login_as(user, :scope => :user)
 
     visit root_path
     click_on 'Cadastrar novo kit de produtos'

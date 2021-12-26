@@ -1,10 +1,33 @@
 require 'rails_helper'
 
 describe 'Usuário edita um Galpão' do
+  it 'e um visitante não consegue editar produto' do
+    Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
+                      address: 'Av Fernandes Lima', city: 'Maceió',
+                      state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
+
+    visit root_path
+    click_on 'Maceió'
+
+    expect(page).not_to have_link('Editar galpão')
+  end
+
+  it 'e um visitante não acessa diretamente o formulário do galpão' do
+    w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
+                      address: 'Av Fernandes Lima', city: 'Maceió',
+                      state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
+    
+    visit edit_warehouse_path(w.id)
+
+    expect(current_path).to eq new_user_session_path
+  end
+
   it 'com sucesso' do
     Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
                      address: 'Av Fernandes Lima', city: 'Maceió',
                      state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
+    user = User.create!(email: 'email@teste.com', password: '123456789')
+    login_as(user, :scope => :user)
     
     visit root_path
     click_on 'Maceió'
@@ -36,6 +59,8 @@ describe 'Usuário edita um Galpão' do
     Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
                      address: 'Av Fernandes Lima', city: 'Maceió',
                      state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
+    user = User.create!(email: 'email@teste.com', password: '123456789')
+    login_as(user, :scope => :user)
 
     visit root_path
     click_on 'Maceió'
@@ -70,6 +95,8 @@ describe 'Usuário edita um Galpão' do
     Warehouse.create!(name: 'Porto Alegre', code: 'POA', description: 'Galpão em POA',
                       address: 'Rua y', city: 'Porto Alegre', state: 'RS', postal_code: '03500-000',
                       total_area: 2000, useful_area: 1000)
+    user = User.create!(email: 'email@teste.com', password: '123456789')
+    login_as(user, :scope => :user)
 
     visit root_path
     click_on 'Guarulhos'
