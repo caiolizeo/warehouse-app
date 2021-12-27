@@ -20,6 +20,7 @@
         <%= link_to "Ver todos os fornecedores", providers_path %>
         <%= link_to 'Ver todos os produtos', product_models_path%>
         <%= link_to 'Ver todos os kits', product_bundles_path %>
+        <%= link_to 'Ver todas as categorias', categories_path%>
         <% if user_signed_in? %>
           <%= link_to "Cadastrar novo galpão", new_warehouse_path %>
           <%= link_to "Cadastrar modelo de produto", new_product_model_path %>

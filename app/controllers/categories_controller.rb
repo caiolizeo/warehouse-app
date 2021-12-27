@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create]
 
   def index
     @categories = Category.all
@@ -20,6 +20,10 @@ class CategoriesController < ApplicationController
       render 'new'
     end
 
+  end
+
+  def show
+    @category = Category.find(params[:id])
   end
   
 end

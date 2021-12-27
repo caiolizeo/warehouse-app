@@ -10,7 +10,8 @@
       <th>Peso</th>
       <th>Dimensões</th>
       <th>SKU</th>
-      <th>fornecedor</th>
+      <th>Fornecedor</th>
+      <th>Categoria</th>
     </tr>
     <% @products.each do |p| %>
       <tr id = <%=p.id%>>
@@ -19,6 +20,7 @@
         <td><%= p.dimensions %></td>
         <td><%= p.sku %></td>
         <td><%= p.provider.trading_name %></td>
+        <td><%= p.category.name %></td>
         <% if user_signed_in?%>
           <td><%= link_to 'Editar', edit_product_model_path(p.id)%></td>
         <% end %>

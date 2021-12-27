@@ -1,0 +1,11 @@
+<h1><%= @category.name %></h1>
+
+<% if @category.product_models.empty? %>
+  <p>Nenhum produto cadastrado nessa categoria</p>
+<% else %>
+  <ul>
+    <% @category.product_models.each do |product| %>
+      <li><%= link_to product.name, product_model_path(product.id) %></li>
+    <% end %>
+  </ul>
+<% end %>
