@@ -8,13 +8,13 @@ describe 'Usuário vê a página de produtos' do
       prov2 = Provider.create!(trading_name: 'C Modas', company_name: 'C Confecções LTDA',
                                cnpj: '18.021.478/0001-63', address: 'Av Europa 250', 
                                email: 'contato@cconfec.com', phone: '99999-9000')
-
+      c = Category.create!(name: 'Outros')
       p1 = ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
-                           weight: 300, provider: prov1)
+                           weight: 300, provider: prov1, category: c)
       p2 = ProductModel.create!(name: 'Boneco Homem Aranha', height: '50', width: '30', length: '15',
-                           weight: 250, provider: prov1)
+                           weight: 250, provider: prov1, category: c)
       p3 = ProductModel.create!(name: 'Camiseta Homem de ferro', height: '70', width: '40', length: '1',
-                           weight: 100, provider: prov2)
+                           weight: 100, provider: prov2, category: c)
 
       visit root_path
       click_on 'Ver todos os produtos'

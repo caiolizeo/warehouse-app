@@ -20,7 +20,8 @@ describe 'Usuário cadastra um modelo de produto' do
     Provider.create!(trading_name: 'C Modas', company_name: 'C Confecções LTDA',
                      cnpj: '08.385.207/0001-33', address: 'Av Europa 250', 
                      email: 'contato@cconfec.com', phone: '99999-9000')
-    
+    Category.create!(name: 'Acessórios')
+    Category.create!(name: 'Vestuário')
     user = User.create!(email: 'email@teste.com', password: '123456789')
     login_as(user, :scope => :user)
 
@@ -33,12 +34,14 @@ describe 'Usuário cadastra um modelo de produto' do
     fill_in 'Largura', with: '8'
     fill_in 'Profundidade', with: '14'
     select 'A Presentes', from: 'Fornecedor'
+    select 'Acessórios', from: 'Categoria'
     click_on 'Gravar'
     
     expect(page).to have_content('Modelo de produto registrado com sucesso!')
     expect(page).to have_content('Nome: Caneca Star Wars')
     expect(page).to have_content('Peso: 300 gramas')
     expect(page).to have_content('Dimensões: 12 x 8 x 14')
+    expect(page).to have_content('Categoria: Acessórios')
     expect(page).to have_content('Fornecedor: A Presentes')
     
 

@@ -25,6 +25,8 @@
           <%= link_to "Cadastrar modelo de produto", new_product_model_path %>
           <%= link_to 'Cadastrar novo kit de produtos', new_product_bundle_path%>
           <%= link_to "Cadastrar novo fornecedor", new_provider_path %>
+          <%= link_to 'Cadastrar nova categoria', new_category_path%>
+
           <%= link_to "Sair", destroy_user_session_path, :method => :delete %>
           <p>Olá <%= current_user.email %></p>
         <% else %>

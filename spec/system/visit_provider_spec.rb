@@ -22,11 +22,11 @@ describe 'O visitante vê um fornecedor' do
     provider = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
                         cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
                         email: 'contato@apresentes.com', phone: '99999-9999')
-    
+    c = Category.create!(name: 'Outros')
     prod1 = ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
-                         weight: 300, sku: 'CM3569SD105W3666SD10', provider: provider)
+                         weight: 300, sku: 'CM3569SD105W3666SD10', provider: provider, category: c)
     prod2 = ProductModel.create!(name: 'Boneco Homem Aranha', height: '50', width: '30', length: '15',
-                         weight: 250, sku: 'BO236S5D10XC3567SX08', provider: provider)
+                         weight: 250, sku: 'BO236S5D10XC3567SX08', provider: provider, category: c)
     
     visit root_path
     click_on 'Ver todos os fornecedores'
@@ -58,15 +58,15 @@ describe 'O visitante vê um fornecedor' do
     provider3 = Provider.create!(trading_name: 'C Modas', company_name: 'C Confecções LTDA',
                                  cnpj: '22.281.398/0001-14', address: 'Av Europa 250', 
                                  email: 'contato@cconfec.com', phone: '99999-9000')
-
+    c = Category.create!(name: 'Outros')
     prod1 = ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
-                                 weight: 300, provider: provider1)
+                                 weight: 300, provider: provider1, category: c)
     prod2 = ProductModel.create!(name: 'Boneco Homem Aranha', height: '50', width: '30', length: '15',
-                                  weight: 250, provider: provider1)
+                                  weight: 250, provider: provider1, category: c)
     prod3 = ProductModel.create!(name: 'Parafuso philips', height: '8', width: '2', length: '2',
-                                 weight: 2, provider: provider2)                            
+                                 weight: 2, provider: provider2, category: c)                            
     prod4 = ProductModel.create!(name: 'Camiseta Homem de ferro', height: '70', width: '40', length: '1',
-                                 weight: 100, provider: provider3)
+                                 weight: 100, provider: provider3, category: c)
 
     visit root_path
     click_on 'Ver todos os fornecedores'

@@ -8,7 +8,7 @@ class ProductModelsController < ApplicationController
   def update
     product_model_params = params.require(:product_model).permit(:name, :weight,
                                                                  :length, :height, :width,
-                                                                 :provider_id)
+                                                                 :provider_id, :category_id)
 
     @product_model = ProductModel.find(params[:id])
     @product_model.update(product_model_params)
@@ -37,7 +37,7 @@ class ProductModelsController < ApplicationController
   def create
     product_model_params = params.require(:product_model).permit(:name, :weight,
                                                                  :length, :height, :width,
-                                                                 :provider_id)
+                                                                 :provider_id, :category_id)
     @product_model = ProductModel.new(product_model_params)
 
     if @product_model.save

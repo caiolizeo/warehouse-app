@@ -17,11 +17,12 @@ RSpec.describe ProductBundle, type: :model do
     p = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
                          cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
                          email: 'contato@apresentes.com', phone: '99999-9999')
+    c = Category.create!(name: 'Outros')
       
     product1 = ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
-                                    weight: 300, provider: p)
+                                    weight: 300, provider: p, category: c)
     product2 = ProductModel.create!(name: 'Boneco Homem Aranha', height: '50', width: '30', length: '15',
-                                    weight: 250, provider: p)
+                                    weight: 250, provider: p, category: c)
 
     bundle = ProductBundle.new(name: '', sku: 'F5G6R9S5F4T7S58T9K62', 
                                    product_models: [product1, product2])
@@ -35,11 +36,11 @@ RSpec.describe ProductBundle, type: :model do
     p = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
                          cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
                          email: 'contato@apresentes.com', phone: '99999-9999')
-      
+    c = Category.create!(name: 'Outros')
     product1 = ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
-                                    weight: 300, provider: p)
+                                    weight: 300, provider: p, category: c)
     product2 = ProductModel.create!(name: 'Boneco Homem Aranha', height: '50', width: '30', length: '15',
-                                    weight: 250, provider: p)
+                                    weight: 250, provider: p, category: c)
 
     bundle = ProductBundle.new(name: 'Bundle', sku: '', 
                                    product_models: [product1, product2])
@@ -53,11 +54,11 @@ RSpec.describe ProductBundle, type: :model do
     p = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
                          cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
                          email: 'contato@apresentes.com', phone: '99999-9999')
-
+    c = Category.create!(name: 'Outros')
     product1 = ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
-                                    weight: 300, provider: p)
+                                    weight: 300, provider: p, category: c)
     product2 = ProductModel.create!(name: 'Boneco Homem Aranha', height: '50', width: '30', length: '15',
-                                    weight: 250, provider: p)
+                                    weight: 250, provider: p, category: c)
 
     b1 = ProductBundle.create!(name: 'B1', sku: 'DKE02OEK49S03LS9DO4I', 
                                product_models: [product1, product2])

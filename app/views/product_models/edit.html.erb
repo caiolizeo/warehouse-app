@@ -32,7 +32,14 @@
     <%= f.text_field :length%>
   </div>
 
-  <%= f.label :provider_id, 'Fornecedor'%>
-  <%= f.collection_select(:provider_id, Provider.all, :id, :trading_name) %>
+  <div>
+    <%= f.label :category_id, 'Categoria'%>
+    <%= f.collection_select(:category_id, Category.all, :id, :name)%>
+  </div>
+  
+  <div>
+    <%= f.label :provider_id, 'Fornecedor'%>
+    <%= f.collection_select(:provider_id, Provider.all, :id, :trading_name) %>
+  </div>
   <%= f.submit 'Editar'%>
 <%end%>

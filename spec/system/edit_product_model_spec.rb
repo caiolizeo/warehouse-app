@@ -8,13 +8,13 @@ describe 'Usuário edita um produto' do
     prov2 = Provider.create!(trading_name: 'C Modas', company_name: 'C Confecções LTDA',
                              cnpj: '18.021.478/0001-63', address: 'Av Europa 250', 
                              email: 'contato@cconfec.com', phone: '99999-9000')
-
+    c = Category.create!(name: 'Outros')
     p1 = ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
-                              weight: 300, provider: prov1)
+                              weight: 300, provider: prov1, category: c)
     p2 = ProductModel.create!(name: 'Boneco Homem Aranha', height: '50', width: '30', length: '15',
-                              weight: 250, provider: prov1)
+                              weight: 250, provider: prov1, category: c)
     p3 = ProductModel.create!(name: 'Camiseta Homem de ferro', height: '70', width: '40', length: '1',
-                              weight: 100, provider: prov2)
+                              weight: 100, provider: prov2, category: c)
 
     visit root_path
     click_on 'Ver todos os produtos'
@@ -28,8 +28,9 @@ describe 'Usuário edita um produto' do
     prov1 = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
                              cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
                              email: 'contato@apresentes.com', phone: '99999-9999')
+    c = Category.create!(name: 'Outros')
     p1 = ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
-                              weight: 300, provider: prov1)
+                              weight: 300, provider: prov1, category: c)
 
     visit edit_product_model_path(p1.id)
 
@@ -43,13 +44,14 @@ describe 'Usuário edita um produto' do
     prov2 = Provider.create!(trading_name: 'C Modas', company_name: 'C Confecções LTDA',
                              cnpj: '18.021.478/0001-63', address: 'Av Europa 250', 
                              email: 'contato@cconfec.com', phone: '99999-9000')
-
+    c = Category.create!(name: 'Outros')
+    c2 = Category.create!(name: 'Brinquedos')
     p1 = ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
-                              weight: 300, provider: prov1)
+                              weight: 300, provider: prov1, category: c)
     p2 = ProductModel.create!(name: 'Boneco Homem Aranha', height: '50', width: '30', length: '15',
-                              weight: 250, provider: prov1)
+                              weight: 250, provider: prov1, category: c)
     p3 = ProductModel.create!(name: 'Camiseta Homem de ferro', height: '70', width: '40', length: '1',
-                              weight: 100, provider: prov2)
+                              weight: 100, provider: prov2, category: c)
 
     user = User.create!(email: 'email@teste.com', password: '123456789')
     login_as(user, :scope => :user)
@@ -67,12 +69,14 @@ describe 'Usuário edita um produto' do
     fill_in 'Largura', with: '40'
     fill_in 'Profundidade', with: '20'
     select 'C Modas', from: 'Fornecedor'
+    select 'Brinquedos', from: 'Categoria'
     click_on 'Editar'
 
     expect(page).to have_content('Nome: Boneco Darth Vader')
     expect(page).to have_content('Peso: 270 gramas')
     expect(page).to have_content('Dimensões: 55 x 40 x 20')
     expect(page).to have_content("SKU: #{p2.sku}")
+    expect(page).to have_content('Categoria: Brinquedos')
     expect(page).to have_content('Fornecedor: C Modas')
   end
 
@@ -83,13 +87,13 @@ describe 'Usuário edita um produto' do
     prov2 = Provider.create!(trading_name: 'C Modas', company_name: 'C Confecções LTDA',
                              cnpj: '18.021.478/0001-63', address: 'Av Europa 250', 
                              email: 'contato@cconfec.com', phone: '99999-9000')
-
+    c = Category.create!(name: 'Outros')
     p1 = ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
-                              weight: 300, provider: prov1)
+                              weight: 300, provider: prov1, category: c)
     p2 = ProductModel.create!(name: 'Boneco Homem Aranha', height: '50', width: '30', length: '15',
-                              weight: 250, provider: prov1)
+                              weight: 250, provider: prov1, category: c)
     p3 = ProductModel.create!(name: 'Camiseta Homem de ferro', height: '70', width: '40', length: '1',
-                              weight: 100, provider: prov2)
+                              weight: 100, provider: prov2, category: c)
 
     user = User.create!(email: 'email@teste.com', password: '123456789')
     login_as(user, :scope => :user)
@@ -123,13 +127,13 @@ describe 'Usuário edita um produto' do
     prov2 = Provider.create!(trading_name: 'C Modas', company_name: 'C Confecções LTDA',
                              cnpj: '18.021.478/0001-63', address: 'Av Europa 250', 
                              email: 'contato@cconfec.com', phone: '99999-9000')
-
+    c = Category.create!(name: 'Outros')
     p1 = ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
-                              weight: 300, provider: prov1)
+                              weight: 300, provider: prov1, category: c)
     p2 = ProductModel.create!(name: 'Boneco Homem Aranha', height: '50', width: '30', length: '15',
-                              weight: 250, provider: prov1)
+                              weight: 250, provider: prov1, category: c)
     p3 = ProductModel.create!(name: 'Camiseta Homem de ferro', height: '70', width: '40', length: '1',
-                              weight: 100, provider: prov2)
+                              weight: 100, provider: prov2, category: c)
 
     user = User.create!(email: 'email@teste.com', password: '123456789')
     login_as(user, :scope => :user)
