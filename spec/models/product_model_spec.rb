@@ -9,17 +9,24 @@ RSpec.describe ProductModel, type: :model do
     expect(result).to eq '14 x 10 x 12'
   end
 
-  it 'Código SKU possui 20 caracteres' do
+  it 'Deve gerar um SKU' do
     p = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
-                             cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
-                             email: 'contato@apresentes.com', phone: '99999-9999')
+                         cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
+                         email: 'contato@apresentes.com', phone: '99999-9999')
     c = Category.create!(name: 'Outros')
-    product = ProductModel.create!(name: 'Caneca', height: 14, width: 10, length: 8,
+    product = ProductModel.new(name: 'Caneca', height: 14, width: 10, length: 8,
                                    weight: 300, provider: p, category: c)
-    
-    result =  product.sku.length
+    allow(SecureRandom).to receive(:alphanumeric).with(20).and_return 'sdgeessxsk333ddolllf'
 
-    expect(result).to eq 20
+    product.save
+
+    expect(product.sku).not_to eq nil
+    expect(product.sku).to eq 'SDGEESSXSK333DDOLLLF'
+    expect(product.sku.length).to eq 20
+  end
+
+  it 'Não deve atualizar o SKU' do
+    
   end
 
   it 'Código SKU é único' do
@@ -29,7 +36,8 @@ RSpec.describe ProductModel, type: :model do
     c = Category.create!(name: 'Outros')
     product1 = ProductModel.create!(name: 'Caneca', height: 14, width: 10, length: 8,
                                    weight: 300, provider: p, category: c)
-    product2 = ProductModel.create(name: 'Caneca', sku: product1.sku, height: 14, width: 10, length: 8,
+    allow(SecureRandom).to receive(:alphanumeric).with(20).and_return product1.sku
+    product2 = ProductModel.create(name: 'Caneca', height: 14, width: 10, length: 8,
                                     weight: 300, provider: p, category: c)
      
     result =  product2.valid?

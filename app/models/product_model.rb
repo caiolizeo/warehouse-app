@@ -23,12 +23,7 @@ class ProductModel < ApplicationRecord
   private
 
   def generate_sku
-    
-    sku = "PR"+SecureRandom.hex(9)
-    while ProductModel.where(sku: sku.upcase).empty? == false
-      sku = "PR"+SecureRandom.hex(9)
-    end
-    
+    sku = SecureRandom.alphanumeric(20)    
     sku.upcase!
   end
  

@@ -13,6 +13,7 @@ describe 'Usuário cadastra um modelo de produto' do
   end
 
   it 'com sucesso' do
+    allow(SecureRandom).to receive(:alphanumeric).with(20).and_return 'sdgeessxsk333ddolllf'
     Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
                      cnpj: '21.749.641/0001-13', address: 'Av Paulista 500', 
                      email: 'contato@jpresentes.com', phone: '99999-9999')
@@ -36,9 +37,11 @@ describe 'Usuário cadastra um modelo de produto' do
     select 'A Presentes', from: 'Fornecedor'
     select 'Acessórios', from: 'Categoria'
     click_on 'Gravar'
-    
+
+    p = ProductModel.last
     expect(page).to have_content('Modelo de produto registrado com sucesso!')
     expect(page).to have_content('Nome: Caneca Star Wars')
+    expect(page).to have_content("SKU: #{p.sku}")
     expect(page).to have_content('Peso: 300 gramas')
     expect(page).to have_content('Dimensões: 12 x 8 x 14')
     expect(page).to have_content('Categoria: Acessórios')
