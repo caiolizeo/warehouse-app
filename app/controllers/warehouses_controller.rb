@@ -22,6 +22,8 @@ class WarehousesController < ApplicationController
 
   def show
     @warehouse = Warehouse.find(params[:id])
+    @items = find_product_items
+    @item_id
   end
 
   def new
@@ -40,5 +42,19 @@ class WarehousesController < ApplicationController
       flash.now[:alert] = 'Não foi possível gravar o galpão'
       render 'new'
     end
+  end
+
+  private
+
+  def find_product_items
+    local_items = ProductItem.where(warehouse_id: params[:id])
+    names = []
+
+    local_items.each do |item|
+      name = ProductModel.find(item.product_model_id).name
+      names.push(name)
+    end
+
+    return names.tally
   end
 end

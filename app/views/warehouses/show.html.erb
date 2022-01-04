@@ -17,6 +17,11 @@
       <th>Nome</th>
       <th>Quantidade</th>
     </tr>
-    
+    <% @items.each do |item| %>
+    <tr id = <%= ProductModel.where(name: item[0])[0].id %>>
+      <td><%=item[0]%></td>
+      <td><%=item[1]%></td>
+    </tr>
+    <% end %>    
   </table>
 <%= link_to 'Voltar', root_path %>

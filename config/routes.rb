@@ -7,6 +7,6 @@ Rails.application.routes.draw do
   resources :product_models, only:[:index, :show, :new, :create, :edit, :update]
   resources :product_bundles, only:[:index, :new, :create, :show]
   resources :categories, only:[:index, :show, :new, :create]
-  resources :product_items, only:[:new, :create]
+  resources :product_items, only:[:new]
   post '/product_items/submit', to: 'product_items#submit', as: 'submit'
 end
