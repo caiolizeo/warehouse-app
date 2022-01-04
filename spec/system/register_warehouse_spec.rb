@@ -124,7 +124,8 @@ describe 'Usuário cadastra um galpão' do
 
   it 'e o CEP possui formato inválido' do
     user = User.create!(email: 'email@teste.com', password: '123456789')
-    login_as(user, :scope => :user)
+
+    login_as(user)
     visit root_path
     click_on 'Cadastrar novo galpão'
     fill_in 'Nome', with: 'Juiz de Fora'

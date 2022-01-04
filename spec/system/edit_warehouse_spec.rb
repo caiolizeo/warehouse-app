@@ -27,8 +27,8 @@ describe 'Usuário edita um Galpão' do
                      address: 'Av Fernandes Lima', city: 'Maceió',
                      state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
     user = User.create!(email: 'email@teste.com', password: '123456789')
-    login_as(user, :scope => :user)
     
+    login_as(user)
     visit root_path
     click_on 'Maceió'
     click_on 'Editar galpão'
@@ -60,8 +60,8 @@ describe 'Usuário edita um Galpão' do
                      address: 'Av Fernandes Lima', city: 'Maceió',
                      state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
     user = User.create!(email: 'email@teste.com', password: '123456789')
-    login_as(user, :scope => :user)
-
+    
+    login_as(user)
     visit root_path
     click_on 'Maceió'
     click_on 'Editar galpão'
@@ -96,8 +96,8 @@ describe 'Usuário edita um Galpão' do
                       address: 'Rua y', city: 'Porto Alegre', state: 'RS', postal_code: '03500-000',
                       total_area: 2000, useful_area: 1000)
     user = User.create!(email: 'email@teste.com', password: '123456789')
-    login_as(user, :scope => :user)
-
+    
+    login_as(user)
     visit root_path
     click_on 'Guarulhos'
     click_on 'Editar galpão'

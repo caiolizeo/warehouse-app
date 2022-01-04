@@ -22,8 +22,8 @@ class WarehousesController < ApplicationController
 
   def show
     @warehouse = Warehouse.find(params[:id])
-    @items = find_product_items
-    @item_id
+    @items = @warehouse.product_items.group(:product_model).count
+    @product_models = ProductModel.all
   end
 
   def new
@@ -44,17 +44,16 @@ class WarehousesController < ApplicationController
     end
   end
 
-  private
-
-  def find_product_items
-    local_items = ProductItem.where(warehouse_id: params[:id])
-    names = []
-
-    local_items.each do |item|
-      name = ProductModel.find(item.product_model_id).name
-      names.push(name)
+  def product_entry
+    quantity = params[:quantity].to_i
+    w = Warehouse.find(params[:id])
+    pm = ProductModel.find(params[:product_model_id])
+    quantity.times do
+      ProductItem.create(product_model: pm, warehouse: w)
     end
+    redirect_to w
 
-    return names.tally
   end
+
+
 end

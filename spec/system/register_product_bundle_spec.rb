@@ -14,8 +14,8 @@ describe 'Usuário registra um kit' do
 
   it 'mas não existem produtos cadastrados' do
     user = User.create!(email: 'email@teste.com', password: '123456789')
-    login_as(user, :scope => :user)
-
+    
+    login_as(user)
     visit root_path
     click_on 'Cadastrar novo kit de produtos'
 
@@ -39,8 +39,8 @@ describe 'Usuário registra um kit' do
     ProductModel.create!(name: 'Camiseta Homem de ferro', height: '75', width: '40', length: '1',
                          weight: 100, provider: p, category: c)
     user = User.create!(email: 'email@teste.com', password: '123456789')
-    login_as(user, :scope => :user)
-
+    
+    login_as(user)
     visit root_path
     click_on 'Cadastrar novo kit de produtos'
     fill_in 'Nome', with: 'Kit Presente Nerd'
@@ -80,8 +80,8 @@ describe 'Usuário registra um kit' do
     ProductModel.create!(name: 'Camiseta Homem de ferro', height: '75', width: '40', length: '1',
                          weight: 100, provider: p, category: c)
     user = User.create!(email: 'email@teste.com', password: '123456789')
-    login_as(user, :scope => :user)
-
+    
+    login_as(user)
     visit root_path
     click_on 'Cadastrar novo kit de produtos'
     fill_in 'Nome', with: 'Kit Presente Nerd'
@@ -109,8 +109,8 @@ describe 'Usuário registra um kit' do
     ProductModel.create!(name: 'Camiseta Homem de ferro', height: '75', width: '40', length: '1',
                          weight: 100, provider: p, category: c)
     user = User.create!(email: 'email@teste.com', password: '123456789')
-    login_as(user, :scope => :user)
-
+    
+    login_as(user)
     visit root_path
     click_on 'Cadastrar novo kit de produtos'
     fill_in 'Nome', with: 'Kit Presente Nerd'

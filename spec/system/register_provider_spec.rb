@@ -14,8 +14,8 @@ describe 'Usuário cadastra um fornecedor' do
 
   it 'e vê um formulário' do
     user = User.create!(email: 'email@teste.com', password: '123456789')
-    login_as(user, :scope => :user)
 
+    login_as(user)
     visit root_path
     click_on 'Ver todos os fornecedores'
     click_on 'Cadastrar novo fornecedor'
@@ -32,8 +32,8 @@ describe 'Usuário cadastra um fornecedor' do
 
   it 'com sucesso' do
     user = User.create!(email: 'email@teste.com', password: '123456789')
-    login_as(user, :scope => :user)
 
+    login_as(user)
     visit root_path
     click_on 'Ver todos os fornecedores'
     click_on 'Cadastrar novo fornecedor'
@@ -57,8 +57,8 @@ describe 'Usuário cadastra um fornecedor' do
 
   it 'e os campos são obrigatórios' do
     user = User.create!(email: 'email@teste.com', password: '123456789')
-    login_as(user, :scope => :user)
 
+    login_as(user)
     visit root_path
 
     click_on 'Ver todos os fornecedores'
@@ -82,8 +82,8 @@ describe 'Usuário cadastra um fornecedor' do
     Provider.create!(trading_name: 'J Presentes', company_name: 'J importações LTDA ME',
                     cnpj: '21.749.641/0001-13', email: 'contato@jpresentes.com')
     user = User.create!(email: 'email@teste.com', password: '123456789')
-    login_as(user, :scope => :user)
 
+    login_as(user)
     visit root_path
 
     click_on 'Ver todos os fornecedores'
@@ -102,8 +102,8 @@ describe 'Usuário cadastra um fornecedor' do
 
   it 'e o cnpj deve possuir formato correto' do
     user = User.create!(email: 'email@teste.com', password: '123456789')
-    login_as(user, :scope => :user)
     
+    login_as(user)
     visit root_path
 
     click_on 'Ver todos os fornecedores'

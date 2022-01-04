@@ -3,6 +3,7 @@ require 'securerandom'
 class ProductModel < ApplicationRecord
   belongs_to :provider
   belongs_to :category
+  has_many :product_items
   has_many :product_bundle_items
   has_many :product_bundles, through: :product_bundle_items
 

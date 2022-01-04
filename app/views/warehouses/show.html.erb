@@ -17,11 +17,30 @@
       <th>Nome</th>
       <th>Quantidade</th>
     </tr>
-    <% @items.each do |item| %>
-    <tr id = <%= ProductModel.where(name: item[0])[0].id %>>
-      <td><%=item[0]%></td>
-      <td><%=item[1]%></td>
-    </tr>
+    <% @items.each_pair do |product_model, qtd| %>
+      <tr id = <%= product_model.id %>>
+        <td><%= product_model.name %></td>
+        <td><%= qtd %></td>
+      </tr>
     <% end %>    
   </table>
+
+  <h2>Entrada de itens</h2>
+
+  <%= form_with(url: product_entry_warehouse_path(@warehouse.id)) do |f| %>
+    <div>
+      <%= f.label :quantity, 'Quantidade'%>
+      <%= f.number_field :quantity%>
+    </div>
+    
+    <div>
+      <%= f.label :product_model_id, 'Produto'%>
+      <%= f.collection_select(:product_model_id, @product_models, :id, :name)%>
+    </div>
+
+    <%= f.submit 'Confirmar'%>
+  <% end %>
+
+
 <%= link_to 'Voltar', root_path %>
+

@@ -54,8 +54,8 @@ describe 'Usuário edita um produto' do
                               weight: 100, provider: prov2, category: c)
 
     user = User.create!(email: 'email@teste.com', password: '123456789')
-    login_as(user, :scope => :user)
-
+    
+    login_as(user)
     visit root_path
     click_on 'Ver todos os produtos'
 
@@ -96,8 +96,8 @@ describe 'Usuário edita um produto' do
                               weight: 100, provider: prov2, category: c)
 
     user = User.create!(email: 'email@teste.com', password: '123456789')
-    login_as(user, :scope => :user)
-
+    
+    login_as(user)
     visit root_path
     click_on 'Ver todos os produtos'
 
@@ -136,8 +136,8 @@ describe 'Usuário edita um produto' do
                               weight: 100, provider: prov2, category: c)
 
     user = User.create!(email: 'email@teste.com', password: '123456789')
-    login_as(user, :scope => :user)
-
+    
+    login_as(user)
     visit root_path
     click_on 'Ver todos os produtos'
 

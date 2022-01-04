@@ -24,8 +24,8 @@ describe 'Usuário cadastra um modelo de produto' do
     Category.create!(name: 'Acessórios')
     Category.create!(name: 'Vestuário')
     user = User.create!(email: 'email@teste.com', password: '123456789')
-    login_as(user, :scope => :user)
-
+    
+    login_as(user)
     visit root_path
     click_on 'Cadastrar modelo de produto'
 
@@ -60,8 +60,8 @@ describe 'Usuário cadastra um modelo de produto' do
                      email: 'contato@cconfec.com', phone: '99999-9000')
 
     user = User.create!(email: 'email@teste.com', password: '123456789')
-    login_as(user, :scope => :user)
     
+    login_as(user)
     visit root_path
     click_on 'Cadastrar modelo de produto'
 
@@ -92,8 +92,8 @@ describe 'Usuário cadastra um modelo de produto' do
                      cnpj: '08.385.207/0001-33', address: 'Av Europa 250', 
                      email: 'contato@cconfec.com', phone: '99999-9000')
     user = User.create!(email: 'email@teste.com', password: '123456789')
-    login_as(user, :scope => :user)
-
+    
+    login_as(user)
     visit root_path
     click_on 'Cadastrar modelo de produto'
 

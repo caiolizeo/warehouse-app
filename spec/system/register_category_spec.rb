@@ -26,8 +26,8 @@ describe 'Usuário cadastra nova categoria' do
 
   it 'com sucesso' do
     user = User.create!(email: 'email@teste.com', password: '123456789')
-    login_as(user, :scope => :user)
 
+    login_as(user)
     visit root_path
     click_on 'Cadastrar nova categoria'
     fill_in 'Nome', with: 'Calçados'
@@ -39,8 +39,8 @@ describe 'Usuário cadastra nova categoria' do
 
   it 'e deixa nome em branco' do
     user = User.create!(email: 'email@teste.com', password: '123456789')
-    login_as(user, :scope => :user)
-
+    
+    login_as(user)
     visit root_path
     click_on 'Cadastrar nova categoria'
     fill_in 'Nome', with: ''
@@ -53,8 +53,8 @@ describe 'Usuário cadastra nova categoria' do
   it 'e cadastra um nome duplicado' do
     Category.create!(name: 'Calçados')
     user = User.create!(email: 'email@teste.com', password: '123456789')
-    login_as(user, :scope => :user)
-
+    
+    login_as(user)
     visit root_path
     click_on 'Cadastrar nova categoria'
     fill_in 'Nome', with: 'Calçados'
