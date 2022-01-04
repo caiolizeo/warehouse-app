@@ -10,4 +10,13 @@
 <% if user_signed_in? %>
   <%= link_to 'Editar galpão', edit_warehouse_path%>
 <% end %>
+
+<h2>Estoque</h2>
+  <table>
+    <tr>
+      <th>Nome</th>
+      <th>Quantidade</th>
+    </tr>
+    
+  </table>
 <%= link_to 'Voltar', root_path %>

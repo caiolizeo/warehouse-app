@@ -15,23 +15,24 @@
     <%= flash[:notice] %>
     <header>
       <nav>
-        <%= link_to "Início", root_path %>
+        <%= link_to 'Início', root_path %>
 
-        <%= link_to "Ver todos os fornecedores", providers_path %>
+        <%= link_to 'Ver todos os fornecedores', providers_path %>
         <%= link_to 'Ver todos os produtos', product_models_path%>
         <%= link_to 'Ver todos os kits', product_bundles_path %>
         <%= link_to 'Ver todas as categorias', categories_path%>
         <% if user_signed_in? %>
-          <%= link_to "Cadastrar novo galpão", new_warehouse_path %>
-          <%= link_to "Cadastrar modelo de produto", new_product_model_path %>
+          <%= link_to 'Cadastrar novo galpão', new_warehouse_path %>
+          <%= link_to 'Cadastrar modelo de produto', new_product_model_path %>
           <%= link_to 'Cadastrar novo kit de produtos', new_product_bundle_path%>
-          <%= link_to "Cadastrar novo fornecedor", new_provider_path %>
+          <%= link_to 'Cadastrar novo fornecedor', new_provider_path %>
           <%= link_to 'Cadastrar nova categoria', new_category_path%>
+          <%= link_to 'Entrada de itens', new_product_item_path%>
 
-          <%= link_to "Sair", destroy_user_session_path, :method => :delete %>
+          <%= link_to 'Sair', destroy_user_session_path, :method => :delete %>
           <p>Olá <%= current_user.email %></p>
         <% else %>
-          <%= link_to "Entrar", new_user_session_path %>
+          <%= link_to 'Entrar', new_user_session_path %>
         <% end %>
 
       </nav>

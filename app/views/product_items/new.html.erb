@@ -1,0 +1,20 @@
+<h1>Entrada de Produtos</h1>
+
+<%= form_with url: '/product_items/submit', method: :post do |f| %>
+  <div>
+    <%= f.label :quantity, 'Quantidade'%>
+    <%= f.number_field :quantity%>
+  </div>
+
+  <div>
+    <%= f.label :warehouse_id, 'Galpão destino'%>
+    <%= f.collection_select(:warehouse_id, Warehouse.all, :id, :code)%>
+  </div>
+
+  <div>
+    <%= f.label :product_model_id, 'Produto'%>
+    <%= f.collection_select(:product_model_id, ProductModel.all, :id, :name)%>
+  </div>
+
+  <%= f.submit 'Confirmar'%>
+<% end %>
