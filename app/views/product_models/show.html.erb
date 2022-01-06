@@ -8,3 +8,20 @@
 </ul>
 
 <h2> Galpões com estoque disponível </h2>
+
+<% if @items.empty? %>
+  <h2>Produto fora de estoque</h2>
+<% else %>
+  <table>
+    <tr>
+      <th>Galpão</th>
+      <th>Quantidade</th>
+    </tr>
+    <% @items.each_pair do |warehouse, qtd| %>
+        <tr id = <%= warehouse.id %>>
+          <td><%= link_to warehouse.name, warehouse %></td>
+          <td><%= qtd %></td>
+        </tr>
+      <% end %> 
+  </table>
+<% end %>

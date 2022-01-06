@@ -62,8 +62,11 @@ describe 'Usuário da entrada em novos itens' do
       expect(page).to have_content('Caneca Marvel')
       expect(page).to have_content('15')
     end
-
   end
+
+  it 'com sucesso diretamente da página de modelo de produto'
+
+  it 'e deixa a quantidade em branco'
 
 
 end

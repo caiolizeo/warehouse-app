@@ -28,6 +28,7 @@ class ProductModelsController < ApplicationController
 
   def show
     @product_model = ProductModel.find(params[:id])
+    @items = @product_model.product_items.group(:warehouse).count
   end
 
   def new
