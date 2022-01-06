@@ -7,13 +7,12 @@ class ProductItemsController < ApplicationController
   end
 
   def process_entry
-    quantity = params[:quantity].to_i
-    w = Warehouse.find(params[:warehouse_id])
-    pm = ProductModel.find(params[:product_model_id])
-    quantity.times do
-      ProductItem.create(product_model: pm, warehouse: w)
-    end
-    redirect_to w
+    pe = ProductEntry.new(quantity: params[:quantity], warehouse_id: params[:warehouse_id],
+                          product_model_id: params[:product_model_id])
+    
+    pe.process
+
+    redirect_to warehouse_path(pe.warehouse_id)
   end
 
 end
