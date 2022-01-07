@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Warehouse API' do
   context 'GET /api/v1/warehouses' do
-    it 'sucesso' do
+    it 'com sucesso' do
       Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
                         address: 'Av Fernandes Lima', city: 'Maceió',
                         state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
@@ -23,11 +23,40 @@ describe 'Warehouse API' do
 
     it 'resposta vazia' do
       get '/api/v1/warehouses'
-      
+
       parsed_response = JSON.parse(response.body)
       expect(response).to have_http_status(200)
       expect(response.content_type).to include('application/json')
       expect(parsed_response).to eq []
+    end
+  end
+
+  context 'GET /api/v1/warehouses/:id' do
+    it 'com sucesso' do
+      w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
+                            address: 'Av Fernandes Lima', city: 'Maceió',
+                            state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
+
+      get "/api/v1/warehouses/#{w.id}"
+
+      parsed_response = JSON.parse(response.body)
+      expect(response).to have_http_status(200)
+      expect(response.content_type).to include('application/json')
+      expect(parsed_response['name']).to eq 'Maceió'
+      expect(parsed_response['code']).to eq 'MCZ'
+      expect(parsed_response['description']).to eq 'Ótimo galpão'
+      expect(parsed_response['city']).to eq 'Maceió'
+      expect(parsed_response['state']).to eq 'AL'
+      expect(parsed_response['postal_code']).to eq '57050-000'
+      expect(parsed_response.keys).not_to include 'created_at'
+      expect(parsed_response.keys).not_to include 'updated_at'
+    end
+
+    it 'Galpão não existe' do
+
+      get "/api/v1/warehouses/123"
+
+      expect(response).to have_http_status(404)
     end
   end
 end
