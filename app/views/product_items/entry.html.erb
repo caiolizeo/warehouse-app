@@ -1,5 +1,11 @@
 <h1>Entrada de Produtos</h1>
 
+<% if @error %>
+  <ul>
+    <li><%= @error %></li>
+  </ul>
+<% end %>
+
 <%= form_with url: product_items_entry_path do |f| %>
   <div>
     <%= f.label :quantity, 'Quantidade'%>

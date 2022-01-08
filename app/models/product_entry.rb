@@ -11,11 +11,17 @@ class ProductEntry
     w = Warehouse.find(warehouse_id)
     pm = ProductModel.find(product_model_id)
 
-    ProductItem.transaction do
-      quantity.times do
-        ProductItem.create!(product_model: pm, warehouse: w)
+    if quantity < 1
+      return false
+    else
+      ProductItem.transaction do
+        quantity.times do
+          ProductItem.create!(product_model: pm, warehouse: w)
+        end
       end
+      return true
     end
+    
   end
 
 

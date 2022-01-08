@@ -24,6 +24,7 @@ class WarehousesController < ApplicationController
     @warehouse = Warehouse.find(params[:id])
     @items = @warehouse.product_items.group(:product_model).count
     @product_models = ProductModel.all
+    @error = nil
   end
 
   def new
@@ -48,11 +49,19 @@ class WarehousesController < ApplicationController
     quantity = params[:quantity].to_i
     w = Warehouse.find(params[:id])
     pm = ProductModel.find(params[:product_model_id])
-    quantity.times do
-      ProductItem.create(product_model: pm, warehouse: w)
+    if quantity < 1
+      @warehouse = Warehouse.find(params[:id])
+      @items = @warehouse.product_items.group(:product_model).count
+      @product_models = ProductModel.all
+      @error = 'Quantidade inválida'
+      flash.now[:alert] = 'Não foi possível dar entrada nos itens'
+      render 'show'
+    else
+      quantity.times do
+        ProductItem.create(product_model: pm, warehouse: w)
+      end
+      redirect_to w
     end
-    redirect_to w
-
   end
 
 

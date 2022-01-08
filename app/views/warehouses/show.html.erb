@@ -25,8 +25,16 @@
     <% end %>    
   </table>
 
+<% if user_signed_in? %>
+  
   <h2>Entrada de itens</h2>
 
+  <% if @error %>
+    <ul>
+      <li><%= @error %></li>
+    </ul>
+  <% end %>
+  
   <%= form_with(url: product_entry_warehouse_path(@warehouse.id)) do |f| %>
     <div>
       <%= f.label :quantity, 'Quantidade'%>
@@ -40,7 +48,7 @@
 
     <%= f.submit 'Confirmar'%>
   <% end %>
-
+<% end %>
 
 <%= link_to 'Voltar', root_path %>
 

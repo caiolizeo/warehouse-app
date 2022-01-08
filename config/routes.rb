@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     post 'product_entry', on: :member
   end
   resources :providers, only:[:index, :show, :new, :create] 
-  resources :product_models, only:[:index, :show, :new, :create, :edit, :update]
+  resources :product_models, only:[:index, :show, :new, :create, :edit, :update] do
+    post 'product_entry', on: :member
+  end
   resources :product_bundles, only:[:index, :new, :create, :show]
   resources :categories, only:[:index, :show, :new, :create]
   resources :product_items, only:[:new]

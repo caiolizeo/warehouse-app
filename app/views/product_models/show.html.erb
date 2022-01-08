@@ -25,3 +25,26 @@
       <% end %> 
   </table>
 <% end %>
+<% if user_signed_in? %>
+  <h2>Entrada de itens</h2>
+
+  <% if @error %>
+    <ul>
+      <li><%= @error %></li>
+    </ul>
+  <% end %>
+
+  <%= form_with(url: product_entry_product_model_path(@product_model.id)) do |f| %>
+    <div>
+      <%= f.label :quantity, 'Quantidade'%>
+      <%= f.number_field :quantity%>
+    </div>
+
+    <div>
+      <%= f.label :warehouse_id, 'Galpão destino'%>
+      <%= f.collection_select(:warehouse_id, @warehouses, :id, :name)%>
+    </div>
+
+    <%= f.submit 'Confirmar'%>
+  <% end %>
+<% end %>
