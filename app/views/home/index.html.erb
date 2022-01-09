@@ -1,13 +1,21 @@
-
-
 <h1>WareHouse App</h1>
 
 <h3>Boas vindas ao sistema de gestão de estoques</h3>
 
+<% if @warehouses.nil? %>
 
-<h3>Galpões cadastrados</h3>
+<% else %>
+  <%= form_with(url: search_warehouses_path, method: :get) do |f|%>
+    <div>
+      <%= f.label :query, 'Buscar galpão'%>
+      <%= f.text_field :query%>
+      <%= f.submit 'Pesquisar'%>
+    </div>
+  <% end %>
 
-<%@warehouses.each do |w|%>
-  <%= link_to w.name, w%> - <%=w.code%><br>
-<%end%>
+  <h3>Galpões cadastrados</h3>
 
+  <%@warehouses.each do |w|%>
+    <%= link_to w.name, w%> - <%=w.code%><br>
+  <%end%>
+<% end %>

@@ -1,0 +1,20 @@
+<%if @warehouses.empty? %>
+  <h2>Nenhum galpão encontrado</h2>
+<% else %>
+  <h2>Galpões Encontrados</h2>
+
+  <table>
+    <tr>
+      <th>Nome</th>
+      <th>Código</th>
+      <th>Cidade</th>
+    </tr>
+    <% @warehouses.each do |warehouse| %>
+      <tr>
+        <td><%= warehouse.name %></td>
+        <td><%= warehouse.code %></td>
+        <td><%= warehouse.city %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

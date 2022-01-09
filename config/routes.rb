@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :warehouses, only:[:show, :new, :create, :edit, :update] do
     post 'product_entry', on: :member
+    get 'search', on: :collection
   end
   resources :providers, only:[:index, :show, :new, :create] 
   resources :product_models, only:[:index, :show, :new, :create, :edit, :update] do
