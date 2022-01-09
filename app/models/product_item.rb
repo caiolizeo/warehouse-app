@@ -4,6 +4,8 @@ class ProductItem < ApplicationRecord
   belongs_to :product_model
   belongs_to :warehouse
 
+  validates :code, length: { is: 20 }, uniqueness: true, presence: true
+
   before_validation :generate_code
 
   private
