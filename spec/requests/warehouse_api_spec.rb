@@ -59,4 +59,65 @@ describe 'Warehouse API' do
       expect(response).to have_http_status(404)
     end
   end
+
+  context 'POST /api/v1/warehouses' do
+    it 'com sucesso' do
+
+      headers = {"CONTENT_TYPE" => "application/json"}
+      post '/api/v1/warehouses', params: '{"name": "Maceió",
+                                          "code": "MCZ",
+                                          "description": "Ótimo galpão",
+                                          "address": "Avenida X",
+                                          "city": "Maceió",
+                                          "state": "AL",
+                                          "postal_code": "57050-000",
+                                          "total_area": 10000,
+                                          "useful_area": 8000}', 
+                                 headers: headers
+
+      expect(response).to have_http_status(201)
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response["id"]).to be_a_kind_of(Integer)
+      expect(parsed_response['name']).to eq 'Maceió'
+      expect(parsed_response['code']).to eq 'MCZ'
+    end
+
+    it 'campos são exigidos' do
+      headers = {"CONTENT_TYPE" => "application/json"}
+      post '/api/v1/warehouses', params: '{"description": "Ótimo galpão",
+                                          "address": "Avenida X",
+                                          "city": "Maceió",
+                                          "state": "AL",
+                                          "postal_code": "57050-000",
+                                          "total_area": 10000,
+                                          "useful_area": 8000}', 
+                                 headers: headers
+
+      expect(response).to have_http_status(422)
+      expect(response.body).to include 'Nome não pode ficar em branco'
+      expect(response.body).to include 'Código não pode ficar em branco'
+    end
+
+    it 'código e nome não são únicos' do
+      w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
+        address: 'Av Fernandes Lima', city: 'Maceió',
+        state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
+
+      headers = {"CONTENT_TYPE" => "application/json"}
+      post '/api/v1/warehouses', params: '{"name": "Maceió",
+                                          "code": "MCZ",
+                                          "description": "Ótimo galpão",
+                                          "address": "Avenida X",
+                                          "city": "Maceió",
+                                          "state": "AL",
+                                          "postal_code": "57050-000",
+                                          "total_area": 10000,
+                                          "useful_area": 8000}', 
+                                 headers: headers
+                                 
+      expect(response).to have_http_status(422)
+      expect(response.body).to include 'Nome já está em uso'
+      expect(response.body).to include 'Código já está em uso'
+    end
+  end
 end

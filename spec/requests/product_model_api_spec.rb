@@ -61,6 +61,13 @@ describe 'Product Model API' do
       expect(parsed_response['weight']).to eq 300
       expect(parsed_response['provider_id']).to eq prov1.id
       expect(parsed_response['category_id']).to eq c1.id
+      expect(parsed_response['provider']['id']).to eq prov1.id
+      expect(parsed_response['provider']['trading_name']).to eq prov1.trading_name
+      expect(parsed_response['provider']['company_name']).to eq prov1.company_name
+      expect(parsed_response['category']['id']).to eq c1.id
+      expect(parsed_response['category']['name']).to eq c1.name
+      
+
     end
 
     it 'modelo de produto não existe' do

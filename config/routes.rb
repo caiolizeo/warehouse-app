@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     namespace :v1 do #versionamento de api
-      resources :warehouses, only:[:index, :show]
+      resources :warehouses, only:[:index, :show, :create]
       resources :product_models, only:[:index, :show]
       resources :suppliers, only:[:index, :show]
     end
