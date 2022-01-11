@@ -68,4 +68,8 @@ class WarehousesController < ApplicationController
     @warehouses = Warehouse.where('name like ? OR code like ? OR city like ?',
       "%#{params[:query]}%", "%#{params[:query]}%", "%#{params[:query]}%")
   end
+
+  def add_category
+    @warehouse = Warehouse.find(params[:id])
+  end
 end

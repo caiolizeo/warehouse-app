@@ -12,6 +12,10 @@
 <% end %>
 
 <h2>Estoque</h2>
+
+<% if @items.empty? %>
+<h4>Nenhum item no estoque</h4>
+<% else %>
   <table>
     <tr>
       <th>Nome</th>
@@ -24,8 +28,11 @@
       </tr>
     <% end %>    
   </table>
+<% end %>
 
 <% if user_signed_in? %>
+
+  <%= link_to 'Adicionar nova categoria ao galpão', add_category_warehouse_path(@warehouse.id)%>
   
   <h2>Entrada de itens</h2>
 
@@ -48,6 +55,7 @@
 
     <%= f.submit 'Confirmar'%>
   <% end %>
+
 <% end %>
 
 <%= link_to 'Voltar', root_path %>
