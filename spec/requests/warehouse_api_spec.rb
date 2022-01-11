@@ -29,6 +29,8 @@ describe 'Warehouse API' do
       expect(response.content_type).to include('application/json')
       expect(parsed_response).to eq []
     end
+
+    it 'erro no banco de dados'
   end
 
   context 'GET /api/v1/warehouses/:id' do
@@ -57,7 +59,11 @@ describe 'Warehouse API' do
       get "/api/v1/warehouses/123"
 
       expect(response).to have_http_status(404)
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response['error']).to eq 'Objeto não encontrado'
     end
+
+    it 'erro no banco de dados'
   end
 
   context 'POST /api/v1/warehouses' do
@@ -119,5 +125,7 @@ describe 'Warehouse API' do
       expect(response.body).to include 'Nome já está em uso'
       expect(response.body).to include 'Código já está em uso'
     end
+
+    it 'erro no banco de dados'
   end
 end

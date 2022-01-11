@@ -38,6 +38,8 @@ describe 'Product Model API' do
       expect(response.content_type).to include('application/json')
       expect(parsed_response).to eq []
     end
+
+    it 'erro no banco de dados'
   end
 
   context 'GET /api/v1/product_models/:id' do
@@ -72,9 +74,28 @@ describe 'Product Model API' do
 
     it 'modelo de produto não existe' do
 
-      get "/api/v1/warehouses/123"
+      get '/api/v1/product_models/999999'
 
       expect(response).to have_http_status(404)
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response['error']).to eq 'Objeto não encontrado'
+    end
+
+    it 'erro no banco de dados' do
+      prov1 = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
+        cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
+        email: 'contato@apresentes.com', phone: '99999-9999')
+      c1 = Category.create!(name: 'Outros')
+      p1 = ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
+        weight: 300, provider: prov1, category: c1)
+
+      allow(ProductModel).to receive(:find).with(p1.id.to_s).and_raise ActiveRecord::ConnectionNotEstablished
+    
+      get "/api/v1/product_models/#{p1.id}"
+
+      expect(response).to have_http_status(500)
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response['error']).to eq 'Erro de conexão com o servidor'
     end
   end
 end

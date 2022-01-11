@@ -60,6 +60,8 @@ describe 'Supplier API' do
       get '/api/v1/suppliers/123'
 
       expect(response).to have_http_status(404)
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response['error']).to eq 'Objeto não encontrado'
     end
   end
 end
