@@ -1,1 +1,10 @@
 <h2>Adicionar categoria ao galpão <%= @warehouse.name%></h2>
+
+<%= form_with(url: register_category_warehouse_path(@warehouse.id)) do |f|%>
+  
+  <div>
+    <%= f.collection_check_boxes :category_ids, @categories, :id, :name %>
+  </div>
+
+  <%= f.submit 'Confirmar'%>
+<% end %>

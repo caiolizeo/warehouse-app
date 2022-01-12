@@ -70,6 +70,28 @@ class WarehousesController < ApplicationController
   end
 
   def add_category
+
     @warehouse = Warehouse.find(params[:id])
+    @categories = Category.all
+  end
+
+  def register_category
+    warehouse = Warehouse.find(params[:id])
+    params[:category_ids].shift
+    w_ids = warehouse.category_ids
+
+    params[:category_ids].each do |id|
+      w_ids << id if !w_ids.include? id.to_i
+    end
+    warehouse.update(category_ids: w_ids)
+    
+    if w_ids != warehouse.category_ids
+      redirect_to warehouse
+    else
+      @warehouse = Warehouse.find(params[:id])
+      @categories = Category.all
+      flash.now[:alert] = 'Não foi possível inserir categorias'
+      render 'add_category'
+    end
   end
 end

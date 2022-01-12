@@ -31,8 +31,6 @@
 <% end %>
 
 <% if user_signed_in? %>
-
-  <%= link_to 'Adicionar nova categoria ao galpão', add_category_warehouse_path(@warehouse.id)%>
   
   <h2>Entrada de itens</h2>
 
@@ -57,6 +55,26 @@
   <% end %>
 
 <% end %>
+<%if @warehouse.categories.empty?%>
 
+  <p>Este galpão não possui nenhuma categoria cadastrada</p>
+
+<% else %>
+
+  <div id='categories'>
+
+    <h2>Categorias</h2>
+    <ul>
+      <% @warehouse.categories.each do |category| %>
+      <li><%= category.name %></li>
+      <% end %>
+    </ul>
+  </div>
+
+<% end %>
+
+<% if user_signed_in? %>
+  <%= link_to 'Adicionar nova categoria ao galpão', add_category_warehouse_path(@warehouse.id)%>
+<% end %>
 <%= link_to 'Voltar', root_path %>
 

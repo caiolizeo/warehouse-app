@@ -25,7 +25,7 @@ describe 'Usuário vincula categoria com galpão' do
 
     expect(current_path).to eq warehouse_path(w.id)
     within('div#categories') do
-      expect(page).to have_css('h2', text: "Categorias do galpão #{w.name}")
+      expect(page).to have_css('h2', text: "Categorias")
       expect(page).to have_css('li', text: 'Vestuário')
       expect(page).not_to have_content('Congelados')
     end
