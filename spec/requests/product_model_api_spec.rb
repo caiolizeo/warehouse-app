@@ -39,7 +39,21 @@ describe 'Product Model API' do
       expect(parsed_response).to eq []
     end
 
-    it 'erro no banco de dados'
+    it 'erro no banco de dados' do
+      prov1 = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
+        cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
+        email: 'contato@apresentes.com', phone: '99999-9999')
+      c1 = Category.create!(name: 'Outros')
+      p1 = ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
+        weight: 300, provider: prov1, category: c1)
+      allow(ProductModel).to receive(:all).and_raise ActiveRecord::ConnectionNotEstablished
+      
+      get '/api/v1/product_models'
+
+      expect(response).to have_http_status(500)
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response['error']).to eq 'Erro de conexão com o servidor'
+    end
   end
 
   context 'GET /api/v1/product_models/:id' do

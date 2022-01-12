@@ -9,3 +9,22 @@
     <% end %>
   </ul>
 <% end %>
+
+<% if @warehouses.empty? %>
+  <p>Nenhum galpão cadastrado nessa categoria</p>
+<% else %>
+  <table>
+    <tr>
+      <th>Nome</th>
+      <th>Código</th>
+      <th>Cep</th>
+    </tr>
+    <% @warehouses.each do |warehouse| %>
+      <tr>
+        <td><%= warehouse.name %></td>
+        <td><%= warehouse.code %></td>
+        <td><%= warehouse.postal_code %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

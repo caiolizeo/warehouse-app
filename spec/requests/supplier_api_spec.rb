@@ -35,6 +35,19 @@ describe 'Supplier API' do
       expect(response.content_type).to include('application/json')
       expect(parsed_response).to eq []
     end
+
+    it 'erro no banco de dados' do
+      Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
+        cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
+        email: 'contato@apresentes.com', phone: '99999-9999')
+      allow(Provider).to receive(:all).and_raise ActiveRecord::ConnectionNotEstablished
+
+      get '/api/v1/suppliers'
+
+      expect(response).to have_http_status(500)
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response['error']).to eq 'Erro de conexão com o servidor'
+    end
   end
 
   context 'GET /api/v1/suppliers/:id' do
@@ -62,6 +75,19 @@ describe 'Supplier API' do
       expect(response).to have_http_status(404)
       parsed_response = JSON.parse(response.body)
       expect(parsed_response['error']).to eq 'Objeto não encontrado'
+    end
+
+    it 'erro no banco de dados' do
+      p = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
+        cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
+        email: 'contato@apresentes.com', phone: '99999-9999')
+        allow(Provider).to receive(:find).with(p.id.to_s).and_raise ActiveRecord::ConnectionNotEstablished
+      
+        get "/api/v1/suppliers/#{p.id}"
+
+      expect(response).to have_http_status(500)
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response['error']).to eq 'Erro de conexão com o servidor'
     end
   end
 end
