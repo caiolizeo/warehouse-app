@@ -55,14 +55,14 @@ describe 'Usuário da entrada em novos itens' do
     prov1 = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
       cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
       email: 'contato@apresentes.com', phone: '99999-9999')
-    c1 = Category.create!(name: 'Outros')
+    c1 = Category.create!(name: 'Decoração')
     p1 = ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
                               weight: 300, provider: prov1, category: c1)
     p2 = ProductModel.create!(name: 'Camiseta Homem de ferro', height: '70', width: '40', length: '1',
                                 weight: 100, provider: prov1, category: c1)
     w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
                           address: 'Av Fernandes Lima', city: 'Maceió',
-                          state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
+                          state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000, categories: [c1])
          
                           
     login_as(user)
@@ -94,7 +94,8 @@ describe 'Usuário da entrada em novos itens' do
                               weight: 100, provider: prov1, category: c1)
     w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
                           address: 'Av Fernandes Lima', city: 'Maceió',
-                          state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
+                          state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000,
+                          categories: [c1])
 
     login_as(user)
     visit root_path
@@ -123,7 +124,8 @@ describe 'Usuário da entrada em novos itens' do
 
     w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
                           address: 'Av Fernandes Lima', city: 'Maceió',
-                          state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
+                          state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000,
+                          categories: [c1])
 
     login_as(user)
     visit root_path
@@ -217,6 +219,102 @@ describe 'Usuário da entrada em novos itens' do
     
     expect(page).to have_content('Não foi possível dar entrada nos itens')
     expect(page).to have_content('Quantidade inválida')
+  end
+
+  it 'e tenta cadastrar um item com categoria diferente do galpão' do
+    user = User.create!(email: 'email@teste.com', password: '123456789')
+    
+    prov1 = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
+      cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
+      email: 'contato@apresentes.com', phone: '99999-9999')
+    c1 = Category.create!(name: 'Congelados')
+    c2 = Category.create!(name: 'Perecíveis')
+    c3 = Category.create!(name: 'Eletrônicos')
+    c4 = Category.create!(name: 'Vestuário')
+    p1 = ProductModel.create!(name: 'SmartWatch', height: '14', width: '10', length: '8',
+                              weight: 300, provider: prov1, category: c3)
+    p2 = ProductModel.create!(name: 'Camiseta Homem de ferro', height: '70', width: '40', length: '1',
+                              weight: 100, provider: prov1, category: c4)
+
+    w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
+                          address: 'Av Fernandes Lima', city: 'Maceió', state: 'AL',
+                          postal_code: '57050-000', total_area: 10000, useful_area: 8000, categories: [c1, c2])
+                          
+    login_as(user)
+    visit root_path
+    click_on 'Entrada de itens'
+    fill_in 'Quantidade', with: 30
+    select 'MCZ', from: 'Galpão destino'
+    select 'SmartWatch', from: 'Produto'
+    click_on 'Confirmar'
+    
+    expect(page).to have_content('Não foi possível dar entrada nos itens')
+    expect(page).to have_content('Este galpão não permite itens da categoria Eletrônicos')
+  end
+
+  it 'e tenta cadastrar um item com categoria diferente do galpão na página de galpão' do
+    user = User.create!(email: 'email@teste.com', password: '123456789')
+    
+    prov1 = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
+                             cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
+                             email: 'contato@apresentes.com', phone: '99999-9999')
+    c1 = Category.create!(name: 'Congelados')
+    c2 = Category.create!(name: 'Perecíveis')
+    c3 = Category.create!(name: 'Eletrônicos')
+    c4 = Category.create!(name: 'Vestuário')
+
+    p1 = ProductModel.create!(name: 'SmartWatch', height: '14', width: '10', length: '8',
+                              weight: 300, provider: prov1, category: c3)
+    p2 = ProductModel.create!(name: 'Camiseta Homem de ferro', height: '70', width: '40', length: '1',
+                              weight: 100, provider: prov1, category: c4)
+
+    w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
+      address: 'Av Fernandes Lima', city: 'Maceió', state: 'AL',
+      postal_code: '57050-000', total_area: 10000, useful_area: 8000, categories: [c1, c2])
+    
+    login_as(user)
+    visit root_path
+    click_on 'Maceió'
+    fill_in 'Quantidade', with: 30
+    select 'SmartWatch', from: 'Produto'
+    click_on 'Confirmar'
+
+    expect(page).to have_content('Não foi possível dar entrada nos itens')
+    expect(page).to have_content('Este galpão não permite itens da categoria Eletrônicos')
+
+  end
+  
+  it 'e tenta cadastrar um item com categoria diferente do galpão na página de modelo de produto' do
+    user = User.create!(email: 'email@teste.com', password: '123456789')
+    
+    prov1 = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
+                             cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
+                             email: 'contato@apresentes.com', phone: '99999-9999')
+    c1 = Category.create!(name: 'Congelados')
+    c2 = Category.create!(name: 'Perecíveis')
+    c3 = Category.create!(name: 'Eletrônicos')
+    c4 = Category.create!(name: 'Vestuário')
+
+    p1 = ProductModel.create!(name: 'SmartWatch', height: '14', width: '10', length: '8',
+                              weight: 300, provider: prov1, category: c3)
+    p2 = ProductModel.create!(name: 'Camiseta Homem de ferro', height: '70', width: '40', length: '1',
+                              weight: 100, provider: prov1, category: c4)
+
+    w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
+      address: 'Av Fernandes Lima', city: 'Maceió', state: 'AL',
+      postal_code: '57050-000', total_area: 10000, useful_area: 8000, categories: [c1, c2])
+    
+    login_as(user)
+    visit root_path
+    click_on 'Ver todos os produtos'
+    click_on 'SmartWatch'
+    fill_in 'Quantidade', with: 15
+    select 'Maceió', from: 'Galpão'
+    click_on 'Confirmar'
+
+    expect(page).to have_content('Não foi possível dar entrada nos itens')
+    expect(page).to have_content('Este galpão não permite itens da categoria Eletrônicos')
+
   end
 
 end

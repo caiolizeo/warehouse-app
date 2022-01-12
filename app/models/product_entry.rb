@@ -8,21 +8,38 @@ class ProductEntry
   end
 
   def process
-    w = Warehouse.find(warehouse_id)
+    wh = Warehouse.find(warehouse_id)
     pm = ProductModel.find(product_model_id)
-
-    if quantity < 1
-      return false
-    else
+    
+    if valid_category? && valid_quantity?
       ProductItem.transaction do
         quantity.times do
-          ProductItem.create!(product_model: pm, warehouse: w)
+          ProductItem.create!(product_model: pm, warehouse: wh)
         end
       end
       return true
+    else
+      return false
     end
-    
   end
 
+  def valid_category?
+    wh = Warehouse.find(warehouse_id)
+    pm = ProductModel.find(product_model_id)
+
+    if wh.category_ids.include? pm.category_id
+      return true
+    else
+      return false
+    end
+  end
+
+  def valid_quantity?
+    if quantity > 0
+      return true
+    else
+      return false
+    end
+  end
 
 end

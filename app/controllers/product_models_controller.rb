@@ -52,22 +52,24 @@ class ProductModelsController < ApplicationController
   end
 
   def product_entry
-    quantity = params[:quantity].to_i
-    w = Warehouse.find(params[:warehouse_id])
-    pm = ProductModel.find(params[:id])
+    pe = ProductEntry.new(quantity: params[:quantity], warehouse_id: params[:warehouse_id],
+      product_model_id: params[:id])
 
-    if quantity < 1
+    if pe.process
+      redirect_to product_model_path(params[:id]), notice: 'Produtos cadastrados com sucesso!'
+    else
       @product_model = ProductModel.find(params[:id])
       @items = @product_model.product_items.group(:warehouse).count
       @warehouses = Warehouse.all
-      @error = 'Quantidade inválida'
+
+      if !pe.valid_quantity?
+        @error = 'Quantidade inválida'
+      elsif !pe.valid_category?
+        @error = "Este galpão não permite itens da categoria #{ProductModel.find(pe.product_model_id).category.name}"
+      end
       flash.now[:alert] = 'Não foi possível dar entrada nos itens'
       render 'show' 
-    else
-      quantity.times do
-        ProductItem.create(product_model: pm, warehouse: w)
-      end
-      redirect_to pm
     end
   end
+
 end

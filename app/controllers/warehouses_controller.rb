@@ -1,5 +1,6 @@
 class WarehousesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update,
+                                            :add_category, :register_category]
 
   def edit
      @warehouse = Warehouse.find(params[:id])
@@ -46,21 +47,24 @@ class WarehousesController < ApplicationController
   end
 
   def product_entry
-    quantity = params[:quantity].to_i
-    w = Warehouse.find(params[:id])
-    pm = ProductModel.find(params[:product_model_id])
-    if quantity < 1
+    pe = ProductEntry.new(quantity: params[:quantity], warehouse_id: params[:id],
+      product_model_id: params[:product_model_id])
+
+    if pe.process
+      redirect_to warehouse_path(params[:id]), notice: 'Produtos cadastrados com sucesso!'
+    else
       @warehouse = Warehouse.find(params[:id])
       @items = @warehouse.product_items.group(:product_model).count
       @product_models = ProductModel.all
-      @error = 'Quantidade inválida'
+
+      if !pe.valid_quantity?
+        @error = 'Quantidade inválida'
+      elsif !pe.valid_category?
+        @error = "Este galpão não permite itens da categoria #{ProductModel.find(pe.product_model_id).category.name}"
+      end
+
       flash.now[:alert] = 'Não foi possível dar entrada nos itens'
       render 'show'
-    else
-      quantity.times do
-        ProductItem.create(product_model: pm, warehouse: w)
-      end
-      redirect_to w
     end
   end
 
@@ -70,6 +74,7 @@ class WarehousesController < ApplicationController
   end
 
   def add_category
+    @error = nil
     @warehouse = Warehouse.find(params[:id])
     @categories = Category.all
   end
@@ -81,7 +86,9 @@ class WarehousesController < ApplicationController
     else
       @warehouse = Warehouse.find(params[:id])
       @categories = Category.all
-      flash.now[:alert] = 'Não foi possível inserir categorias'
+ 
+      @error = 'Nenhuma categoria selecionada' if params[:category_ids].empty?
+      flash.now[:alert] = 'Não foi possível inserir novas categorias'
       render 'add_category'
     end
   end

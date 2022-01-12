@@ -82,13 +82,13 @@ describe 'Usuário vê a página de produtos' do
     p2 = ProductModel.create!(name: 'Boneco Homem Aranha', height: '50', width: '30', length: '15',
                                 weight: 250, provider: prov1, category: c1)
     w1 = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
-                           address: 'Av Fernandes Lima', city: 'Maceió',
+                           address: 'Av Fernandes Lima', city: 'Maceió', categories: [c1],
                            state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
     w2 = Warehouse.create!(name: 'São Paulo', code: 'SPX', description: 'galpão em sp',
-                           address: 'Av paulista', city: 'São Paulo',
+                           address: 'Av paulista', city: 'São Paulo', categories: [c1],
                            state: 'SP', postal_code: '01000-000', total_area: 8000, useful_area: 4500)
     w3 = Warehouse.create!(name: 'Rio de Janeiro', code: 'RIO', description: 'galpão no rio',
-                           address: 'Av Brasil', city: 'Rio de Janeiro',
+                           address: 'Av Brasil', city: 'Rio de Janeiro', categories: [c1],
                            state: 'RJ', postal_code: '05000-000', total_area: 8300, useful_area: 5000)
        
     ProductEntry.new(quantity: 18, warehouse_id: w1.id, product_model_id: p1.id).process
@@ -137,7 +137,7 @@ describe 'Usuário vê a página de produtos' do
     p1 = ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
                               weight: 300, provider: prov1, category: c1)
     w1 = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
-                           address: 'Av Fernandes Lima', city: 'Maceió',
+                           address: 'Av Fernandes Lima', city: 'Maceió', categories: [c1],
                            state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
   
     ProductEntry.new(quantity: 18, warehouse_id: w1.id, product_model_id: p1.id).process

@@ -18,7 +18,12 @@ class ProductItemsController < ApplicationController
     else
       @warehouses = Warehouse.all
       @product_models = ProductModel.all
-      @error = 'Quantidade inválida'
+    
+      if !pe.valid_quantity?
+        @error = 'Quantidade inválida'
+      elsif !pe.valid_category?
+        @error = "Este galpão não permite itens da categoria #{ProductModel.find(pe.product_model_id).category.name}"
+      end
       flash.now[:alert] = 'Não foi possível dar entrada nos itens'
       render 'entry'
     end
