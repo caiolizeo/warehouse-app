@@ -90,4 +90,15 @@ describe 'Supplier API' do
       expect(parsed_response['error']).to eq 'Erro de conexão com o servidor'
     end
   end
+
+  context 'POST /api/v1/suppliers' do
+    it 'com sucesso'
+
+    it 'campos são exigidos'
+
+    it 'cnpj é único'
+
+    it 'erro no banco de dados'
+
+  end
 end

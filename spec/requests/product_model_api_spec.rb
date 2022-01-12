@@ -112,4 +112,16 @@ describe 'Product Model API' do
       expect(parsed_response['error']).to eq 'Erro de conexão com o servidor'
     end
   end
+
+  context 'POST /api/v1/product_models' do
+    
+    it 'com sucesso'
+
+    it 'campos são exigidos'
+
+    it 'peso, altura, largura e profundidade são números'
+
+    it 'erro no banco de dados'
+
+  end
 end
