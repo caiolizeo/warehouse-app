@@ -26,13 +26,13 @@ describe 'Warehouse API' do
       expect(response.body).not_to include 'Av Paulista'
     end
 
-    it 'resposta vazia' do
+    it 'Nenhum galpão cadastrado' do
       get '/api/v1/warehouses'
 
       parsed_response = JSON.parse(response.body)
       expect(response).to have_http_status(200)
       expect(response.content_type).to include('application/json')
-      expect(parsed_response).to eq []
+      expect(parsed_response['alert']).to eq 'Nenhum galpão cadastrado'
     end
 
     it 'erro no banco de dados' do

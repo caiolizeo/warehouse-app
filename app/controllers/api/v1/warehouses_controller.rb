@@ -1,8 +1,13 @@
 class Api::V1::WarehousesController < Api::V1::ApiController
   def index
     warehouses = Warehouse.all
-    render json: warehouses.as_json(except: [:address, :created_at, :updated_at],
-                                    include: [categories: {except: [:created_at, :updated_at]}]), status: 200
+    if warehouses.empty?
+      render json: '{"alert": "Nenhum galpão cadastrado"}', status: 200
+    else
+      render json: warehouses.as_json(except: [:address, :created_at, :updated_at],
+        include: [categories: {except: [:created_at, :updated_at]}]), status: 200
+
+    end
   end
 
   def show
