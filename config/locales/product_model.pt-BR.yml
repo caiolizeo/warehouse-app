@@ -10,4 +10,5 @@ pt-BR:
         width: "Largura"
         length: "Profundidade"
         provider: "Fornecedor"
+        category: "Categoria"
         sku: "SKU"

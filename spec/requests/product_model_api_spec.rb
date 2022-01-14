@@ -115,13 +115,90 @@ describe 'Product Model API' do
 
   context 'POST /api/v1/product_models' do
     
-    it 'com sucesso'
+    it 'com sucesso' do
+      prov1 = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
+        cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
+        email: 'contato@apresentes.com', phone: '99999-9999')
+      c1 = Category.create!(name: 'Outros')
+      
+      headers = {"CONTENT_TYPE" => "application/json"}
+      post '/api/v1/product_models', params: '{"name": "SmartWatch",
+                                              "weight": 300,
+                                              "height": 14,
+                                              "length": 8,
+                                              "width": 10,
+                                              "provider_id": 1,
+                                              "category_id": 1}',
+                                     headers: headers
 
-    it 'campos são exigidos'
+        expect(response).to have_http_status(201)
+        parsed_response = JSON.parse(response.body)
+        expect(parsed_response["id"]).to be_a_kind_of(Integer)
+        expect(parsed_response['name']).to eq 'SmartWatch'
+        expect(parsed_response['weight']).to eq 300
+        expect(parsed_response['height']).to eq 14
+        expect(parsed_response['length']).to eq 8
+        expect(parsed_response['width']).to eq 10
+        expect(parsed_response['provider_id']).to eq 1
+        expect(parsed_response['category_id']).to eq 1
 
-    it 'peso, altura, largura e profundidade são números'
+    end
 
-    it 'erro no banco de dados'
+    it 'campos são exigidos' do
+      headers = {"CONTENT_TYPE" => "application/json"}
+      post '/api/v1/product_models', params: '{}', headers: headers
+
+      expect(response).to have_http_status(422)
+      expect(response.body).to include 'Nome não pode ficar em branco'
+      expect(response.body).to include 'Peso não pode ficar em branco'
+      expect(response.body).to include 'Altura não pode ficar em branco'
+      expect(response.body).to include 'Largura não pode ficar em branco'
+      expect(response.body).to include 'Profundidade não pode ficar em branco'
+      expect(response.body).to include 'Fornecedor é obrigatório'
+      expect(response.body).to include 'Categoria é obrigatório'
+    end
+
+    it 'peso, altura, largura e profundidade são números' do
+      prov1 = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
+        cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
+        email: 'contato@apresentes.com', phone: '99999-9999')
+      c1 = Category.create!(name: 'Outros')
+
+      post '/api/v1/product_models', params: '{"weight": a,
+                                               "height": b,
+                                               "length": c,
+                                               "width": d}'
+
+        expect(response).to have_http_status(422)
+        parsed_response = JSON.parse(response.body)
+        expect(response.body).to include 'Altura não é um número'
+        expect(response.body).to include 'Profundidade não é um número'
+        expect(response.body).to include 'Largura não é um número'
+        expect(response.body).to include 'Peso não é um número'
+    end
+
+    it 'erro no banco de dados' do
+      prov1 = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
+        cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
+        email: 'contato@apresentes.com', phone: '99999-9999')
+      c1 = Category.create!(name: 'Outros')
+
+      allow(ProductModel).to receive(:new).and_raise ActiveRecord::ConnectionNotEstablished
+      
+      headers = {"CONTENT_TYPE" => "application/json"}
+      post '/api/v1/product_models', params: '{"name": "SmartWatch",
+                                              "weight": 300,
+                                              "height": 14,
+                                              "length": 8,
+                                              "width": 10,
+                                              "provider_id": 1,
+                                              "category_id": 1}',
+                                     headers: headers
+
+      expect(response).to have_http_status(500)
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response['error']).to eq 'Erro de conexão com o servidor'
+    end
 
   end
 end

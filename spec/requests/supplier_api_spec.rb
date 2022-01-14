@@ -92,13 +92,74 @@ describe 'Supplier API' do
   end
 
   context 'POST /api/v1/suppliers' do
-    it 'com sucesso'
+    it 'com sucesso' do
+      headers = {"CONTENT_TYPE" => "application/json"}
+      post '/api/v1/suppliers', params: '{"trading_name": "A Presentes",
+                                           "company_name": "A importações LTDA ME",
+                                           "cnpj": "21.749.641/0001-13",
+                                           "address": "Av Paulista 500",
+                                           "email": "contato@jpresentes.com",
+                                           "phone": "99999-9999"}',
+                                 headers: headers
 
-    it 'campos são exigidos'
+        expect(response).to have_http_status(201)
+        parsed_response = JSON.parse(response.body)
+        expect(parsed_response["id"]).to be_a_kind_of(Integer)
+        expect(parsed_response['trading_name']).to eq 'A Presentes'
+        expect(parsed_response['company_name']).to eq 'A importações LTDA ME'
+        expect(parsed_response['cnpj']).to eq '21.749.641/0001-13'
+        expect(parsed_response['address']).to eq 'Av Paulista 500'
+        expect(parsed_response['email']).to eq 'contato@jpresentes.com'
+        expect(parsed_response['phone']).to eq '99999-9999'
+    end
 
-    it 'cnpj é único'
+    it 'campos são exigidos' do
+      headers = {"CONTENT_TYPE" => "application/json"}
+      post '/api/v1/suppliers', params: '{}', headers: headers
+     
+      expect(response).to have_http_status(422)
+      parsed_response = JSON.parse(response.body)
+      expect(response.body).to include 'Nome fantasia não pode ficar em branco'
+      expect(response.body).to include 'Razão social não pode ficar em branco'
+      expect(response.body).to include 'Cnpj não pode ficar em branco'
+      expect(response.body).to include 'Email não pode ficar em branco'
+      expect(response.body).to include 'Cnpj possui formato inválido'
+    end
 
-    it 'erro no banco de dados'
+    it 'cnpj é único' do
+      Provider.create!(trading_name: 'C Modas', company_name: 'C Confecções LTDA',
+        cnpj: '22.281.398/0001-14', address: 'Av Europa 250', 
+        email: 'contato@cconfec.com', phone: '99999-9000')
+
+      headers = {"CONTENT_TYPE" => "application/json"}
+      post '/api/v1/suppliers', params: '{"trading_name": "A Presentes",
+                                          "company_name": "A importações LTDA ME",
+                                          "cnpj": "22.281.398/0001-14",
+                                          "address": "Av Paulista 500",
+                                          "email": "contato@jpresentes.com",
+                                          "phone": "99999-9999"}', 
+                                headers: headers
+     
+      expect(response).to have_http_status(422)
+      parsed_response = JSON.parse(response.body)
+      expect(response.body).to include 'Cnpj já está em uso'
+    end
+
+    it 'erro no banco de dados' do
+      allow(Provider).to receive(:new).and_raise ActiveRecord::ConnectionNotEstablished
+      headers = {"CONTENT_TYPE" => "application/json"}
+      post '/api/v1/suppliers', params: '{"trading_name": "A Presentes",
+                                          "company_name": "A importações LTDA ME",
+                                          "cnpj": "22.281.398/0001-14",
+                                          "address": "Av Paulista 500",
+                                          "email": "contato@jpresentes.com",
+                                          "phone": "99999-9999"}', 
+                                headers: headers
+                                
+      expect(response).to have_http_status(500)
+      parsed_response = JSON.parse(response.body)
+      expect(parsed_response['error']).to eq 'Erro de conexão com o servidor'
+    end
 
   end
 end
