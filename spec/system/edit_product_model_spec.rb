@@ -53,7 +53,7 @@ describe 'Usuário edita um produto' do
     p3 = ProductModel.create!(name: 'Camiseta Homem de ferro', height: '70', width: '40', length: '1',
                               weight: 100, provider: prov2, category: c)
 
-    user = User.create!(email: 'email@teste.com', password: '123456789')
+    user = create(:user)
     
     login_as(user)
     visit root_path
