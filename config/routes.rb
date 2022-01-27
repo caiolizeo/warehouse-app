@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
   resources :providers, only:[:index, :show, :new, :create] 
   resources :product_models, only:[:index, :show, :new, :create, :edit, :update] do
+    patch 'enable', on: :member
     post 'product_entry', on: :member
   end
   resources :product_bundles, only:[:index, :new, :create, :show]

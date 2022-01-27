@@ -1,6 +1,7 @@
 require 'securerandom'
 
 class ProductModel < ApplicationRecord
+  enum status: {disabled: 0, enabled: 1}
   belongs_to :provider
   belongs_to :category
   has_many :product_items

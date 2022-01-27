@@ -12,3 +12,6 @@ pt-BR:
         provider: "Fornecedor"
         category: "Categoria"
         sku: "SKU"
+        statuses:
+          disabled: "Desativado"
+          enabled: "Ativo"

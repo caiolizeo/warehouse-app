@@ -6,19 +6,24 @@
 
   <table>
     <tr>
+      <th>Status</th>
       <th>Produto</th>
       <th>Categoria</th>
     </tr>
     <% @products.each do |p| %>
       <tr id = <%=p.id%>>
+        <td><%= p.enum_name(:status, p.status) %></td>
         <td><%= link_to p.name, p %></td>
         <td><%= p.category.name %></td>
         <% if user_signed_in?%>
           <td><%= link_to 'Editar', edit_product_model_path(p.id)%></td>
+          <% if p.enabled? %>
+            <td><%= link_to 'Desativar', enable_product_model_path(p.id), method: :patch %></td>
+          <% else %>
+            <td><%= link_to 'Ativar', enable_product_model_path(p.id), method: :patch %></td>
+          <% end %>
         <% end %>
       </tr>
     <% end %>
-
   </table>
-
 <% end %>

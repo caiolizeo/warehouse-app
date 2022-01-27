@@ -3,7 +3,7 @@ class ProductItemsController < ApplicationController
 
   def entry
     @warehouses = Warehouse.all
-    @product_models = ProductModel.all
+    @product_models = ProductModel.enabled
     @error = nil
   end
 
@@ -17,7 +17,7 @@ class ProductItemsController < ApplicationController
       redirect_to warehouse_path(pe.warehouse_id)
     else
       @warehouses = Warehouse.all
-      @product_models = ProductModel.all
+      @product_models = ProductModel.enabled
     
       if !pe.valid_quantity?
         @error = 'Quantidade inválida'

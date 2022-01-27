@@ -72,4 +72,16 @@ class ProductModelsController < ApplicationController
     end
   end
 
+  def enable
+    pm = ProductModel.find(params[:id])
+
+    if pm.enabled?
+      pm.disabled!
+    else
+      pm.enabled!
+    end
+
+    redirect_to pm
+  end
+
 end
