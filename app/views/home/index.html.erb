@@ -1,11 +1,27 @@
-<h1>WareHouse App</h1>
-
 <h3>Boas vindas ao sistema de gestão de estoques</h3>
+<br>
 
 <% unless @warehouses.nil? %>
   <h3>Galpões cadastrados</h3>
-
-  <%@warehouses.each do |w|%>
-    <%= link_to w.name, w%> - <%=w.code%><br>
-  <%end%>
+  <div style="display: flex;">
+    <%@warehouses.each do |w|%>
+      <div class="card" style="width: 18rem; margin-right: 15px;" id="card-<%=w.id%>">
+        <div class="card-body">
+          <h5 class="card-title"><%= w.name %></h5>
+          <p class="card-text"><%= w.description %></p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Código: <%= w.code %></li>
+          <li class="list-group-item">Endereço: <%= w.address %></li>
+          <li class="list-group-item">CEP: <%= w.postal_code %></li>
+        </ul>
+        <div class="card-body">
+          <%= link_to 'Detalhes', w, class: 'card-link'%>
+        </div>
+      </div>
+      <br>
+    <%end%>
+  </div>
+<% else %>
+  <h3> Nenhum galpão cadastrado</h3>
 <% end %>

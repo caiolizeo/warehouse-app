@@ -14,7 +14,7 @@
   
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="navbar-nav">
+        <div class="navbar-nav" style="margin-left: 15px;">
           <%= link_to 'Warehouse App', root_path, class: 'navbar-brand' %>
           <%= link_to 'Início', root_path, class: 'nav-link' %>
           <%= link_to 'Fornecedores', providers_path, class: 'nav-link'%>
@@ -38,7 +38,7 @@
 
       <% if user_signed_in? %>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="navbar-nav">
+        <div class="navbar-nav" style="margin-left: 15px;">
           <%= link_to 'Novo galpão', new_warehouse_path, class: 'nav-link'%>
           <%= link_to 'Novo produto', new_product_model_path, class: 'nav-link'%>
           <%= link_to 'Novo kit', new_product_bundle_path, class: 'nav-link'%>
@@ -51,9 +51,18 @@
         </nav>
       <% end %>
     </header>
-    <%= flash[:alert] %>
-    <%= flash[:notice] %>
-    <main>
+    <% flash.each do |type, msg| %>
+      <% if type == 'alert' %>
+        <div class="alert alert-danger" role="alert">
+          <%= msg %>
+        </div>
+      <% elsif type == 'notice' %>
+        <div class="alert alert-success" role="alert">
+          <%= msg %>
+        </div>
+      <% end %>
+    <% end %>
+    <main style="margin: 15px;">
       <%= yield %>
     </main>
   </body>

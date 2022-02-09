@@ -22,7 +22,9 @@ describe 'Usuário da entrada em novos itens' do
                             state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
 
       visit root_path
-      click_on 'Maceió'
+      within("div#card-#{w.id}") do
+        click_on 'Detalhes'
+      end
 
       expect(page).not_to have_field('Quantidade')
       expect(page).not_to have_field('Produto')
@@ -121,7 +123,9 @@ describe 'Usuário da entrada em novos itens' do
 
     login_as(user)
     visit root_path
-    click_on 'Maceió'
+    within("div#card-#{w.id}") do
+      click_on 'Detalhes'
+    end
     fill_in 'Quantidade', with: 15
     select 'Caneca Marvel', from: 'Produto'
     click_on 'Confirmar'
@@ -211,7 +215,9 @@ describe 'Usuário da entrada em novos itens' do
 
     login_as(user)
     visit root_path
-    click_on 'Maceió'
+    within("div#card-#{w.id}") do
+      click_on 'Detalhes'
+    end
     click_on 'Confirmar'
 
     expect(page).to have_content('Não foi possível dar entrada nos itens')
@@ -296,7 +302,9 @@ describe 'Usuário da entrada em novos itens' do
     
     login_as(user)
     visit root_path
-    click_on 'Maceió'
+    within("div#card-#{w.id}") do
+      click_on 'Detalhes'
+    end
     fill_in 'Quantidade', with: 30
     select 'SmartWatch', from: 'Produto'
     click_on 'Confirmar'

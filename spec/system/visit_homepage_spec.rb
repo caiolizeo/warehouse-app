@@ -4,7 +4,7 @@ describe 'Visitante abre a tela inicial' do
   it 'e vê a mensagem de boas vindas' do
     visit root_path
 
-    expect(page).to have_css('h1', text: 'WareHouse App')
+    expect(page).to have_link('Warehouse App')
     expect(page).to have_css('h3', text: 'Boas vindas ao sistema de gestão de estoques')
   end
 
@@ -41,13 +41,9 @@ describe 'Visitante abre a tela inicial' do
                      state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
 
     visit root_path
-
-    expect(page).not_to have_content('Ótimo galpão')
-    expect(page).not_to have_content('Av Fernandes Lima')
-    expect(page).not_to have_content('CEP: 57050-000')
+    
     expect(page).not_to have_content('Área Total: 10000 m2')
     expect(page).not_to have_content('Área Útil: 8000 m2')
     expect(page).not_to have_content('Maceió/AL')
-
   end
 end

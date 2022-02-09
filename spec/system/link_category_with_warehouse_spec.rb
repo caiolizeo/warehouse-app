@@ -8,7 +8,9 @@ describe 'Usuário vincula categoria com galpão' do
       state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
 
     visit root_path
-    click_on 'Maceió'
+    within("div#card-#{w.id}") do
+      click_on 'Detalhes'
+    end
 
     expect(page).not_to have_link('Adicionar nova categoria ao galpão')
   end
@@ -34,7 +36,9 @@ describe 'Usuário vincula categoria com galpão' do
 
     login_as(user)
     visit root_path
-    click_on 'Maceió'
+    within("div#card-#{w.id}") do
+      click_on 'Detalhes'
+    end
     click_on 'Adicionar nova categoria ao galpão'
     check 'Vestuário'
     check 'Eletrônicos'
@@ -59,7 +63,9 @@ describe 'Usuário vincula categoria com galpão' do
 
     login_as(user)
     visit root_path
-    click_on 'Maceió'
+    within("div#card-#{w.id}") do
+      click_on 'Detalhes'
+    end
     click_on 'Adicionar nova categoria ao galpão'
     click_on 'Confirmar'
 
@@ -75,7 +81,9 @@ describe 'Usuário vincula categoria com galpão' do
 
     login_as(user)
     visit root_path
-    click_on 'Maceió'
+    within("div#card-#{w.id}") do
+      click_on 'Detalhes'
+    end
     click_on 'Adicionar nova categoria ao galpão'
 
     expect(page).to have_content('Não existem categorias no sistema')

@@ -2,12 +2,14 @@ require 'rails_helper'
 
 describe 'Usuário edita um Galpão' do
   it 'e um visitante não consegue editar produto' do
-    Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
+    w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
                       address: 'Av Fernandes Lima', city: 'Maceió',
                       state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
 
     visit root_path
-    click_on 'Maceió'
+    within("div#card-#{w.id}") do
+      click_on 'Detalhes'
+    end
 
     expect(page).not_to have_link('Editar galpão')
   end
@@ -23,14 +25,16 @@ describe 'Usuário edita um Galpão' do
   end
 
   it 'com sucesso' do
-    Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
+    w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
                      address: 'Av Fernandes Lima', city: 'Maceió',
                      state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
     user = User.create!(email: 'email@teste.com', password: '123456789')
     
     login_as(user)
     visit root_path
-    click_on 'Maceió'
+    within("div#card-#{w.id}") do
+      click_on 'Detalhes'
+    end
     click_on 'Editar galpão'
 
     fill_in 'Nome', with: 'Juiz de Fora'
@@ -56,14 +60,16 @@ describe 'Usuário edita um Galpão' do
   end
 
   it 'e tenta apagar todos os atributos' do
-    Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
+    w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
                      address: 'Av Fernandes Lima', city: 'Maceió',
                      state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
     user = User.create!(email: 'email@teste.com', password: '123456789')
     
     login_as(user)
     visit root_path
-    click_on 'Maceió'
+    within("div#card-#{w.id}") do
+      click_on 'Detalhes'
+    end
     click_on 'Editar galpão'
 
     fill_in 'Nome', with: ''
@@ -89,7 +95,7 @@ describe 'Usuário edita um Galpão' do
   end
 
   it 'e tenta utilizar nome e código cadastrados em outro galpão' do
-    Warehouse.create!(name: 'Guarulhos', code: 'GRU', description: 'Galpão em Guarulhos',
+    w = Warehouse.create!(name: 'Guarulhos', code: 'GRU', description: 'Galpão em Guarulhos',
                       address: 'Rua x', city: 'Guarulhos', state: 'SP', postal_code: '04200-000',
                       total_area: 5000, useful_area: 3000)
     Warehouse.create!(name: 'Porto Alegre', code: 'POA', description: 'Galpão em POA',
@@ -99,7 +105,9 @@ describe 'Usuário edita um Galpão' do
     
     login_as(user)
     visit root_path
-    click_on 'Guarulhos'
+    within("div#card-#{w.id}") do
+      click_on 'Detalhes'
+    end
     click_on 'Editar galpão'
 
     fill_in 'Nome', with: 'Porto Alegre'
