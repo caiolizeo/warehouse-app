@@ -9,7 +9,7 @@ describe 'Usuário desativa e ativa um modelo de produto' do
 
 
     visit root_path
-    click_on 'Ver todos os produtos'
+    click_on 'Produtos'
 
     expect(page).not_to have_css("tr##{p1.id}", text: 'Ativar')
     expect(page).not_to have_css("tr##{p2.id}", text: 'Ativar')
@@ -25,7 +25,7 @@ describe 'Usuário desativa e ativa um modelo de produto' do
 
     login_as(user)
     visit root_path
-    click_on 'Ver todos os produtos'
+    click_on 'Produtos'
 
     within("tr##{p1.id}") do
       click_on 'Desativar'
@@ -43,7 +43,7 @@ describe 'Usuário desativa e ativa um modelo de produto' do
 
     login_as(user)
     visit root_path
-    click_on 'Ver todos os produtos'
+    click_on 'Produtos'
 
     within("tr##{p1.id}") do
       click_on 'Ativar'

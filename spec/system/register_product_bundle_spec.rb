@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Usuário registra um kit' do
   it 'e um visitante não vê o link de cadastro' do
     visit root_path
-    expect(page).not_to have_content('Cadastrar modelo de produto')
+    expect(page).not_to have_content('Novo produto')
   end
 
   it  'e um visitante não acessa diretamente o formulário' do
@@ -17,7 +17,7 @@ describe 'Usuário registra um kit' do
     
     login_as(user)
     visit root_path
-    click_on 'Cadastrar novo kit de produtos'
+    click_on 'Novo kit'
 
     expect(page).to have_content('Não é possível cadastrar um novo kit pois não existem produtos cadastrados')
     expect(page).not_to have_css('label', text: 'Caneca Marvel')
@@ -42,7 +42,7 @@ describe 'Usuário registra um kit' do
     
     login_as(user)
     visit root_path
-    click_on 'Cadastrar novo kit de produtos'
+    click_on 'Novo kit'
     fill_in 'Nome', with: 'Kit Presente Nerd'
     fill_in 'Código SKU', with: 'XVJ81D8S24X95X1GH4E8'
 
@@ -83,7 +83,7 @@ describe 'Usuário registra um kit' do
     
     login_as(user)
     visit root_path
-    click_on 'Cadastrar novo kit de produtos'
+    click_on 'Novo kit'
     fill_in 'Nome', with: 'Kit Presente Nerd'
     fill_in 'Código SKU', with: ''
     
@@ -112,7 +112,7 @@ describe 'Usuário registra um kit' do
     
     login_as(user)
     visit root_path
-    click_on 'Cadastrar novo kit de produtos'
+    click_on 'Novo kit'
     fill_in 'Nome', with: 'Kit Presente Nerd'
     fill_in 'Código SKU', with: 'A'
     

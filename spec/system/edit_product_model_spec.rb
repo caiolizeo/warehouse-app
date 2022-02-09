@@ -17,7 +17,7 @@ describe 'Usuário edita um produto' do
                               weight: 100, provider: prov2, category: c)
 
     visit root_path
-    click_on 'Ver todos os produtos'
+    click_on 'Produtos'
 
     expect(page).not_to have_css("tr##{p1.id}", text: 'Editar')
     expect(page).not_to have_css("tr##{p2.id}", text: 'Editar')
@@ -57,7 +57,7 @@ describe 'Usuário edita um produto' do
     
     login_as(user)
     visit root_path
-    click_on 'Ver todos os produtos'
+    click_on 'Produtos'
 
     within("tr##{p2.id}") do
       click_on 'Editar'
@@ -99,7 +99,7 @@ describe 'Usuário edita um produto' do
     
     login_as(user)
     visit root_path
-    click_on 'Ver todos os produtos'
+    click_on 'Produtos'
 
     within("tr##{p2.id}") do
       click_on 'Editar'
@@ -139,7 +139,7 @@ describe 'Usuário edita um produto' do
     
     login_as(user)
     visit root_path
-    click_on 'Ver todos os produtos'
+    click_on 'Produtos'
 
     within("tr##{p2.id}") do
       click_on 'Editar'

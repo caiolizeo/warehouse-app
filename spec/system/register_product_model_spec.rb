@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Usuário cadastra um modelo de produto' do
   it 'e um visitante não vê o link de cadastro' do
     visit root_path
-    expect(page).not_to have_content('Cadastrar modelo de produto')
+    expect(page).not_to have_content('Novo produto')
   end
 
   it  'e um visitante não acessa diretamente o formulário' do
@@ -27,7 +27,7 @@ describe 'Usuário cadastra um modelo de produto' do
     
     login_as(user)
     visit root_path
-    click_on 'Cadastrar modelo de produto'
+    click_on 'Novo produto'
 
     fill_in 'Nome', with: 'Caneca Star Wars'
     fill_in 'Peso', with: 300
@@ -63,7 +63,7 @@ describe 'Usuário cadastra um modelo de produto' do
     
     login_as(user)
     visit root_path
-    click_on 'Cadastrar modelo de produto'
+    click_on 'Novo produto'
 
     fill_in 'Nome', with: ''
     fill_in 'Peso', with: ''
@@ -95,7 +95,7 @@ describe 'Usuário cadastra um modelo de produto' do
     
     login_as(user)
     visit root_path
-    click_on 'Cadastrar modelo de produto'
+    click_on 'Novo produto'
 
     fill_in 'Nome', with: 'Caneca Star Wars'
     fill_in 'Peso', with: -20

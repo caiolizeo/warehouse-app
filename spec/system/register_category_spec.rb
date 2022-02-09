@@ -18,7 +18,7 @@ describe 'Usuário cadastra nova categoria' do
     login_as(user, :scope => :user)
 
     visit root_path
-    click_on 'Cadastrar nova categoria'
+    click_on 'Nova Categoria'
 
     expect(page).to have_field('Nome')
     
@@ -29,7 +29,7 @@ describe 'Usuário cadastra nova categoria' do
 
     login_as(user)
     visit root_path
-    click_on 'Cadastrar nova categoria'
+    click_on 'Nova Categoria'
     fill_in 'Nome', with: 'Calçados'
     click_on 'Gravar'
 
@@ -42,7 +42,7 @@ describe 'Usuário cadastra nova categoria' do
     
     login_as(user)
     visit root_path
-    click_on 'Cadastrar nova categoria'
+    click_on 'Nova Categoria'
     fill_in 'Nome', with: ''
     click_on 'Gravar'
 
@@ -56,7 +56,7 @@ describe 'Usuário cadastra nova categoria' do
     
     login_as(user)
     visit root_path
-    click_on 'Cadastrar nova categoria'
+    click_on 'Nova Categoria'
     fill_in 'Nome', with: 'Calçados'
     click_on 'Gravar'
 

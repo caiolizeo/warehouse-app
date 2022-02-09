@@ -11,7 +11,7 @@ describe 'Usuário vê a página de produtos' do
       p3 = create(:product_model, name: 'Camiseta Homem de ferro', weight: 100, provider: prov2, category: c2)
 
       visit root_path
-      click_on 'Ver todos os produtos'
+      click_on 'Produtos'
 
       expect(page).to have_content('Caneca Marvel')      
       expect(page).to have_content('Outros', count: 2)
@@ -23,7 +23,7 @@ describe 'Usuário vê a página de produtos' do
   it 'e não existe nenhum produto cadastrado' do
 
     visit root_path
-    click_on 'Ver todos os produtos'
+    click_on 'Produtos'
 
     expect(page).to have_content('Nenhum produto cadastrado.')
   end
@@ -39,7 +39,7 @@ describe 'Usuário vê a página de produtos' do
                               weight: 100, provider: prov2, category: c2)
 
     visit root_path
-    click_on 'Ver todos os produtos'
+    click_on 'Produtos'
     click_on 'Caneca Marvel'
 
     expect(page).to have_content('Caneca Marvel')
@@ -72,7 +72,7 @@ describe 'Usuário vê a página de produtos' do
     ProductEntry.new(quantity: 21, warehouse_id: w3.id, product_model_id: p2.id).process
   
     visit root_path
-    click_on 'Ver todos os produtos'
+    click_on 'Produtos'
     click_on 'Caneca Marvel'
 
     expect(page).to have_css('h2', text: 'Galpões com estoque disponível')
@@ -92,7 +92,7 @@ describe 'Usuário vê a página de produtos' do
     p1 = create(:product_model, name: 'Caneca Marvel', provider: prov1, category: c1)
 
     visit root_path
-    click_on 'Ver todos os produtos'
+    click_on 'Produtos'
     click_on 'Caneca Marvel'
 
     expect(page).to have_css('h2', text:'Produto fora de estoque')
@@ -111,7 +111,7 @@ describe 'Usuário vê a página de produtos' do
     ProductEntry.new(quantity: 18, warehouse_id: w1.id, product_model_id: p1.id).process
     
     visit root_path
-    click_on 'Ver todos os produtos'
+    click_on 'Produtos'
     click_on 'Caneca Marvel'
     click_on 'Maceió'
 

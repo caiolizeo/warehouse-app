@@ -16,7 +16,7 @@ describe 'Usuário vê a página de categorias' do
     c = Category.create!(name: 'Eletrônicos', warehouses:[w1, w2])
 
     visit root_path
-    click_on 'Ver todas as categorias'
+    click_on 'Categorias'
     click_on 'Eletrônicos'
 
     expect(page).to have_css('td', text: 'Maceió')

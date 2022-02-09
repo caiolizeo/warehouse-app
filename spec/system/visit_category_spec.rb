@@ -7,7 +7,7 @@ describe 'Usuário vê categorias' do
     Category.create!(name: 'Brinquedos')
     
     visit root_path
-    click_on 'Ver todas as categorias'
+    click_on 'Categorias'
 
     expect(page).to have_css('li', text: 'Vestuário')
     expect(page).to have_css('li', text: 'Calçados')
@@ -16,7 +16,7 @@ describe 'Usuário vê categorias' do
 
   it 'e não existem categorias cadastradas' do
     visit root_path
-    click_on 'Ver todas as categorias'
+    click_on 'Categorias'
 
     expect(page).to have_content('Nenhuma categoria cadastrada')
   end
@@ -37,7 +37,7 @@ describe 'Usuário vê categorias' do
                               weight: 100, provider: prov2, category: c)
          
     visit root_path
-    click_on 'Ver todas as categorias'
+    click_on 'Categorias'
     click_on 'Outros'
 
     expect(page).to have_css('h1', text: 'Outros')
@@ -57,7 +57,7 @@ describe 'Usuário vê categorias' do
     c = Category.create!(name: 'Eletrônicos', warehouses:[w1, w2])
 
     visit root_path
-    click_on 'Ver todas as categorias'
+    click_on 'Categorias'
     click_on 'Eletrônicos'
 
     expect(page).to have_css('td', text: 'Maceió')
@@ -72,7 +72,7 @@ describe 'Usuário vê categorias' do
     Category.create!(name: 'Eletrônicos')
 
     visit root_path
-    click_on 'Ver todas as categorias'
+    click_on 'Categorias'
     click_on 'Eletrônicos'
 
     expect(page).to have_content('Nenhum produto cadastrado nessa categoria')
@@ -97,7 +97,7 @@ describe 'Usuário vê categorias' do
                               weight: 100, provider: prov2, category: c2)
          
     visit root_path
-    click_on 'Ver todas as categorias'
+    click_on 'Categorias'
     click_on 'Outros'
 
     expect(page).to have_css('h1', text: 'Outros')
@@ -115,7 +115,7 @@ describe 'Usuário vê categorias' do
                               weight: 300, provider: prov1, category: c)
          
     visit root_path
-    click_on 'Ver todas as categorias'
+    click_on 'Categorias'
     click_on 'Outros'
     click_on 'Caneca Marvel'
 

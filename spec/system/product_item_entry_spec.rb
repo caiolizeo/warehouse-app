@@ -38,7 +38,7 @@ describe 'Usuário da entrada em novos itens' do
                                weight: 300, provider: prov, category: c)
     
       visit root_path
-      click_on 'Ver todos os produtos'
+      click_on 'Produtos'
       click_on 'Caneca Marvel'
 
       expect(page).not_to have_field('Quantidade')
@@ -151,7 +151,7 @@ describe 'Usuário da entrada em novos itens' do
 
     login_as(user)
     visit root_path
-    click_on 'Ver todos os produtos'
+    click_on 'Produtos'
     click_on 'Caneca Marvel'
     fill_in 'Quantidade', with: 15
     select 'Maceió', from: 'Galpão'
@@ -235,7 +235,7 @@ describe 'Usuário da entrada em novos itens' do
 
     login_as(user)
     visit root_path
-    click_on 'Ver todos os produtos'
+    click_on 'Produtos'
     click_on 'Caneca Marvel'
     click_on 'Confirmar'
     
@@ -328,7 +328,7 @@ describe 'Usuário da entrada em novos itens' do
     
     login_as(user)
     visit root_path
-    click_on 'Ver todos os produtos'
+    click_on 'Produtos'
     click_on 'SmartWatch'
     fill_in 'Quantidade', with: 15
     select 'Maceió', from: 'Galpão'

@@ -20,7 +20,7 @@ describe 'Um usuário vê todos os bundles cadastrados' do
                           product_models: [product1, product3])
 
     visit root_path
-    click_on 'Ver todos os kits'
+    click_on 'Kits'
 
     expect(page).to have_css('td', text: 'Kit Nerd')
     expect(page).to have_css('td', text: 'KD5E9D5E8R7S5D6T9H5Y4')
@@ -34,7 +34,7 @@ describe 'Um usuário vê todos os bundles cadastrados' do
   it 'mas não existem bundles cadastrados' do
     
     visit root_path
-    click_on 'Ver todos os kits'
+    click_on 'Kits'
 
     expect(page).to have_content('Nenhum kit cadastrado')
   end

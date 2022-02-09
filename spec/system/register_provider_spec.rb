@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Usuário cadastra um fornecedor' do
   it 'e um visitante não vê o link de cadastro' do
     visit root_path
-    expect(page).not_to have_content('Cadastrar novo fornecedor')
+    expect(page).not_to have_content('Novo fornecedor')
   end
 
   it  'e um visitante não acessa diretamente o formulário' do
@@ -17,8 +17,8 @@ describe 'Usuário cadastra um fornecedor' do
 
     login_as(user)
     visit root_path
-    click_on 'Ver todos os fornecedores'
-    click_on 'Cadastrar novo fornecedor'
+    click_on 'Fornecedores'
+    click_on 'Novo fornecedor'
 
     expect(page).to have_content 'Novo fornecedor'
     expect(page).to have_field 'Nome fantasia'
@@ -35,8 +35,8 @@ describe 'Usuário cadastra um fornecedor' do
 
     login_as(user)
     visit root_path
-    click_on 'Ver todos os fornecedores'
-    click_on 'Cadastrar novo fornecedor'
+    click_on 'Fornecedores'
+    click_on 'Novo fornecedor'
 
     fill_in 'Nome fantasia', with: 'J Presentes'
     fill_in 'Razão social', with: 'J importações LTDA ME'
@@ -61,8 +61,8 @@ describe 'Usuário cadastra um fornecedor' do
     login_as(user)
     visit root_path
 
-    click_on 'Ver todos os fornecedores'
-    click_on 'Cadastrar novo fornecedor'
+    click_on 'Fornecedores'
+    click_on 'Novo fornecedor'
 
     fill_in 'Nome fantasia', with: ''
     fill_in 'Razão social', with: ''
@@ -86,8 +86,8 @@ describe 'Usuário cadastra um fornecedor' do
     login_as(user)
     visit root_path
 
-    click_on 'Ver todos os fornecedores'
-    click_on 'Cadastrar novo fornecedor'
+    click_on 'Fornecedores'
+    click_on 'Novo fornecedor'
 
     fill_in 'Nome fantasia', with: 'K Presentes'
     fill_in 'Razão social', with: 'K importações LTDA ME'
@@ -106,8 +106,8 @@ describe 'Usuário cadastra um fornecedor' do
     login_as(user)
     visit root_path
 
-    click_on 'Ver todos os fornecedores'
-    click_on 'Cadastrar novo fornecedor'
+    click_on 'Fornecedores'
+    click_on 'Novo fornecedor'
 
     fill_in 'Nome fantasia', with: 'K Presentes'
     fill_in 'Razão social', with: 'K importações LTDA ME'

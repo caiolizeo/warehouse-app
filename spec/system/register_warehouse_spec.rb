@@ -6,7 +6,7 @@ describe 'Usuário cadastra um galpão' do
 
     visit root_path
 
-    expect(page).not_to have_link ('Cadastrar novo galpão')
+    expect(page).not_to have_link ('Novo galpão')
   end
 
   it 'e um visitante não acessa diretamente o formulário' do
@@ -21,7 +21,7 @@ describe 'Usuário cadastra um galpão' do
     login_as(user, :scope => :user)
     
     visit root_path
-    click_on 'Cadastrar novo galpão'
+    click_on 'Novo galpão'
 
     expect(page).to have_content 'Novo galpão'
     expect(page).to have_field 'Nome'
@@ -41,7 +41,7 @@ describe 'Usuário cadastra um galpão' do
 
     login_as(user, :scope => :user)
     visit root_path
-    click_on 'Cadastrar novo galpão'
+    click_on 'Novo galpão'
 
     fill_in 'Nome', with: 'Juiz de Fora'
     fill_in 'Código', with: 'JDF'
@@ -71,7 +71,7 @@ describe 'Usuário cadastra um galpão' do
 
     login_as(user, :scope => :user)
     visit root_path
-    click_on 'Cadastrar novo galpão'
+    click_on 'Novo galpão'
     fill_in 'Nome', with: ''
     fill_in 'Código', with: ''
     fill_in 'Descrição', with: ''
@@ -104,7 +104,7 @@ describe 'Usuário cadastra um galpão' do
     
     user = login_as(user, :scope => :user)
     visit root_path
-    click_on 'Cadastrar novo galpão'
+    click_on 'Novo galpão'
 
     fill_in 'Nome', with: 'Maceió'
     fill_in 'Código', with: 'MCZ'
@@ -127,7 +127,7 @@ describe 'Usuário cadastra um galpão' do
 
     login_as(user)
     visit root_path
-    click_on 'Cadastrar novo galpão'
+    click_on 'Novo galpão'
     fill_in 'Nome', with: 'Juiz de Fora'
     fill_in 'Código', with: 'JDF'
     fill_in 'Descrição', with: 'Um galpão'

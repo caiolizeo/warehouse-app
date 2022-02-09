@@ -7,7 +7,7 @@ describe 'O visitante vê um fornecedor' do
                     email: 'contato@apresentes.com', phone: '99999-9999')
 
     visit root_path
-    click_on 'Ver todos os fornecedores'
+    click_on 'Fornecedores'
     click_on s.trading_name #é possível utilizar uma variável
 
     expect(page).to have_content('Nome fantasia: A Presentes')
@@ -29,7 +29,7 @@ describe 'O visitante vê um fornecedor' do
                          weight: 250, sku: 'BO236S5D10XC3567SX08', provider: provider, category: c)
     
     visit root_path
-    click_on 'Ver todos os fornecedores'
+    click_on 'Fornecedores'
     click_on provider.trading_name #é possível utilizar uma variável
 
     expect(page).to have_css('li', text: 'Nome fantasia: A Presentes')
@@ -69,7 +69,7 @@ describe 'O visitante vê um fornecedor' do
                                  weight: 100, provider: provider3, category: c)
 
     visit root_path
-    click_on 'Ver todos os fornecedores'
+    click_on 'Fornecedores'
     click_on 'A Presentes'
     
     expect(page).to have_css('td', text: 'Caneca Marvel')
@@ -84,7 +84,7 @@ describe 'O visitante vê um fornecedor' do
                     email: 'contato@apresentes.com', phone: '99999-9999')
 
     visit root_path
-    click_on 'Ver todos os fornecedores'
+    click_on 'Fornecedores'
     click_on 'A Presentes'
     click_on 'Voltar'
 

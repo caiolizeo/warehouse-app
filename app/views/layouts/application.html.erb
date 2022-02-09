@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>WarehouseApp</title>
+    <title>Warehouse App</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,32 +11,48 @@
   </head>
 
   <body>
+  
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="navbar-nav">
+          <%= link_to 'Warehouse App', root_path, class: 'navbar-brand' %>
+          <%= link_to 'Início', root_path, class: 'nav-link' %>
+          <%= link_to 'Fornecedores', providers_path, class: 'nav-link'%>
+          <%= link_to 'Produtos', product_models_path, class: 'nav-link'%>
+          <%= link_to 'Kits', product_bundles_path, class: 'nav-link'%>
+          <%= link_to 'Categorias', categories_path, class: 'nav-link'%>
+        </div>
+        <div class="container-fluid">
+          <%= form_with(url: search_warehouses_path, method: :get, class: 'd-flex') do |f|%>
+              <%= f.label :query, 'Buscar galpão'%>
+              <%= f.text_field :query, class: 'form-control me-2'%>
+              <%= f.submit 'Pesquisar', class: 'btn btn-success'%>
+          <% end %>
+        </div>
+        <div class="navbar-nav">
+          <% unless user_signed_in? %>
+            <%= link_to 'Entrar', new_user_session_path, class: 'nav-link'%>
+          <% end %>
+        </div>
+      </nav>
+
+      <% if user_signed_in? %>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="navbar-nav">
+          <%= link_to 'Novo galpão', new_warehouse_path, class: 'nav-link'%>
+          <%= link_to 'Novo produto', new_product_model_path, class: 'nav-link'%>
+          <%= link_to 'Novo kit', new_product_bundle_path, class: 'nav-link'%>
+          <%= link_to 'Novo fornecedor', new_provider_path, class: 'nav-link'%>
+          <%= link_to 'Nova Categoria', new_category_path, class: 'nav-link'%>
+          <%= link_to 'Entrada de itens', product_items_entry_path, class: 'nav-link'%>
+          <%= link_to 'Sair', destroy_user_session_path, :method => :delete, class: 'nav-link'%>
+          <p>Olá <%= current_user.email %></p>
+        </div>
+        </nav>
+      <% end %>
+    </header>
     <%= flash[:alert] %>
     <%= flash[:notice] %>
-    <header>
-      <nav>
-        <%= link_to 'Início', root_path %>
-
-        <%= link_to 'Ver todos os fornecedores', providers_path %>
-        <%= link_to 'Ver todos os produtos', product_models_path%>
-        <%= link_to 'Ver todos os kits', product_bundles_path %>
-        <%= link_to 'Ver todas as categorias', categories_path%>
-        <% if user_signed_in? %>
-          <%= link_to 'Cadastrar novo galpão', new_warehouse_path %>
-          <%= link_to 'Cadastrar modelo de produto', new_product_model_path %>
-          <%= link_to 'Cadastrar novo kit de produtos', new_product_bundle_path%>
-          <%= link_to 'Cadastrar novo fornecedor', new_provider_path %>
-          <%= link_to 'Cadastrar nova categoria', new_category_path%>
-          <%= link_to 'Entrada de itens', product_items_entry_path%>
-
-          <%= link_to 'Sair', destroy_user_session_path, :method => :delete %>
-          <p>Olá <%= current_user.email %></p>
-        <% else %>
-          <%= link_to 'Entrar', new_user_session_path %>
-        <% end %>
-
-      </nav>
-    </header>
     <main>
       <%= yield %>
     </main>
