@@ -11,7 +11,7 @@ class ProductEntry
     wh = Warehouse.find(warehouse_id)
     pm = ProductModel.find(product_model_id)
     
-    if valid_category? && valid_quantity? && pm.enabled?
+    if valid_category? && valid_quantity?
       ProductItem.transaction do
         quantity.times do
           ProductItem.create!(product_model: pm, warehouse: wh)
