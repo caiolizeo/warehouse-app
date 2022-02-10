@@ -15,7 +15,7 @@
     <% @products.each do |p| %>
       <tr id = <%=p.id%>>
         <td><%= p.enum_name(:status, p.status) %></td>
-        <td><%= link_to p.name, p %></td>
+        <td><%= p.name %></td>
         <td><%= p.category.name %></td>
         <% if user_signed_in?%>
           <td><%= link_to 'Editar', edit_product_model_path(p.id)%></td>
@@ -25,6 +25,7 @@
             <td><%= link_to 'Ativar', enable_product_model_path(p.id), method: :patch %></td>
           <% end %>
         <% end %>
+        <td><%= link_to 'Detalhes', p %></td>
       </tr>
     <% end %>
   </table>

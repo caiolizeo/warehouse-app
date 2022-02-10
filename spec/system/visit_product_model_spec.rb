@@ -40,7 +40,9 @@ describe 'Usuário vê a página de produtos' do
 
     visit root_path
     click_on 'Produtos'
-    click_on 'Caneca Marvel'
+    within("tr##{p1.id}") do
+      click_on 'Detalhes'
+    end
 
     expect(page).to have_content('Caneca Marvel')
     expect(page).to have_content('300 gramas')
@@ -73,7 +75,9 @@ describe 'Usuário vê a página de produtos' do
   
     visit root_path
     click_on 'Produtos'
-    click_on 'Caneca Marvel'
+    within("tr##{p1.id}") do
+      click_on 'Detalhes'
+    end
 
     expect(page).to have_css('h2', text: 'Galpões com estoque disponível')
     expect(page).to have_css('td', text: 'Maceió')
@@ -93,7 +97,9 @@ describe 'Usuário vê a página de produtos' do
 
     visit root_path
     click_on 'Produtos'
-    click_on 'Caneca Marvel'
+    within("tr##{p1.id}") do
+      click_on 'Detalhes'
+    end
 
     expect(page).to have_css('h2', text:'Produto fora de estoque')
     expect(page).not_to have_css('th', text: 'Galpão')
@@ -112,7 +118,9 @@ describe 'Usuário vê a página de produtos' do
     
     visit root_path
     click_on 'Produtos'
-    click_on 'Caneca Marvel'
+    within("tr##{p1.id}") do
+      click_on 'Detalhes'
+    end
     click_on 'Maceió'
 
     expect(page).to have_content('Maceió')

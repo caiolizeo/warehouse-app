@@ -41,7 +41,9 @@ describe 'Usuário da entrada em novos itens' do
     
       visit root_path
       click_on 'Produtos'
-      click_on 'Caneca Marvel'
+      within("tr##{p.id}") do
+        click_on 'Detalhes'
+      end
 
       expect(page).not_to have_field('Quantidade')
       expect(page).not_to have_field('Galpão')
@@ -156,7 +158,9 @@ describe 'Usuário da entrada em novos itens' do
     login_as(user)
     visit root_path
     click_on 'Produtos'
-    click_on 'Caneca Marvel'
+    within("tr##{p.id}") do
+      click_on 'Detalhes'
+    end
     fill_in 'Quantidade', with: 15
     select 'Maceió', from: 'Galpão'
     click_on 'Confirmar'
@@ -242,7 +246,9 @@ describe 'Usuário da entrada em novos itens' do
     login_as(user)
     visit root_path
     click_on 'Produtos'
-    click_on 'Caneca Marvel'
+    within("tr##{p.id}") do
+      click_on 'Detalhes'
+    end
     click_on 'Confirmar'
     
     expect(page).to have_content('Não foi possível dar entrada nos itens')
@@ -337,7 +343,9 @@ describe 'Usuário da entrada em novos itens' do
     login_as(user)
     visit root_path
     click_on 'Produtos'
-    click_on 'SmartWatch'
+    within("tr##{p1.id}") do
+      click_on 'Detalhes'
+    end
     fill_in 'Quantidade', with: 15
     select 'Maceió', from: 'Galpão'
     click_on 'Confirmar'

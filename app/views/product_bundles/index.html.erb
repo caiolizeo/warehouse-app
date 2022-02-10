@@ -1,18 +1,23 @@
 <% if @product_bundle.empty? %>
  <p>Nenhum kit cadastrado</p>
 <% else %>
-  <table>
-    <tr>
-      <th>Nome</th>
-      <th>SKU</th>
-      <th>Quant. de produtos</th>
-    </tr>
-    <% @product_bundle.each do |bundle| %>
+  <table class="table table-striped table-hover">
+    <thead>
       <tr>
-        <td><%= link_to bundle.name, bundle%></td>
-        <td><%= link_to bundle.sku, bundle %></td>
-        <td><%= link_to bundle.product_models.length, bundle %></td>
+        <th>Nome</th>
+        <th>SKU</th>
+        <th>Quant. de produtos</th>
       </tr>
-    <% end %>
+    <thead>
+    <tbody>
+      <% @product_bundle.each do |bundle| %>
+        <tr>
+          <td><%= bundle.name %></td>
+          <td><%= bundle.sku %></td>
+          <td><%= bundle.product_models.length %></td>
+          <td><%= link_to 'Detalhes', bundle %></td>
+        </tr>
+      <% end %>
+    </tbody>
   </table>
 <% end %>
