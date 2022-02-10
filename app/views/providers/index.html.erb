@@ -1,15 +1,33 @@
-
-
 <h3>Lista de fornecedores</h3>
 
 <% if @providers.none? %>
   <p>Nenhum fornecedor cadastrado</p>
 <% else %>
   <p>Fornecedores cadastrados: <%= @provider_count %></p>
-  
-  <% @providers.each do |provider| %>
-    <li><%= link_to provider.trading_name, provider %></li>
-  <% end %>
+  <br>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Nome fantasia</th>
+        <th>CNPJ</th>
+        <th>E-mail</th>
+        <th>Telefone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @providers.each do |provider| %>
+        <tr>
+          <td><%= provider.trading_name %></td>
+          <td><%= provider.cnpj %></td>
+          <td><%= provider.email %></td>
+          <td><%= provider.phone %></td>
+          <td>
+            <%= link_to 'Detalhes', provider%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>
 
 

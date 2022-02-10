@@ -1,30 +1,35 @@
-<ul>
-  <li>Nome fantasia: <%= @provider.trading_name%></li>
-  <li>Razão social: <%= @provider.company_name%></li>
-  <li>CNPJ: <%= @provider.cnpj %></li>
-  <li>Endereço: <%= @provider.address%></li>
-  <li>Email: <%= @provider.email%></li>
-  <li>Telefone: <%= @provider.phone%></li>
-</ul>
+<h3><%= @provider.trading_name %></h3>
 
+<ul class="list-group">
+  <li class="list-group-item">Nome fantasia: <%= @provider.trading_name%></li>
+  <li class="list-group-item">Razão social: <%= @provider.company_name%></li>
+  <li class="list-group-item">CNPJ: <%= @provider.cnpj %></li>
+  <li class="list-group-item">Endereço: <%= @provider.address%></li>
+  <li class="list-group-item">Email: <%= @provider.email%></li>
+  <li class="list-group-item">Telefone: <%= @provider.phone%></li>
+</ul>
+<br>
 <p>Produtos deste fornecedor:</p>
 
-<table>
-  <tr>
-    <th>Produto</th>
-    <th>Peso</th>
-    <th>Dimensões</th>
-    <th>SKU</th>
-
-  </tr>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Produto</th>
+      <th>Peso</th>
+      <th>Dimensões</th>
+      <th>SKU</th>
+    </tr>
+  </thead>
+  <tbody>
   <% @provider.product_models.each do |p|%>
     <tr>
       <td><%=p.name%></td>
       <td><%=p.weight%>g</td>
-      <td><%=p.dimensions%></td>
+      <td><%=p.dimensions%> (cm)</td>
       <td><%=p.sku%></td>
     </tr>
   <%end%>
+  </tbody>
 
 </table>
 
