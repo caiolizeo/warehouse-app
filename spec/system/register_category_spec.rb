@@ -34,7 +34,7 @@ describe 'Usuário cadastra nova categoria' do
     click_on 'Gravar'
 
     expect(page).to have_content('Categoria cadastrada com sucesso')
-    expect(page).to have_css('li', text: 'Calçados')
+    expect(page).to have_css('td', text: 'Calçados')
   end
 
   it 'e deixa nome em branco' do

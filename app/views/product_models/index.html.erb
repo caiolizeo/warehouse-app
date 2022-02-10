@@ -1,9 +1,10 @@
+<h3>Lista de modelos de produto</h3>
+
 <%if @products.empty? %>
-
   <p>Nenhum produto cadastrado.</p>
-  
 <% else %>
-
+  <p>Produtos cadastrados: <%= @products.count %></p>
+  <br>
   <table class="table table-striped table-hover">
   <thead>
     <tr>

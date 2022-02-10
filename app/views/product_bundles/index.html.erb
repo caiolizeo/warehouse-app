@@ -1,6 +1,10 @@
+<h3>Lista de kits de produto</h3>
+
 <% if @product_bundle.empty? %>
  <p>Nenhum kit cadastrado</p>
 <% else %>
+  <p>Produtos cadastrados: <%= @product_bundle.count %></p>
+  <br>
   <table class="table table-striped table-hover">
     <thead>
       <tr>

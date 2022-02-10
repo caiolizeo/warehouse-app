@@ -1,11 +1,26 @@
-<h1> Categorias</h1>
+<h3> Categorias</h3>
 
 <% if @categories.empty? %>
   <p>Nenhuma categoria cadastrada</p>
+  
 <% else %>
-  <ul>
-    <% @categories.each do |category| %>
-      <li><%= link_to category.name, category_path(category.id) %></li>
-    <% end %>
-  </ul>
+  <p>Categorias cadastradas: <%= @categories.count %></p>
+  <br>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Galpões cadastrados</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @categories.each do |category| %>
+        <tr id="cat-<%= category.id %>">
+          <td><%= category.name %></td>
+          <td><%= category.warehouses.count %></td>
+          <td><%= link_to 'Detalhes', category%></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>

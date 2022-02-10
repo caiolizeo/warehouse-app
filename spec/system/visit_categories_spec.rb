@@ -17,7 +17,9 @@ describe 'Usuário vê a página de categorias' do
 
     visit root_path
     click_on 'Categorias'
-    click_on 'Eletrônicos'
+    within("tr#cat-#{c.id}") do
+      click_on 'Detalhes'
+    end
 
     expect(page).to have_css('td', text: 'Maceió')
     expect(page).to have_css('td', text: 'MCZ')

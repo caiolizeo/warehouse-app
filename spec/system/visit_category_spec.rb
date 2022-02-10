@@ -9,9 +9,9 @@ describe 'Usuário vê categorias' do
     visit root_path
     click_on 'Categorias'
 
-    expect(page).to have_css('li', text: 'Vestuário')
-    expect(page).to have_css('li', text: 'Calçados')
-    expect(page).to have_css('li', text: 'Brinquedos')
+    expect(page).to have_css('td', text: 'Vestuário')
+    expect(page).to have_css('td', text: 'Calçados')
+    expect(page).to have_css('td', text: 'Brinquedos')
   end
 
   it 'e não existem categorias cadastradas' do
@@ -38,7 +38,9 @@ describe 'Usuário vê categorias' do
          
     visit root_path
     click_on 'Categorias'
-    click_on 'Outros'
+    within("tr#cat-#{c.id}") do
+      click_on 'Detalhes'
+    end
 
     expect(page).to have_css('h1', text: 'Outros')
     expect(page).to have_css('li', text: 'Caneca Marvel')
@@ -58,7 +60,9 @@ describe 'Usuário vê categorias' do
 
     visit root_path
     click_on 'Categorias'
-    click_on 'Eletrônicos'
+    within("tr#cat-#{c.id}") do
+      click_on 'Detalhes'
+    end
 
     expect(page).to have_css('td', text: 'Maceió')
     expect(page).to have_css('td', text: 'MCZ')
@@ -69,11 +73,13 @@ describe 'Usuário vê categorias' do
   end
 
   it 'e uma categoria não possui produtos nem galpões' do
-    Category.create!(name: 'Eletrônicos')
+    c = Category.create!(name: 'Eletrônicos')
 
     visit root_path
     click_on 'Categorias'
-    click_on 'Eletrônicos'
+    within("tr#cat-#{c.id}") do
+      click_on 'Detalhes'
+    end
 
     expect(page).to have_content('Nenhum produto cadastrado nessa categoria')
     expect(page).to have_content('Nenhum galpão cadastrado nessa categoria')
@@ -98,7 +104,9 @@ describe 'Usuário vê categorias' do
          
     visit root_path
     click_on 'Categorias'
-    click_on 'Outros'
+    within("tr#cat-#{c.id}") do
+      click_on 'Detalhes'
+    end
 
     expect(page).to have_css('h1', text: 'Outros')
     expect(page).to have_css('li', text: 'Caneca Marvel')
@@ -116,7 +124,9 @@ describe 'Usuário vê categorias' do
          
     visit root_path
     click_on 'Categorias'
-    click_on 'Outros'
+    within("tr#cat-#{c.id}") do
+      click_on 'Detalhes'
+    end
     click_on 'Caneca Marvel'
 
     expect(current_path).to eq product_model_path(p1.id)
