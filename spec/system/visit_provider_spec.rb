@@ -2,20 +2,18 @@ require 'rails_helper'
 
 describe 'O visitante vê um fornecedor' do
   it 'e vê todos os dados cadastrados' do
-    s = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
+    provider = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
                     cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
                     email: 'contato@apresentes.com', phone: '99999-9999')
 
     visit root_path
-    click_on 'Fornecedores'
-    click_on s.trading_name #é possível utilizar uma variável
 
-    expect(page).to have_content('Nome fantasia: A Presentes')
-    expect(page).to have_content('Razão social: A importações LTDA ME')
-    expect(page).to have_content("CNPJ: #{s.cnpj}")
-    expect(page).to have_content('Endereço: Av Paulista 500')
-    expect(page).to have_content('Email: contato@apresentes.com')
-    expect(page).to have_content('Telefone: 99999-9999')
+    click_on 'Fornecedores'
+
+    expect(page).to have_content('A Presentes')
+    expect(page).to have_content(provider.cnpj)
+    expect(page).to have_content('contato@apresentes.com')
+    expect(page).to have_content('99999-9999')
   end
 
   it 'e vê os produtos do fornecedor' do
@@ -30,7 +28,9 @@ describe 'O visitante vê um fornecedor' do
     
     visit root_path
     click_on 'Fornecedores'
-    click_on provider.trading_name #é possível utilizar uma variável
+    within("tr#provider-#{provider.id}") do
+      click_on 'Detalhes'
+    end
 
     expect(page).to have_css('li', text: 'Nome fantasia: A Presentes')
     expect(page).to have_css('p',  text:'Produtos deste fornecedor:')
@@ -70,7 +70,9 @@ describe 'O visitante vê um fornecedor' do
 
     visit root_path
     click_on 'Fornecedores'
-    click_on 'A Presentes'
+    within("tr#provider-#{provider1.id}") do
+      click_on 'Detalhes'
+    end
     
     expect(page).to have_css('td', text: 'Caneca Marvel')
     expect(page).to have_css('td', text: 'Boneco Homem Aranha')
@@ -79,13 +81,15 @@ describe 'O visitante vê um fornecedor' do
   end
 
   it 'e consegue voltar para a página de fornecedores' do
-    Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
+    p = Provider.create!(trading_name: 'A Presentes', company_name: 'A importações LTDA ME',
                     cnpj: '08.385.207/0001-33', address: 'Av Paulista 500',
                     email: 'contato@apresentes.com', phone: '99999-9999')
 
     visit root_path
     click_on 'Fornecedores'
-    click_on 'A Presentes'
+    within("tr#provider-#{p.id}") do
+      click_on 'Detalhes'
+    end
     click_on 'Voltar'
 
     expect(current_path).to eq providers_path

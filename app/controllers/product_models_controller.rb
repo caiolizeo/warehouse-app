@@ -81,7 +81,7 @@ class ProductModelsController < ApplicationController
       pm.enabled!
     end
 
-    redirect_to pm
+    redirect_to product_models_path
   end
 
 end

@@ -16,7 +16,7 @@
     </thead>
     <tbody>
       <% @providers.each do |provider| %>
-        <tr>
+        <tr id="provider-<%= provider.id %>">
           <td><%= provider.trading_name %></td>
           <td><%= provider.cnpj %></td>
           <td><%= provider.email %></td>

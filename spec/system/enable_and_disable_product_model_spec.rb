@@ -31,8 +31,10 @@ describe 'Usuário desativa e ativa um modelo de produto' do
       click_on 'Desativar'
     end
 
-    expect(page).to have_css("a", text: 'Ativar')
-    expect(page).to have_css("li", text: 'Status: Desativado')
+    within("tr##{p1.id}") do
+      expect(page).to have_content('Ativar')
+      expect(page).to have_content('Desativado')
+    end
   end
 
   it 'e ativa com sucesso' do
@@ -49,8 +51,10 @@ describe 'Usuário desativa e ativa um modelo de produto' do
       click_on 'Ativar'
     end
 
-    expect(page).to have_css("a", text: 'Desativar')
-    expect(page).to have_css("li", text: 'Status: Ativo')
+    within("tr##{p1.id}") do
+      expect(page).to have_content('Desativar')      
+      expect(page).to have_content('Ativo')
+    end
   end
   
 
