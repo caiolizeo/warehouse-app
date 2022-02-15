@@ -30,20 +30,48 @@ class WarehousesController < ApplicationController
 
   def new
     @warehouse = Warehouse.new
+    @errors = []
   end
 
   def create
-    w_params = params.require(:warehouse).permit(:name, :code, :address, :state,
-                                                 :city, :postal_code, :description,
+    w_params = params.require(:warehouse).permit(:name, :code, :postal_code, :description,
                                                  :useful_area, :total_area)
+
+
     @warehouse = Warehouse.new(w_params)
+    
+    if @warehouse.valid? == false
+      flash.now[:alert] = 'Não foi possível gravar o galpão'
+    byebug
+    
+      @errors = @warehouse.errors.full_messages.uniq
+      return render 'new'
+    end
+    response = Faraday.get("https://viacep.com.br/ws/#{w_params[:postal_code]}/json/")
+
+    if response.status == 400
+      flash.now[:alert] = 'Não foi possível gravar o galpão'
+      @errors = @warehouse.errors.full_messages
+      return render 'new'
+    end
+
+    address = JSON.parse(response.body)
+    @warehouse.address = address['logradouro']
+    @warehouse.city = address['localidade']
+    @warehouse.state = address['uf']
+    
     if @warehouse.save
       # flash[:notice] = 'Galpão cadastrado com sucesso!'
-      redirect_to warehouse_path(@warehouse.id), notice: 'Galpão cadastrado com sucesso!'
+      redirect_to confirm_warehouse_path(@warehouse.id), notice: 'Galpão cadastrado com sucesso!'
     else
       flash.now[:alert] = 'Não foi possível gravar o galpão'
+      @errors = @warehouse.errors.full_messages
       render 'new'
     end
+  end
+
+  def confirm
+  
   end
 
   def product_entry

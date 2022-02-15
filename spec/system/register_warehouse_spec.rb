@@ -46,20 +46,19 @@ describe 'Usuário cadastra um galpão' do
     fill_in 'Nome', with: 'Juiz de Fora'
     fill_in 'Código', with: 'JDF'
     fill_in 'Descrição', with: 'Um galpão'
-    fill_in 'Endereço', with: 'Av Rio Branco'
-    fill_in 'Cidade', with: 'Juiz de Fora'
-    fill_in 'Estado', with: 'MG'
-    fill_in 'CEP', with: '36000-000'
+    fill_in 'CEP', with: ''
     fill_in 'Área total', with: '5000'
     fill_in 'Área útil', with: '3000'
-    click_on 'Gravar'
+    click_on 'Cadastrar'
+    fill_in 'Número', with: '500'
+    click_on 'Confirmar'
 
     expect(page).to have_content('Juiz de Fora')
     expect(page).to have_content('JDF')
     expect(page).to have_content('Um galpão')
-    expect(page).to have_content('Av Rio Branco')
+    expect(page).to have_content('Avenida Barão do Rio Branco')
     expect(page).to have_content('Juiz de Fora/MG')
-    expect(page).to have_content('CEP: 36000-000')
+    expect(page).to have_content('CEP: 36045-120')
     expect(page).to have_content('Área Total: 5000 m2')
     expect(page).to have_content('Área Útil: 3000 m2')
     expect(page).to have_content('Galpão cadastrado com sucesso!')

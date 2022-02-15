@@ -1,4 +1,5 @@
 class Warehouse < ApplicationRecord
+  enum status: {disabled: 0, enabled: 1}
   has_many :product_items
   has_many :warehouse_categories
   has_many :categories, through: :warehouse_categories

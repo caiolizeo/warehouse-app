@@ -1,10 +1,10 @@
 <h1>Novo galpão</h1>
 
 <div style="width: 46rem;">
-<% unless @warehouse.errors.full_messages == []%>
+<% unless @errors == []%>
   <div class="alert alert-warning">
     <ul>
-      <% @warehouse.errors.full_messages.each do |msg| %>
+      <% @errors.each do |msg| %>
         <li><%=msg%></li>
       <%end%>
     </ul>
@@ -28,21 +28,6 @@
     </div>
     <br>
     <div class="form-group">
-      <%= f.label :address, 'Endereço'%>
-      <%=f.text_field :address, class: 'form-control'%>
-    </div>
-    <br>
-    <div class="form-group">
-      <%= f.label :city, 'Cidade'%>
-      <%=f.text_field :city, class: 'form-control'%>
-    </div>
-    <br>
-    <div class="form-group">
-      <%= f.label :state, 'Estado'%>
-      <%=f.text_field :state, class: 'form-control'%>
-    </div>
-    <br>
-    <div class="form-group">
       <%= f.label :postal_code, 'CEP'%>
       <%=f.text_field :postal_code, class: 'form-control'%>
     </div>
@@ -58,7 +43,7 @@
     </div>
     <br>
     <div>
-      <%=f.submit 'Gravar', class: 'btn btn-success'%>
+      <%=f.submit 'Cadastrar', class: 'btn btn-success'%>
     </div>
   <% end %>
 </div>

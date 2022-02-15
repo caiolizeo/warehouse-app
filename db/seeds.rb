@@ -9,10 +9,10 @@ User.create!(email: 'email@teste.com', password: '123456')
 
 Warehouse.create!(name: "Maceió", code: "MCZ", description: "Ótimo galpão",
                   address: "Av Fernandes Lima", city: "Maceió",
-                  state: "AL", postal_code: "57050-000", total_area: 10000, useful_area: 8000)
+                  state: "AL", postal_code: "57055-000", total_area: 10000, useful_area: 8000)
 Warehouse.create!(name: "São Paulo", code: "SPX", description: "galpão em sp",
                   address: "Av paulista", city: "São Paulo",
-                  state: "SP", postal_code: "01000-000", total_area: 8000, useful_area: 4500)
+                  state: "SP", postal_code: "01311-200", total_area: 8000, useful_area: 4500)
 
 pr1 = Provider.create!(trading_name: "A Presentes", company_name: "A importações LTDA ME",
                        cnpj: "21.749.641/0001-13", address: "Av Paulista 500",

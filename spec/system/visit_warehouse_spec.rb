@@ -5,7 +5,7 @@ describe 'Visitante vê um galpão' do
     # Arrange -> Preparar db
     w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
                      address: 'Av Fernandes Lima', city: 'Maceió',
-                     state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
+                     state: 'AL', postal_code: '57055-000', total_area: 10000, useful_area: 8000)
 
     # Act -> Agir / Executar algo
     visit root_path
@@ -19,7 +19,7 @@ describe 'Visitante vê um galpão' do
     expect(page).to have_content('Ótimo galpão')
     expect(page).to have_content('Av Fernandes Lima')
     expect(page).to have_content('Maceió/AL')
-    expect(page).to have_content('CEP: 57050-000')
+    expect(page).to have_content('CEP: 57055-000')
     expect(page).to have_content('Área Total: 10000 m2')
     expect(page).to have_content('Área Útil: 8000 m2')
     expect(page).to have_link('Voltar', href: root_path)

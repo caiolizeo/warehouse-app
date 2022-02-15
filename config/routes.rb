@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get 'add_category', on: :member
     post 'register_category', on: :member
     get 'search', on: :collection
+    get 'confirm', on: :member
   end
   resources :providers, only:[:index, :show, :new, :create] 
   resources :product_models, only:[:index, :show, :new, :create, :edit, :update] do
