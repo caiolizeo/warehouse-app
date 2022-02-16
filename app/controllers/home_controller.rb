@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @warehouses = Warehouse.all
+    @warehouses = Warehouse.enabled
+    @disabled_warehouses = Warehouse.disabled
   end
 end

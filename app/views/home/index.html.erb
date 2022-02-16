@@ -27,3 +27,7 @@
 <% else %>
   <h3> Nenhum galpão cadastrado</h3>
 <% end %>
+<br>
+<% if user_signed_in? && @disabled_warehouses.empty? == false %>
+  <%= link_to 'Galpões desativados', disabled_warehouses_path %>
+<% end %>

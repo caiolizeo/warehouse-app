@@ -1,0 +1,27 @@
+<h3>Confirmar dados</h3>
+<br>
+
+<p><strong>Nome: </strong> <%= @warehouse.name %></p>
+<p><strong>Código: </strong> <%= @warehouse.code %></p>
+<p><strong>Descrição: </strong> <%= @warehouse.description %></p>
+<p><strong>Área total: </strong> <%= @warehouse.total_area %>m2</p>
+<p><strong>Área útil: </strong> <%= @warehouse.useful_area %>m2</p>
+<br>
+<strong>Endereço</strong>
+<ul style="list-style-type: none;">
+    <li><%= @warehouse.address %></li>
+    <li><%= @warehouse.city %>/<%= @warehouse.state %></li>
+    <li><%= @warehouse.postal_code %></li>
+    <%= form_with(url: activate_warehouse_path(@warehouse.id), method: :patch) do |f| %>
+        <div>
+        <%= f.label :address_number, 'Número'%>
+        <%= f.number_field :address_number%>
+        </div>
+        <br>
+        <div>
+            <%= f.submit 'Confirmar', class: 'btn btn-success'%>
+        </div>
+    <% end %>
+</ul>
+
+

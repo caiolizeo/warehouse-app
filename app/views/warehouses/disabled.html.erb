@@ -1,0 +1,23 @@
+<h3>Galpões desativados</h3>
+
+<div style="display: flex;">
+  <%@warehouses.each do |w|%>
+    <div class="card" style="width: 18rem; margin-right: 15px;" id="card-<%=w.id%>">
+      <div class="card-body">
+        <h5 class="card-title"><%= w.name %></h5>
+        <p class="card-text"><%= w.description %></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Código: <%= w.code %></li>
+        <li class="list-group-item">Endereço: <%= w.address %></li>
+        <li class="list-group-item">CEP: <%= w.postal_code %></li>
+      </ul>
+      <iframe src="https://www.google.com.br/maps?q=<%= w.postal_code %>,%20Brasil&output=embed"
+              style="margin: 5%; border-radius: 5px;" allowfullscreen="" loading="lazy"></iframe>
+      <div class="card-body">
+        <%= link_to 'Detalhes', w, class: 'card-link'%>
+      </div>
+    </div>
+    <br>
+  <%end%>
+</div>

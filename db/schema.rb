@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_15_202330) do
+ActiveRecord::Schema.define(version: 2022_02_16_001004) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -106,6 +106,7 @@ ActiveRecord::Schema.define(version: 2022_02_15_202330) do
     t.integer "total_area"
     t.integer "useful_area"
     t.integer "status", default: 0
+    t.string "number"
   end
 
   add_foreign_key "product_bundle_items", "product_bundles"

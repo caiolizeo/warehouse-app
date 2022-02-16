@@ -1,6 +1,7 @@
 class WarehousesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update,
-                                            :add_category, :register_category]
+                                            :add_category, :register_category,
+                                            :disabled]
 
   def edit
      @warehouse = Warehouse.find(params[:id])
@@ -37,12 +38,10 @@ class WarehousesController < ApplicationController
     w_params = params.require(:warehouse).permit(:name, :code, :postal_code, :description,
                                                  :useful_area, :total_area)
 
-
     @warehouse = Warehouse.new(w_params)
     
     if @warehouse.valid? == false
       flash.now[:alert] = 'Não foi possível gravar o galpão'
-    byebug
     
       @errors = @warehouse.errors.full_messages.uniq
       return render 'new'
@@ -71,7 +70,25 @@ class WarehousesController < ApplicationController
   end
 
   def confirm
-  
+    @warehouse = Warehouse.find(params[:id])
+  end
+
+  def activate
+    warehouse = Warehouse.find(params[:id])
+    n_params = params.permit(:address_number)
+    
+    if n_params['address_number'].empty?
+      warehouse.number = 's/n'
+    elsif
+      warehouse.number = n_params['address_number']
+    end    
+    warehouse.enabled!
+
+    redirect_to warehouse
+  end
+
+  def disabled
+    @warehouses = Warehouse.disabled
   end
 
   def product_entry

@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     post 'register_category', on: :member
     get 'search', on: :collection
     get 'confirm', on: :member
+    patch 'activate', on: :member
+    get 'disabled', on: :collection
   end
   resources :providers, only:[:index, :show, :new, :create] 
   resources :product_models, only:[:index, :show, :new, :create, :edit, :update] do
