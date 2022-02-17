@@ -12,7 +12,7 @@
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Código: <%= w.code %></li>
-          <li class="list-group-item">Endereço: <%= w.address %></li>
+          <li class="list-group-item">Endereço: <%= w.address %>, <%= w.number %></li>
           <li class="list-group-item">CEP: <%= w.postal_code %></li>
         </ul>
         <iframe src="https://www.google.com.br/maps?q=<%= w.postal_code %>,%20Brasil&output=embed"

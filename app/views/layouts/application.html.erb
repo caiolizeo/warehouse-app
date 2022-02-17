@@ -45,10 +45,14 @@
           <%= link_to 'Novo fornecedor', new_provider_path, class: 'nav-link'%>
           <%= link_to 'Nova Categoria', new_category_path, class: 'nav-link'%>
           <%= link_to 'Entrada de itens', product_items_entry_path, class: 'nav-link'%>
-          <%= link_to 'Sair', destroy_user_session_path, :method => :delete, class: 'nav-link'%>
         </div>
         </nav>
-        <p style="text-align: right; margin: 15px;">Olá <%= current_user.email %></p>
+        <div>
+          <p style="text-align: right; margin: 15px;">
+            Olá <%= current_user.email %> - 
+            <%= link_to 'Sair', destroy_user_session_path, :method => :delete, class: 'link-danger'%>
+          </p>
+        </div>
       <% end %>
     </header>
     <% flash.each do |type, msg| %>

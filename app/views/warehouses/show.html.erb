@@ -1,21 +1,28 @@
-  <h3><%= @warehouse.name %></h3>
-<div>
-  <strong>Código: </strong><%= @warehouse.code %>
-  <br>
-  <strong>Descrição: </strong><%= @warehouse.description %>
-  <br>
-  <strong>Endereço: </strong><%= @warehouse.address %>, <%= @warehouse.number %> - <%= @warehouse.city %>/<%= @warehouse.state %>
-  <br>
-  <strong>CEP: </strong><%= @warehouse.postal_code %>
-  <br>
-  <strong>Área Total: </strong><%= @warehouse.total_area %> m2
-  <br>
-  <strong>Área Útil: </strong><%= @warehouse.useful_area %> m2
-  <br>
-  <iframe src="https://www.google.com.br/maps?q=<%= @warehouse.postal_code %>,%20Brasil&output=embed"
-          style="border-radius: 5px;" allowfullscreen="" loading="lazy"></iframe>
-  <br>
 
+
+<% if @warehouse.disabled? %>
+  <div class="alert alert-danger" role="alert">
+    <h4>Atenção!</h4>
+    Este galpão não foi ativado no sistema
+  </div>
+  <%= link_to 'Ativar Galpão', confirm_warehouse_path(params[:id]), class: 'link-success'%>
+  <br><br><br>
+<% end %>
+
+
+<h3><%= @warehouse.name %></h3>
+<div style="width: 25rem;">
+  <ul class="list-group">
+    <li class="list-group-item"><strong>Código: </strong><%= @warehouse.code %></li>
+    <li class="list-group-item"><strong>Descrição: </strong><%= @warehouse.description %></li>
+    <li class="list-group-item"><strong>Endereço: </strong><%= @warehouse.address %>, <%= @warehouse.number %> - <%= @warehouse.city %>/<%= @warehouse.state %></li>
+    <li class="list-group-item"><strong>CEP: </strong><%= @warehouse.postal_code %></li>
+    <li class="list-group-item"><strong>Área Total: </strong><%= @warehouse.total_area %> m2</li>
+    <li class="list-group-item"><strong>Área Útil: </strong><%= @warehouse.useful_area %> m2</li>
+    <iframe src="https://www.google.com.br/maps?q=<%= @warehouse.postal_code %>,%20Brasil&output=embed"
+            style="border-radius: 5px;" allowfullscreen="" loading="lazy"></iframe>
+  </ul>
+  <br>
   <% if user_signed_in? %>
     <%= link_to 'Editar galpão', edit_warehouse_path, class: 'link-primary'%>
   <% end %>
@@ -25,7 +32,7 @@
   <h3>Estoque</h3>
 
   <% if @items.empty? %>
-  <h4>Nenhum item no estoque</h4>
+  <p>Nenhum item no estoque</p>
   <% else %>
     <table class="table" style="width: 46rem;">
       <thead>
@@ -50,52 +57,50 @@
   <% if user_signed_in? %>
     
     <h3>Entrada de itens</h3>
+    <% if @product_models.empty? %>
+      <p>Nenhum produto disponível para este galpão</p>
+    <% else %>
+      <% if @error %>
+        <ul>
+          <li><%= @error %></li>
+        </ul>
+      <% end %>
 
-    <% if @error %>
-      <ul>
-        <li><%= @error %></li>
-      </ul>
+      <%= form_with(url: product_entry_warehouse_path(@warehouse.id)) do |f| %>
+        <div>
+          <%= f.label :quantity, 'Quantidade'%>
+          <%= f.number_field :quantity%>
+        </div>
+        
+        <div>
+          <%= f.label :product_model_id, 'Produto'%>
+          <%= f.collection_select(:product_model_id, @product_models, :id, :name)%>
+        </div>
+        <%= f.submit 'Confirmar', class: 'btn btn-success'%>
+      <% end %>
+
     <% end %>
-    
-    <%= form_with(url: product_entry_warehouse_path(@warehouse.id)) do |f| %>
-      <div>
-        <%= f.label :quantity, 'Quantidade'%>
-        <%= f.number_field :quantity%>
-      </div>
-      
-      <div>
-        <%= f.label :product_model_id, 'Produto'%>
-        <%= f.collection_select(:product_model_id, @product_models, :id, :name)%>
-      </div>
-
-      <%= f.submit 'Confirmar', class: 'btn btn-success'%>
-    <% end %>
-
   <% end %>
-  <%if @warehouse.categories.empty?%>
-
-    <p>Este galpão não possui nenhuma categoria cadastrada</p>
-
-  <% else %>
-</div>
+</div> 
 
 <div style="margin-top: 70px;">
+  <h3>Categorias</h3>
+  <%if @warehouse.categories.empty?%>
+      <p>Este galpão não possui nenhuma categoria cadastrada</p>
+  <% else %>
     <div id='categories'>
-
-      <h3>Categorias</h3>
       <ul>
         <% @warehouse.categories.each do |category| %>
         <li><%= category.name %></li>
         <% end %>
       </ul>
     </div>
-
   <% end %>
-
-  <% if user_signed_in? %>
-    <%= link_to 'Adicionar nova categoria ao galpão', add_category_warehouse_path(@warehouse.id)%>
-  <% end %>
+<% if user_signed_in? %>
+  <%= link_to 'Adicionar nova categoria ao galpão', add_category_warehouse_path(@warehouse.id)%>
+<% end %>
 </div>
+<br>
 <br>
 <%= link_to 'Voltar', root_path %>
 

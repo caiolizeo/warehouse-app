@@ -2,6 +2,7 @@ class WarehousesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update,
                                             :add_category, :register_category,
                                             :disabled]
+  before_action :verify_confirm, only: [:confirm]
 
   def edit
      @warehouse = Warehouse.find(params[:id])
@@ -25,7 +26,7 @@ class WarehousesController < ApplicationController
   def show
     @warehouse = Warehouse.find(params[:id])
     @items = @warehouse.product_items.group(:product_model).count
-    @product_models = ProductModel.all
+    @product_models = ProductModel.where(category: @warehouse.categories, status: :enabled)
     @error = nil
   end
 
@@ -137,4 +138,13 @@ class WarehousesController < ApplicationController
       render 'add_category'
     end
   end
+
+  private
+
+  def verify_confirm
+    if Warehouse.find(params[:id]).enabled?
+      redirect_to root_path
+    end
+  end
+
 end
