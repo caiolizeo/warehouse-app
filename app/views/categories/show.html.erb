@@ -1,30 +1,35 @@
-<h1><%= @category.name %></h1>
+<h3>Produtos na categoria <%= @category.name %></h3>
 
 <% if @category.product_models.empty? %>
   <p>Nenhum produto cadastrado nessa categoria</p>
 <% else %>
-  <ul>
+  <ul class="list-group" style="width: 25rem;">
     <% @category.product_models.each do |product| %>
-      <li><%= link_to product.name, product_model_path(product.id) %></li>
+      <li class="list-group-item"><%= link_to product.name, product_model_path(product.id) %></li>
     <% end %>
   </ul>
 <% end %>
+<br><br>
 
 <% if @warehouses.empty? %>
   <p>Nenhum galpão cadastrado nessa categoria</p>
 <% else %>
-  <table>
-    <tr>
-      <th>Nome</th>
-      <th>Código</th>
-      <th>Cep</th>
-    </tr>
-    <% @warehouses.each do |warehouse| %>
+  <table class="table" style="width: 25rem;">
+    <thead>
       <tr>
-        <td><%= warehouse.name %></td>
-        <td><%= warehouse.code %></td>
-        <td><%= warehouse.postal_code %></td>
+        <th>Nome</th>
+        <th>Código</th>
+        <th>Cep</th>
       </tr>
-    <% end %>
+    </thead>
+    <tbody>
+      <% @warehouses.each do |warehouse| %>
+        <tr>
+          <td><%= warehouse.name %></td>
+          <td><%= warehouse.code %></td>
+          <td><%= warehouse.postal_code %></td>
+        </tr>
+      <% end %>
+    </tbody>
   </table>
 <% end %>

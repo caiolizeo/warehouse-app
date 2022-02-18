@@ -15,9 +15,14 @@
   </thead>
     <% @products.each do |p| %>
       <tr id = <%=p.id%>>
-        <td><%= p.enum_name(:status, p.status) %></td>
+        <% if p.enabled? %>
+          <td style="color: green;"><%= p.enum_name(:status, p.status) %></td>
+        <% else %>
+          <td style="color: #dc3545;"><%= p.enum_name(:status, p.status) %></td>
+        <% end %>
         <td><%= p.name %></td>
         <td><%= p.category.name %></td>
+        <td><%= link_to 'Detalhes', p %></td>
         <% if user_signed_in?%>
           <td><%= link_to 'Editar', edit_product_model_path(p.id)%></td>
           <% if p.enabled? %>
@@ -26,7 +31,6 @@
             <td><%= link_to 'Ativar', enable_product_model_path(p.id), method: :patch %></td>
           <% end %>
         <% end %>
-        <td><%= link_to 'Detalhes', p %></td>
       </tr>
     <% end %>
   </table>

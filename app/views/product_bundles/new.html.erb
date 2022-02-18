@@ -1,30 +1,41 @@
+<h3>Novo kit de produtos</h3>
 
 <% if ProductModel.all.empty? %>
-<p>Não é possível cadastrar um novo kit pois não existem produtos cadastrados</p>
+  <p>Não é possível cadastrar um novo kit pois não existem produtos cadastrados</p>
 <% else %>
+  <div style="width: 46rem;">
+    <% unless @errors == []%>
+      <div class="alert alert-warning">
+        <ul>
+          <% @errors.each do |msg| %>
+            <li><%=msg%></li>
+          <%end%>
+        </ul>
+      </div>
+    <% end %>
 
-  <h1>Novo kit de produtos</h1>
-  <ul>
-  <% @product_bundle.errors.full_messages.each do |error| %>
-    <li><%= error%></li>
-  <% end %>
-  </ul>
-
-  <%=form_with(model: @product_bundle) do |f|%>
-    <div>
-      <%= f.label :name, 'Nome'%>
-      <%= f.text_field :name%>
-    </div>
-
-    <div>
-      <%= f.label :sku, 'Código SKU'%>
-      <%= f.text_field :sku%>
-    </div>
-    <div>
-      <%= f.collection_check_boxes :product_model_ids, ProductModel.all, :id, :name %>
-    </div>
-    <div>
-      <%=f.submit 'Gravar'%>
-    </div>
-  <% end %>
+    <%=form_with(model: @product_bundle) do |f|%>
+      <div class="form-group">
+        <%= f.label :name, 'Nome'%>
+        <%= f.text_field :name, class: 'form-control'%>
+      </div>
+      <br>
+      <div class="form-group">
+        <%= f.label :sku, 'Código SKU'%>
+        <%= f.text_field :sku, class: 'form-control'%>
+      </div>
+      <br>
+      <div class="form-check form-switch">
+        <%= f.collection_check_boxes :product_model_ids, ProductModel.all, :id, :name do |b| %>
+          <%= b.check_box class: 'form-check-input', id: 'flexSwitchCheckDefault' %>
+          <%= b.label class: 'form-check-label', id: 'flexSwitchCheckDefault'%>
+          <br>
+        <% end %>
+      </div>
+      <br>
+      <div>
+        <%=f.submit 'Gravar', class: 'btn btn-success'%>
+      </div>
+    <% end %>
+  </div>
 <% end %>

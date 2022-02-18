@@ -7,6 +7,7 @@ class CategoriesController < ApplicationController
 
   def new
     @category = Category.new
+    @errors = []
   end
 
   def create
@@ -16,6 +17,7 @@ class CategoriesController < ApplicationController
     if @category.save
     redirect_to categories_path, notice: 'Categoria cadastrada com sucesso'
     else
+      @errors = @category.errors.full_messages
       flash.now[:alert] = 'Não foi possível cadastrar a categoria'
       render 'new'
     end

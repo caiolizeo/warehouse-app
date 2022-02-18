@@ -1,26 +1,28 @@
-<h2>Entrar</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<h3>Entrar</h3>
+<div style="width: 25rem;">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="field form-group">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+    </div>
+    <br>
+    <div class="field form-group">
+      <%= f.label :password %><br />
+      <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
+    </div>
+    <br>
+    <% if devise_mapping.rememberable? %>
+      <div class="field form-group form-check form-switch">
+        <%= f.check_box :remember_me, class: 'form-check-input', id: 'flexSwitchCheckDefault' %>
+        <%= f.label :remember_me, class: 'form-check-label', id: 'flexSwitchCheckDefault' %>
+      </div>
+    <% end %>
+    <br>
+    <div class="actions">
+      <%= f.submit "Entrar", class: 'btn btn-success' %>
     </div>
   <% end %>
+  <br>
+  <%= render "devise/shared/links" %>
 
-  <div class="actions">
-    <%= f.submit "Entrar" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

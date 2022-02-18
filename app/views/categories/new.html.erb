@@ -1,16 +1,22 @@
-<h1>Nova categoria</h1>
+<h3>Nova categoria</h3>
+<br>
+<div style="width: 46rem;">
+  <% unless @errors == []%>
+    <div class="alert alert-warning">
+      <ul>
+        <% @errors.each do |msg| %>
+          <li><%=msg%></li>
+        <%end%>
+      </ul>
+    </div>
+  <% end %>
 
-<ul>
-  <% @category.errors.full_messages.each do |msg| %>
-    <li><%=msg%></li>
-  <%end%>
-</ul>
-
-<%= form_with(model: @category) do |f| %>
-  <div>
-    <%= f.label :name, 'Nome'%>
-    <%= f.text_field :name %>
-  </div>
-
-  <%=f.submit 'Gravar'%>
-<% end %>
+  <%= form_with(model: @category) do |f| %>
+    <div class="form-group">
+      <%= f.label :name, 'Nome'%>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+    <br>
+    <%=f.submit 'Gravar', class: 'btn btn-success'%>
+  <% end %>
+</div>

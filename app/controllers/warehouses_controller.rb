@@ -44,7 +44,7 @@ class WarehousesController < ApplicationController
     if @warehouse.valid? == false
       flash.now[:alert] = 'Não foi possível gravar o galpão'
     
-      @errors = @warehouse.errors.full_messages.uniq
+      @errors = @warehouse.errors.full_messages
       return render 'new'
     end
     response = Faraday.get("https://viacep.com.br/ws/#{w_params[:postal_code]}/json/")

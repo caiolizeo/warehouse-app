@@ -12,6 +12,7 @@ class ProvidersController < ApplicationController
 
   def new
     @provider = Provider.new
+    @errors = []
   end
 
   def create
@@ -23,6 +24,7 @@ class ProvidersController < ApplicationController
     if @provider.save
       redirect_to provider_path(@provider.id), notice: 'Fornecedor cadastrado com sucesso!'
     else
+      @errors = @provider.errors.full_messages
       flash.now[:alert] = 'Não foi possível cadastrar o fornecedor'
       render 'new'
     end

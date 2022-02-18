@@ -1,26 +1,28 @@
-<h1>Entrada de Produtos</h1>
+<h3>Entrada de itens</h3>
 
-<% if @error %>
-  <ul>
-    <li><%= @error %></li>
-  </ul>
-<% end %>
-
-<%= form_with url: product_items_entry_path do |f| %>
-  <div>
-    <%= f.label :quantity, 'Quantidade'%>
-    <%= f.number_field :quantity%>
-  </div>
-
-  <div>
-    <%= f.label :warehouse_id, 'Galpão destino'%>
-    <%= f.collection_select(:warehouse_id, @warehouses, :id, :code)%>
-  </div>
-
-  <div>
-    <%= f.label :product_model_id, 'Produto'%>
-    <%= f.collection_select(:product_model_id, @product_models, :id, :name)%>
-  </div>
-
-  <%= f.submit 'Confirmar'%>
-<% end %>
+<div style="width: 46rem;">
+  <% if @error %>
+    <ul>
+      <li><%= @error %></li>
+    </ul>
+  <% end %>
+  <br>
+  <%= form_with url: product_items_entry_path do |f| %>
+    <div class="form-group">
+      <%= f.label :quantity, 'Quantidade'%>
+      <%= f.number_field :quantity, class: 'form-control'%>
+    </div>
+    <br>
+    <div class="form-group">
+      <%= f.label :warehouse_id, 'Galpão destino'%><br>
+      <%= f.collection_select(:warehouse_id, @warehouses, :id, :code)%>
+    </div>
+    <br>
+    <div class="form-group">
+      <%= f.label :product_model_id, 'Produto'%><br>
+      <%= f.collection_select(:product_model_id, @product_models, :id, :name)%>
+    </div>
+    <br>
+    <%= f.submit 'Confirmar', class: 'btn btn-success'%>
+  <% end %>
+</div>

@@ -30,11 +30,13 @@ class ProductModelsController < ApplicationController
     @product_model = ProductModel.find(params[:id])
     @items = @product_model.product_items.group(:warehouse).count
     @warehouses = Warehouse.all
+ 
     @error = nil
   end
 
   def new
     @product_model = ProductModel.new
+    @errors = []
   end
 
   def create
@@ -47,6 +49,7 @@ class ProductModelsController < ApplicationController
       redirect_to @product_model, notice: 'Modelo de produto registrado com sucesso!'
     else
       flash.now[:alert] = 'Não foi possível gravar o produto'
+      @errors = @product_model.errors.full_messages
       render 'new'
     end
   end

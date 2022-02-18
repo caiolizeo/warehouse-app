@@ -12,6 +12,7 @@ class ProductBundlesController < ApplicationController
 
   def new
     @product_bundle = ProductBundle.new
+    @errors = []
   end
 
   def create
@@ -21,6 +22,7 @@ class ProductBundlesController < ApplicationController
       redirect_to @product_bundle
     else
       flash.now[:alert] = 'Não foi possível gravar o kit'
+      @errors = @product_bundle.errors.full_messages
       render 'new'
     end
   end

@@ -1,15 +1,15 @@
-<h1>Novo galpão</h1>
+<h3>Novo galpão</h3>
 
 <div style="width: 46rem;">
-<% unless @errors == []%>
-  <div class="alert alert-warning">
-    <ul>
-      <% @errors.each do |msg| %>
-        <li><%=msg%></li>
-      <%end%>
-    </ul>
-  </div>
-<% end %>
+  <% unless @errors == []%>
+    <div class="alert alert-warning">
+      <ul>
+        <% @errors.each do |msg| %>
+          <li><%=msg%></li>
+        <%end%>
+      </ul>
+    </div>
+  <% end %>
 
   <%= form_with(model: @warehouse) do |f|%>
     <div class="form-group">

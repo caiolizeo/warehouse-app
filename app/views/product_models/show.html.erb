@@ -1,60 +1,71 @@
-<ul>
-  <li>Nome: <%= @product_model.name %></li>
-  <li>Peso: <%= @product_model.weight %> gramas</li>
-  <li>Dimensões: <%= @product_model.dimensions %></li>
-  <li>SKU: <%= @product_model.sku %></li>
-  <li>Categoria: <%= @product_model.category.name %></li>
-  <li>Fornecedor: <%= @product_model.provider.trading_name %> </li>
-  <li>Status: <%= @product_model.enum_name(:status, @product_model.status)%></li>
+<h3><%= @product_model.name %></h3>
+<ul class="list-group" style="width: 25rem;">
+  <li class="list-group-item"><strong>Peso: </strong><%= @product_model.weight %> gramas</li>
+  <li class="list-group-item"><strong>Dimensões: </strong><%= @product_model.dimensions %></li>
+  <li class="list-group-item"><strong>SKU: </strong><%= @product_model.sku %></li>
+  <li class="list-group-item"><strong>Categoria: </strong><%= @product_model.category.name %></li>
+  <li class="list-group-item"><strong>Fornecedor: </strong><%= @product_model.provider.trading_name %> </li>
+  <li class="list-group-item"><strong>Status: </strong><%= @product_model.enum_name(:status, @product_model.status)%></li>
 </ul>
 
 <% if user_signed_in? %>
+  <br>
   <% if @product_model.enabled? %>
-    <%= link_to 'Desativar', enable_product_model_path(@product_model.id), method: :patch %>
+    <%= link_to 'Desativar', enable_product_model_path(@product_model.id), method: :patch, class: 'btn btn-danger'%>
   <% else %>
-    <%= link_to 'Ativar', enable_product_model_path(@product_model.id), method: :patch %>
+    <%= link_to 'Ativar', enable_product_model_path(@product_model.id), method: :patch, class: 'btn btn-success' %>
   <% end %>
 <% end %>
 
-
-<h2> Galpões com estoque disponível </h2>
-
+<br><br><br>
+<h3> Galpões com estoque disponível </h3>
 <% if @items.empty? %>
-  <h2>Produto fora de estoque</h2>
+  <p>Produto fora de estoque</p>
 <% else %>
-  <table>
-    <tr>
-      <th>Galpão</th>
-      <th>Quantidade</th>
-    </tr>
-    <% @items.each_pair do |warehouse, qtd| %>
+  <table class="table" style="width: 25rem;">
+    <thead>
+      <tr>
+        <th>Galpão</th>
+        <th>Quantidade</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @items.each_pair do |warehouse, qtd| %>
         <tr id = <%= warehouse.id %>>
           <td><%= link_to warehouse.name, warehouse %></td>
           <td><%= qtd %></td>
         </tr>
       <% end %> 
+    </tbody>
   </table>
 <% end %>
+
+
+<br><br><br>
 <% if user_signed_in? %>
-  <h2>Entrada de itens</h2>
+  <h3>Entrada de itens</h3>
 
-  <% if @error %>
-    <ul>
-      <li><%= @error %></li>
-    </ul>
-  <% end %>
+  <div class="form-group" style="width: 25rem;">
+    <% if @error %>
+      <ul>
+        <li><%= @error %></li>
+      </ul>
+    <% end %>
 
-  <%= form_with(url: product_entry_product_model_path(@product_model.id)) do |f| %>
-    <div>
-      <%= f.label :quantity, 'Quantidade'%>
-      <%= f.number_field :quantity%>
-    </div>
+    <%= form_with(url: product_entry_product_model_path(@product_model.id)) do |f| %>
+      <div>
+        <%= f.label :quantity, 'Quantidade'%>
+        <%= f.number_field :quantity, class: 'form-control'%>
+      </div>
+      <br>
+      <div>
+        <%= f.label :warehouse_id, 'Galpão destino'%>
+        <br>
+        <%= f.collection_select(:warehouse_id, @warehouses, :id, :name)%>
+      </div>
+      <br>
+      <%= f.submit 'Confirmar', class: 'btn btn-success'%>
+    <% end %>
+  </div>
 
-    <div>
-      <%= f.label :warehouse_id, 'Galpão destino'%>
-      <%= f.collection_select(:warehouse_id, @warehouses, :id, :name)%>
-    </div>
-
-    <%= f.submit 'Confirmar'%>
-  <% end %>
 <% end %>

@@ -12,9 +12,14 @@
   <%= form_with(url: register_category_warehouse_path(@warehouse.id)) do |f|%>
     
     <div>
-      <%= f.collection_check_boxes :category_ids, @categories, :id, :name %>
+      <div class="form-check form-switch">
+        <%= f.collection_check_boxes :category_ids, @categories, :id, :name do |b| %>
+          <%= b.check_box class: 'form-check-input', id: 'flexSwitchCheckDefault' %>
+          <%= b.label class: 'form-check-label', id: 'flexSwitchCheckDefault'%>
+          <br>
+        <% end %>
     </div>
-
-    <%= f.submit 'Confirmar'%>
+    <br>
+    <%= f.submit 'Confirmar', class: 'btn btn-success'%>
   <% end %>
 <% end %>
