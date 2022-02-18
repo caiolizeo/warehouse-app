@@ -3,6 +3,7 @@ class ProductModelsController < ApplicationController
 
   def edit
     @product_model = ProductModel.find(params[:id])
+    @errors = []
   end
   
   def update
@@ -16,6 +17,7 @@ class ProductModelsController < ApplicationController
     if @product_model.save
       redirect_to @product_model
     else
+      @errors = @product_model.errors.full_messages
       flash.now[:alert] = 'Não foi possível editar o produto'
       render 'edit'
     end

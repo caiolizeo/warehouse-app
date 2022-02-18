@@ -6,6 +6,7 @@ class WarehousesController < ApplicationController
 
   def edit
      @warehouse = Warehouse.find(params[:id])
+     @errors = []
   end
 
   def update
@@ -18,6 +19,7 @@ class WarehousesController < ApplicationController
     if @warehouse.save
       redirect_to @warehouse, notice: 'Galpão editado com sucesso!'
     else
+      @errors = @warehouse.errors.full_messages
       flash.now[:alert] = 'Não foi possível editar o galpão'
       render 'edit'
     end                                          

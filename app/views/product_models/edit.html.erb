@@ -1,45 +1,52 @@
 <h3>Editar Produto</h3>
 
-<ul>
-  <% @product_model.errors.full_messages.each do |msg| %>
-    <li><%=msg%></li>
+<div style="width: 46rem;">
+  <% unless @errors == []%>
+    <div class="alert alert-warning">
+      <ul>
+        <% @errors.each do |msg| %>
+          <li><%=msg%></li>
+        <%end%>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_with(model: @product_model) do |f|%>
+    <div class="form-group">
+      <%= f.label :name, 'Nome'%>
+      <%= f.text_field :name, class: 'form-control'%>
+    </div>
+    <br>
+    <div class="form-group">
+      <%= f.label :weight, 'Peso'%>
+      <%= f.text_field :weight, class: 'form-control'%>
+    </div>
+    <br>
+    <div class="form-group">
+      <%= f.label :height, 'Altura'%>
+      <%= f.text_field :height, class: 'form-control'%>
+    </div>
+    <br>
+    <div class="form-group">
+      <%= f.label :width, 'Largura'%>
+      <%= f.text_field :width, class: 'form-control'%>
+    </div>
+    <br>
+    <div class="form-group">
+      <%= f.label :length, 'Profundidade'%>
+      <%= f.text_field :length, class: 'form-control'%>
+    </div>
+    <br>
+    <div class="form-group">
+      <%= f.label :category_id, 'Categoria'%><br>
+      <%= f.collection_select(:category_id, Category.all, :id, :name)%>
+    </div>
+    <br>    
+    <div class="form-group">
+      <%= f.label :provider_id, 'Fornecedor'%><br>
+      <%= f.collection_select(:provider_id, Provider.all, :id, :trading_name) %>
+    </div>
+    <br>
+    <%= f.submit 'Editar', class: 'btn btn-success'%>
   <%end%>
-</ul>
-
-<%= form_with(model: @product_model) do |f|%>
-  <div>
-    <%= f.label :name, 'Nome'%>
-    <%= f.text_field :name%>
-  </div>
-
-  <div>
-    <%= f.label :weight, 'Peso'%>
-    <%= f.text_field :weight%>
-  </div>
-
-  <div>
-    <%= f.label :height, 'Altura'%>
-    <%= f.text_field :height%>
-  </div>
-
-  <div>
-    <%= f.label :width, 'Largura'%>
-    <%= f.text_field :width%>
-  </div>
-
-  <div>
-    <%= f.label :length, 'Profundidade'%>
-    <%= f.text_field :length%>
-  </div>
-
-  <div>
-    <%= f.label :category_id, 'Categoria'%>
-    <%= f.collection_select(:category_id, Category.all, :id, :name)%>
-  </div>
-  
-  <div>
-    <%= f.label :provider_id, 'Fornecedor'%>
-    <%= f.collection_select(:provider_id, Provider.all, :id, :trading_name) %>
-  </div>
-  <%= f.submit 'Editar'%>
-<%end%>
+</div>
