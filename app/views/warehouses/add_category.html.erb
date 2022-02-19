@@ -14,8 +14,8 @@
     <div>
       <div class="form-check form-switch">
         <%= f.collection_check_boxes :category_ids, @categories, :id, :name do |b| %>
-          <%= b.check_box class: 'form-check-input', id: 'flexSwitchCheckDefault' %>
-          <%= b.label class: 'form-check-label', id: 'flexSwitchCheckDefault'%>
+          <%= b.check_box  class: 'form-check-input' %>
+          <%= b.label  class: 'form-check-label'%>
           <br>
         <% end %>
     </div>

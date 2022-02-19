@@ -11,16 +11,16 @@ describe 'Visitante abre a tela inicial' do
   it 'e vê os galpões cadastrados' do
     Warehouse.create!(name: 'Guarulhos', code: 'GRU', description: 'Galpão em Guarulhos',
                       address: 'Rua x', city: 'Guarulhos', state: 'SP', postal_code: '04200-000',
-                      total_area: 5000, useful_area: 3000)
+                      total_area: 5000, useful_area: 3000, status: :enabled)
     Warehouse.create!(name: 'Porto Alegre', code: 'POA', description: 'Galpão em POA',
                       address: 'Rua y', city: 'Porto Alegre', state: 'RS', postal_code: '03500-000',
-                  total_area: 2000, useful_area: 1000)
+                  total_area: 2000, useful_area: 1000, status: :enabled)
     Warehouse.create!(name: 'São Luís', code: 'SLZ', description: 'Galpão em São Luís',
                       address: 'Rua z', city: 'São Luís', state: 'MA', postal_code: '01700-000',
-                      total_area: 2500, useful_area: 2000)
+                      total_area: 2500, useful_area: 2000, status: :enabled)
     Warehouse.create!(name: 'Vitória', code: 'VIX', description: 'Galpão em Vitória', 
                       address: 'Rua a', city: 'Vitória', state: 'ES', postal_code: '02500-000',
-                      total_area: 2700, useful_area: 2300)
+                      total_area: 2700, useful_area: 2300, status: :enabled)
 
     visit root_path
     

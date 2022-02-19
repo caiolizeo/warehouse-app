@@ -72,7 +72,7 @@ describe 'Usuário edita um produto' do
     select 'Brinquedos', from: 'Categoria'
     click_on 'Editar'
 
-    expect(page).to have_content('Nome: Boneco Darth Vader')
+    expect(page).to have_content('Boneco Darth Vader')
     expect(page).to have_content('Peso: 270 gramas')
     expect(page).to have_content('Dimensões: 55 x 40 x 20')
     expect(page).to have_content("SKU: #{p2.sku}")

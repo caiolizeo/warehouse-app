@@ -65,9 +65,9 @@ describe 'Usuário vê a página de produtos' do
     c1 = create(:category)
     p1 = create(:product_model, name: 'Caneca Marvel', provider: prov1, category: c1)
     p2 = create(:product_model, name: 'Boneco Homem Aranha', provider: prov1, category: c1)
-    w1 = create(:warehouse, name: 'Maceió', code: 'MCZ', categories: [c1])
-    w2 = create(:warehouse, name: 'São Paulo', code: 'SPX', categories: [c1])
-    w3 = create(:warehouse, name: 'Rio de Janeiro', code: 'RIO', categories: [c1])
+    w1 = create(:warehouse, name: 'Maceió', code: 'MCZ', categories: [c1], status: :enabled)
+    w2 = create(:warehouse, name: 'São Paulo', code: 'SPX', categories: [c1], status: :enabled)
+    w3 = create(:warehouse, name: 'Rio de Janeiro', code: 'RIO', categories: [c1], status: :enabled)
     ProductEntry.new(quantity: 18, warehouse_id: w1.id, product_model_id: p1.id).process
     ProductEntry.new(quantity: 37, warehouse_id: w2.id, product_model_id: p1.id).process
     ProductEntry.new(quantity: 25, warehouse_id: w3.id, product_model_id: p1.id).process
@@ -79,7 +79,7 @@ describe 'Usuário vê a página de produtos' do
       click_on 'Detalhes'
     end
 
-    expect(page).to have_css('h2', text: 'Galpões com estoque disponível')
+    expect(page).to have_css('h3', text: 'Galpões com estoque disponível')
     expect(page).to have_css('td', text: 'Maceió')
     expect(page).to have_css('td', text: '18')
     expect(page).to have_css('td', text: 'São Paulo')
@@ -93,15 +93,15 @@ describe 'Usuário vê a página de produtos' do
   it 'e não existem produtos no estoque' do
     prov1 = create(:provider)
     c1 = create(:category)
-    p1 = create(:product_model, name: 'Caneca Marvel', provider: prov1, category: c1)
+    p1 = create(:product_model, name: 'Caneca Marvel', provider: prov1, category: c1, status: :enabled)
 
     visit root_path
     click_on 'Produtos'
     within("tr##{p1.id}") do
       click_on 'Detalhes'
     end
-
-    expect(page).to have_css('h2', text:'Produto fora de estoque')
+    save_page
+    expect(page).to have_css('p', text:'Produto fora de estoque')
     expect(page).not_to have_css('th', text: 'Galpão')
     expect(page).not_to have_css('th', text: 'Quantidade')
     

@@ -30,11 +30,11 @@ describe 'Usuário vê categorias' do
                              cnpj: '18.021.478/0001-63', address: 'Av Europa 250', 
                              email: 'contato@cconfec.com', phone: '99999-9000')
     p1 = ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
-                              weight: 300, provider: prov1, category: c)
+                              weight: 300, provider: prov1, category: c, status: :enabled)
     p2 = ProductModel.create!(name: 'Boneco Homem Aranha', height: '50', width: '30', length: '15',
-                              weight: 250, provider: prov1, category: c)
+                              weight: 250, provider: prov1, category: c, status: :enabled)
     p3 = ProductModel.create!(name: 'Camiseta Homem de ferro', height: '70', width: '40', length: '1',
-                              weight: 100, provider: prov2, category: c)
+                              weight: 100, provider: prov2, category: c, status: :enabled)
          
     visit root_path
     click_on 'Categorias'
@@ -42,7 +42,7 @@ describe 'Usuário vê categorias' do
       click_on 'Detalhes'
     end
 
-    expect(page).to have_css('h1', text: 'Outros')
+    expect(page).to have_css('h3', text: 'Outros')
     expect(page).to have_css('li', text: 'Caneca Marvel')
     expect(page).to have_css('li', text: 'Boneco Homem Aranha')
     expect(page).to have_css('li', text: 'Camiseta Homem de ferro')
@@ -96,11 +96,11 @@ describe 'Usuário vê categorias' do
                              cnpj: '18.021.478/0001-63', address: 'Av Europa 250', 
                              email: 'contato@cconfec.com', phone: '99999-9000')
     p1 = ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
-                              weight: 300, provider: prov1, category: c)
+                              weight: 300, provider: prov1, category: c, status: :enabled)
     p2 = ProductModel.create!(name: 'Boneco Homem Aranha', height: '50', width: '30', length: '15',
-                              weight: 250, provider: prov1, category: c)
+                              weight: 250, provider: prov1, category: c, status: :enabled)
     p3 = ProductModel.create!(name: 'Camiseta Homem de ferro', height: '70', width: '40', length: '1',
-                              weight: 100, provider: prov2, category: c2)
+                              weight: 100, provider: prov2, category: c2, status: :enabled)
          
     visit root_path
     click_on 'Categorias'
@@ -108,7 +108,7 @@ describe 'Usuário vê categorias' do
       click_on 'Detalhes'
     end
 
-    expect(page).to have_css('h1', text: 'Outros')
+    expect(page).to have_css('h3', text: 'Produtos na categoria Outros')
     expect(page).to have_css('li', text: 'Caneca Marvel')
     expect(page).to have_css('li', text: 'Boneco Homem Aranha')
     expect(page).not_to have_css('li', text: 'Camiseta Homem de ferro')

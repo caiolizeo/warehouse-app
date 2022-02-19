@@ -10,12 +10,23 @@ class WarehousesController < ApplicationController
   end
 
   def update
-    w_params = params.require(:warehouse).permit(:name, :code, :address, :state,
-                                                 :city, :postal_code, :description,
+    w_params = params.require(:warehouse).permit(:name, :code, :postal_code, :description,
                                                  :useful_area, :total_area)
-    
+                                                     
     @warehouse = Warehouse.find(params[:id])
+    response = Faraday.get("https://viacep.com.br/ws/#{w_params[:postal_code]}/json/")
+    if response.status != 200
+      flash.now[:alert] = 'Não foi possível editar o galpão'
+      @errors = @warehouse.errors.full_messages
+      return render 'new'
+    end
+    
     @warehouse.update(w_params)
+    address = JSON.parse(response.body)
+    @warehouse.address = address['logradouro']
+    @warehouse.city = address['localidade']
+    @warehouse.state = address['uf']
+    
     if @warehouse.save
       redirect_to @warehouse, notice: 'Galpão editado com sucesso!'
     else

@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 describe 'Usuário vincula categoria com galpão' do
-
   it 'visitante não vê o link para vincular categorias com o galpão' do
-    w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
-      address: 'Av Fernandes Lima', city: 'Maceió',
-      state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
+    w = Warehouse.create!(name: "Maceió", code: "MCZ", description: "Ótimo galpão",
+      address: "Av Fernandes Lima", city: "Maceió", number: 's/n',
+      state: "AL", postal_code: "57055-000", total_area: 10000, useful_area: 8000, status: :enabled)
 
     visit root_path
     within("div#card-#{w.id}") do
@@ -30,9 +29,10 @@ describe 'Usuário vincula categoria com galpão' do
     c1 = Category.create!(name: 'Vestuário')
     c2 = Category.create!(name: 'Eletrônicos')
     c2 = Category.create!(name: 'Congelados')
-    w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
-      address: 'Av Fernandes Lima', city: 'Maceió',
-      state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
+    w = Warehouse.create!(name: "Maceió", code: "MCZ", description: "Ótimo galpão",
+      address: "Av Fernandes Lima", city: "Maceió", number: 's/n',
+      state: "AL", postal_code: "57055-000", total_area: 10000, useful_area: 8000, status: :enabled)
+
 
     login_as(user)
     visit root_path
@@ -45,9 +45,10 @@ describe 'Usuário vincula categoria com galpão' do
     click_on 'Confirmar'
 
     expect(current_path).to eq warehouse_path(w.id)
+    expect(page).to have_css('h3', text: "Categorias")
     within('div#categories') do
-      expect(page).to have_css('h2', text: "Categorias")
       expect(page).to have_css('li', text: 'Vestuário')
+      expect(page).to have_css('li', text: 'Eletrônicos')
       expect(page).not_to have_content('Congelados')
     end
   end
@@ -57,9 +58,10 @@ describe 'Usuário vincula categoria com galpão' do
     c1 = Category.create!(name: 'Vestuário')
     c2 = Category.create!(name: 'Eletrônicos')
     c2 = Category.create!(name: 'Congelados')
-    w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
-      address: 'Av Fernandes Lima', city: 'Maceió',
-      state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
+    w = Warehouse.create!(name: "Maceió", code: "MCZ", description: "Ótimo galpão",
+      address: "Av Fernandes Lima", city: "Maceió", number: 's/n',
+      state: "AL", postal_code: "57055-000", total_area: 10000, useful_area: 8000, status: :enabled)
+
 
     login_as(user)
     visit root_path
@@ -75,9 +77,9 @@ describe 'Usuário vincula categoria com galpão' do
 
   it 'não existem categorias cadastradas no banco de dados' do
     user = User.create!(email: 'email@teste.com', password: '123456789')
-    w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
-      address: 'Av Fernandes Lima', city: 'Maceió',
-      state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
+    w = Warehouse.create!(name: "Maceió", code: "MCZ", description: "Ótimo galpão",
+      address: "Av Fernandes Lima", city: "Maceió", number: 's/n',
+      state: "AL", postal_code: "57055-000", total_area: 10000, useful_area: 8000, status: :enabled)
 
     login_as(user)
     visit root_path

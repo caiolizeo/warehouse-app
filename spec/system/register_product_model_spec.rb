@@ -40,7 +40,7 @@ describe 'Usuário cadastra um modelo de produto' do
 
     p = ProductModel.last
     expect(page).to have_content('Modelo de produto registrado com sucesso!')
-    expect(page).to have_content('Nome: Caneca Star Wars')
+    expect(page).to have_content('Caneca Star Wars')
     expect(page).to have_content("SKU: #{p.sku}")
     expect(page).to have_content('Peso: 300 gramas')
     expect(page).to have_content('Dimensões: 12 x 8 x 14')

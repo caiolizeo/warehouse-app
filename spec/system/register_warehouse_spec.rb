@@ -27,9 +27,6 @@ describe 'Usuário cadastra um galpão' do
     expect(page).to have_field 'Nome'
     expect(page).to have_field 'Código'
     expect(page).to have_field 'Descrição'
-    expect(page).to have_field 'Endereço'
-    expect(page).to have_field 'Cidade'
-    expect(page).to have_field 'Estado'
     expect(page).to have_field 'CEP'
     expect(page).to have_field 'Área total'
     expect(page).to have_field 'Área útil'
@@ -46,10 +43,11 @@ describe 'Usuário cadastra um galpão' do
     fill_in 'Nome', with: 'Juiz de Fora'
     fill_in 'Código', with: 'JDF'
     fill_in 'Descrição', with: 'Um galpão'
-    fill_in 'CEP', with: ''
+    fill_in 'CEP', with: '36045-120'
     fill_in 'Área total', with: '5000'
     fill_in 'Área útil', with: '3000'
     click_on 'Cadastrar'
+    
     fill_in 'Número', with: '500'
     click_on 'Confirmar'
 
@@ -61,7 +59,6 @@ describe 'Usuário cadastra um galpão' do
     expect(page).to have_content('CEP: 36045-120')
     expect(page).to have_content('Área Total: 5000 m2')
     expect(page).to have_content('Área Útil: 3000 m2')
-    expect(page).to have_content('Galpão cadastrado com sucesso!')
 
   end
 
@@ -74,23 +71,17 @@ describe 'Usuário cadastra um galpão' do
     fill_in 'Nome', with: ''
     fill_in 'Código', with: ''
     fill_in 'Descrição', with: ''
-    fill_in 'Endereço', with: ''
-    fill_in 'Cidade', with: ''
-    fill_in 'Estado', with: ''
-    fill_in 'CEP', with: ''
+    fill_in 'CEP', with: '04244-000'
     fill_in 'Área total', with: ''
     fill_in 'Área útil', with: ''
 
-    click_on 'Gravar'
+    click_on 'Cadastrar'
 
     expect(page).not_to have_content('Galpão cadastrado com sucesso!')
     expect(page).to have_content('Não foi possível gravar o galpão')
     expect(page).to have_content('Nome não pode ficar em branco')
     expect(page).to have_content('Código não pode ficar em branco')
-    expect(page).to have_content('Endereço não pode ficar em branco')
-    expect(page).to have_content('Cidade não pode ficar em branco')
     expect(page).to have_content('Descrição não pode ficar em branco')
-    expect(page).to have_content('Estado não pode ficar em branco')
     expect(page).to have_content('Área total não pode ficar em branco')
     expect(page).to have_content('Área útil não pode ficar em branco')
   end
@@ -108,13 +99,10 @@ describe 'Usuário cadastra um galpão' do
     fill_in 'Nome', with: 'Maceió'
     fill_in 'Código', with: 'MCZ'
     fill_in 'Descrição', with: 'Ótimo galpão'
-    fill_in 'Endereço', with: 'Av Fernandes Lima'
-    fill_in 'Cidade', with: 'Maceió'
-    fill_in 'Estado', with: 'AL'
     fill_in 'CEP', with: '57050-000'
     fill_in 'Área total', with: '10000'
     fill_in 'Área útil', with: '8000'
-    click_on 'Gravar'
+    click_on 'Cadastrar'
 
     expect(page).not_to have_content('Galpão cadastrado com sucesso!')
     expect(page).to have_content('Nome já está em uso')
@@ -130,13 +118,10 @@ describe 'Usuário cadastra um galpão' do
     fill_in 'Nome', with: 'Juiz de Fora'
     fill_in 'Código', with: 'JDF'
     fill_in 'Descrição', with: 'Um galpão'
-    fill_in 'Endereço', with: 'Av Rio Branco'
-    fill_in 'Cidade', with: 'Juiz de Fora'
-    fill_in 'Estado', with: 'MG'
     fill_in 'CEP', with: '36000000'
     fill_in 'Área total', with: '5000'
     fill_in 'Área útil', with: '3000'
-    click_on 'Gravar'
+    click_on 'Cadastrar'
 
     expect(page).not_to have_content('Galpão cadastrado com sucesso!')
     expect(page).to have_content('CEP possui formato inválido')

@@ -19,7 +19,7 @@ describe 'Usuário da entrada em novos itens' do
     it 'na página do galpão' do
       w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
                             address: 'Av Fernandes Lima', city: 'Maceió',
-                            state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
+                            state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000, status: :enabled)
 
       visit root_path
       within("div#card-#{w.id}") do
@@ -63,11 +63,10 @@ describe 'Usuário da entrada em novos itens' do
                               weight: 300, provider: prov1, category: c1, status: :enabled)
     p2 = ProductModel.create!(name: 'Camiseta Homem de ferro', height: '70', width: '40', length: '1',
                                 weight: 100, provider: prov1, category: c1)
-    w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
-                          address: 'Av Fernandes Lima', city: 'Maceió',
-                          state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000, categories: [c1])
-         
-                          
+    w = Warehouse.create!(name: "Maceió", code: "MCZ", description: "Ótimo galpão",
+                          address: "Av Fernandes Lima", city: "Maceió", number: 's/n', categories: [c1],
+                          state: "AL", postal_code: "57055-000", total_area: 10000, useful_area: 8000, status: :enabled)
+                                           
     login_as(user)
     visit root_path
     click_on 'Entrada de itens'
@@ -77,7 +76,7 @@ describe 'Usuário da entrada em novos itens' do
     click_on 'Confirmar'
     
     expect(current_path).to eq warehouse_path(w.id)
-    expect(page).to have_css('h2', text: 'Estoque')
+    expect(page).to have_css('h3', text: 'Estoque')
     within("tr##{p1.id}") do
       expect(page).to have_content('Caneca Marvel')
       expect(page).to have_content('30')
@@ -115,13 +114,13 @@ describe 'Usuário da entrada em novos itens' do
                              email: 'contato@apresentes.com', phone: '99999-9999')
     c1 = Category.create!(name: 'Outros')
     p1 = ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
-                              weight: 300, provider: prov1, category: c1)
+                              weight: 300, provider: prov1, category: c1, status: :enabled)
     p2 = ProductModel.create!(name: 'Camiseta Homem de ferro', height: '70', width: '40', length: '1',
-                              weight: 100, provider: prov1, category: c1)
+                              weight: 100, provider: prov1, category: c1, status: :enabled)
     w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
                           address: 'Av Fernandes Lima', city: 'Maceió',
                           state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000,
-                          categories: [c1])
+                          categories: [c1], status: :enabled)
 
     login_as(user)
     visit root_path
@@ -133,7 +132,7 @@ describe 'Usuário da entrada em novos itens' do
     click_on 'Confirmar'
     
     expect(current_path).to eq warehouse_path(w.id)
-    expect(page).to have_css('h2', text: 'Estoque')
+    expect(page).to have_css('h3', text: 'Estoque')
     within("tr##{p1.id}") do
       expect(page).to have_content('Caneca Marvel')
       expect(page).to have_content('15')
@@ -148,12 +147,12 @@ describe 'Usuário da entrada em novos itens' do
                              email: 'contato@apresentes.com', phone: '99999-9999')
     c1 = Category.create!(name: 'Outros')
     p = ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
-                              weight: 300, provider: prov1, category: c1)
+                              weight: 300, provider: prov1, category: c1, status: :enabled)
 
     w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
                           address: 'Av Fernandes Lima', city: 'Maceió',
                           state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000,
-                          categories: [c1])
+                          categories: [c1], status: :enabled)
 
     login_as(user)
     visit root_path
@@ -166,7 +165,7 @@ describe 'Usuário da entrada em novos itens' do
     click_on 'Confirmar'
     
     expect(current_path).to eq product_model_path(p.id)
-    expect(page).to have_css('h2', text: 'Galpões com estoque disponível')
+    expect(page).to have_css('h3', text: 'Galpões com estoque disponível')
     within("tr##{w.id}") do
       expect(page).to have_content('Maceió')
       expect(page).to have_content('15')
@@ -210,12 +209,12 @@ describe 'Usuário da entrada em novos itens' do
                              email: 'contato@apresentes.com', phone: '99999-9999')
     c1 = Category.create!(name: 'Outros')
     p1 = ProductModel.create!(name: 'Caneca Marvel', height: '14', width: '10', length: '8',
-                              weight: 300, provider: prov1, category: c1)
+                              weight: 300, provider: prov1, category: c1, status: 'enabled')
     p2 = ProductModel.create!(name: 'Camiseta Homem de ferro', height: '70', width: '40', length: '1',
-                              weight: 100, provider: prov1, category: c1)
+                              weight: 100, provider: prov1, category: c1, status: 'enabled')
     w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
-                          address: 'Av Fernandes Lima', city: 'Maceió',
-                          state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000)
+                          address: 'Av Fernandes Lima', city: 'Maceió', categories: [c1],
+                          state: 'AL', postal_code: '57050-000', total_area: 10000, useful_area: 8000, status: :enabled)
 
     login_as(user)
     visit root_path
@@ -301,23 +300,17 @@ describe 'Usuário da entrada em novos itens' do
                               weight: 300, provider: prov1, category: c3)
     p2 = ProductModel.create!(name: 'Camiseta Homem de ferro', height: '70', width: '40', length: '1',
                               weight: 100, provider: prov1, category: c4)
+    w = Warehouse.create!(name: "Maceió", code: "MCZ", description: "Ótimo galpão",
+      address: "Av Fernandes Lima", city: "Maceió", number: 's/n', categories: [c1, c2],
+      state: "AL", postal_code: "57055-000", total_area: 10000, useful_area: 8000, status: :enabled)
 
-    w = Warehouse.create!(name: 'Maceió', code: 'MCZ', description: 'Ótimo galpão',
-      address: 'Av Fernandes Lima', city: 'Maceió', state: 'AL',
-      postal_code: '57050-000', total_area: 10000, useful_area: 8000, categories: [c1, c2])
-    
     login_as(user)
     visit root_path
     within("div#card-#{w.id}") do
       click_on 'Detalhes'
     end
-    fill_in 'Quantidade', with: 30
-    select 'SmartWatch', from: 'Produto'
-    click_on 'Confirmar'
 
-    expect(page).to have_content('Não foi possível dar entrada nos itens')
-    expect(page).to have_content('Este galpão não permite itens da categoria Eletrônicos')
-
+    expect(page).to have_content('Nenhum produto disponível para este galpão')
   end
   
   it 'e tenta cadastrar um item com categoria diferente do galpão na página de modelo de produto' do
